@@ -1,2 +1,7 @@
 server:
   port: 3000
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://user:pass@ds133241.mlab.com:33241/onetests
