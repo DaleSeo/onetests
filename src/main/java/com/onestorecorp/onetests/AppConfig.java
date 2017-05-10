@@ -1,5 +1,6 @@
 package com.onestorecorp.onetests;
 
+import com.onestorecorp.onetests.rest.Host;
 import com.onestorecorp.onetests.rest.Service;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ public class AppConfig {
 			@Override
 			public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
 				config.exposeIdsFor(Service.class);
+				config.exposeIdsFor(Host.class);
 			}
 
 		};
