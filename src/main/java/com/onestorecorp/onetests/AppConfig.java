@@ -1,5 +1,6 @@
 package com.onestorecorp.onetests;
 
+import com.onestorecorp.onetests.rest.Api;
 import com.onestorecorp.onetests.rest.Host;
 import com.onestorecorp.onetests.rest.Service;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,7 @@ public class AppConfig {
 			public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
 				config.exposeIdsFor(Service.class);
 				config.exposeIdsFor(Host.class);
+				config.exposeIdsFor(Api.class);
 			}
 
 		};
