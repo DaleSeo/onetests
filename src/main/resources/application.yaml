@@ -5,3 +5,8 @@ spring:
   data:
     mongodb:
       uri: mongodb://sqe:QASPBIS*36!@172.21.196.30:27017/sqe
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: DEBUG
