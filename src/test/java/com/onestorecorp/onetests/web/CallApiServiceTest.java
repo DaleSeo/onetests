@@ -3,8 +3,6 @@ package com.onestorecorp.onetests.web;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collections;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CallApiServiceTest {
@@ -29,8 +27,8 @@ public class CallApiServiceTest {
 
 		assertThat(res.getStatusCode()).isEqualTo(200);
 		assertThat(res.getStatusMessage()).isEqualTo("OK");
-		assertThat(res.getHeaders()).containsEntry("Content-Type", Collections.singletonList("application/json; charset=utf-8"));
-		assertThat(res.getHeaders()).containsEntry("Content-Length", Collections.singletonList("292"));
+		assertThat(res.getHeaders()).containsEntry("Content-Type", "application/json; charset=utf-8");
+		assertThat(res.getHeaders()).containsEntry("Content-Length", "292");
 		assertThat(res.getBody()).isEqualTo("{\n" +
 				"  \"userId\": 1,\n" +
 				"  \"id\": 1,\n" +
@@ -62,8 +60,8 @@ public class CallApiServiceTest {
 
 		assertThat(res.getStatusCode()).isEqualTo(201);
 		assertThat(res.getStatusMessage()).isEqualTo("Created");
-		assertThat(res.getHeaders()).containsEntry("Content-Type", Collections.singletonList("application/json; charset=utf-8"));
-		assertThat(res.getHeaders()).containsEntry("Content-Length", Collections.singletonList("15"));
+		assertThat(res.getHeaders()).containsEntry("Content-Type", "application/json; charset=utf-8");
+		assertThat(res.getHeaders()).containsEntry("Content-Length", "15");
 		assertThat(res.getBody()).isEqualTo("{\n" +
 				"  \"id\": 101\n" +
 				"}");
