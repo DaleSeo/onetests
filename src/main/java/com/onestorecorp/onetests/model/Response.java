@@ -1,4 +1,4 @@
-package com.onestorecorp.onetests.web;
+package com.onestorecorp.onetests.model;
 
 import lombok.Data;
 
@@ -14,7 +14,5 @@ public class Response {
 	private Map<String, String> headers;
 
 	private String body;
-
-	private String text;
 
 }

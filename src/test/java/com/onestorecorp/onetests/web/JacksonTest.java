@@ -1,6 +1,7 @@
 package com.onestorecorp.onetests.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.onestorecorp.onetests.model.Request;
 import org.junit.Test;
 
 import java.io.IOException;

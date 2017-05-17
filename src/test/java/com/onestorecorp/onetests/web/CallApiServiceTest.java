@@ -1,5 +1,7 @@
 package com.onestorecorp.onetests.web;
 
+import com.onestorecorp.onetests.model.Request;
+import com.onestorecorp.onetests.model.Response;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,12 +37,6 @@ public class CallApiServiceTest {
 				"  \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n" +
 				"  \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n" +
 				"}");
-		assertThat(res.getText()).isEqualTo("{\n" +
-				"  \"userId\": 1,\n" +
-				"  \"id\": 1,\n" +
-				"  \"title\": \"sunt aut facere repellat provident occaecati excepturi optio reprehenderit\",\n" +
-				"  \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n" +
-				"}");
 	}
 
 	@Test
@@ -63,9 +59,6 @@ public class CallApiServiceTest {
 		assertThat(res.getHeaders()).containsEntry("Content-Type", "application/json; charset=utf-8");
 		assertThat(res.getHeaders()).containsEntry("Content-Length", "15");
 		assertThat(res.getBody()).isEqualTo("{\n" +
-				"  \"id\": 101\n" +
-				"}");
-		assertThat(res.getText()).isEqualTo("{\n" +
 				"  \"id\": 101\n" +
 				"}");
 	}

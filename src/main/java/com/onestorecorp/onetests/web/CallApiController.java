@@ -1,5 +1,7 @@
 package com.onestorecorp.onetests.web;
 
+import com.onestorecorp.onetests.model.Request;
+import com.onestorecorp.onetests.model.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,10 @@ public class CallApiController {
 	private CallApiService svc;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody Response callApi(@RequestBody Request req) {
+	public @ResponseBody
+	Response callApi(@RequestBody Request req, @RequestParam String apiId) {
 		logger.info("##### {}", req);
-		Response res = svc.callApi(req);
+		Response res = svc.callApi(req, apiId);
 		logger.info("##### {}", res);
 		return res;
 	}

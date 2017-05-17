@@ -1,4 +1,4 @@
-package com.onestorecorp.onetests.web;
+package com.onestorecorp.onetests.model;
 
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import lombok.Data;

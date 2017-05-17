@@ -1,4 +1,4 @@
-package com.onestorecorp.onetests.rest;
+package com.onestorecorp.onetests.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

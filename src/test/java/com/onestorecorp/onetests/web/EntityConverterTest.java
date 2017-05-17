@@ -1,5 +1,7 @@
 package com.onestorecorp.onetests.web;
 
+import com.onestorecorp.onetests.model.Request;
+import com.onestorecorp.onetests.model.Response;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.*;
@@ -76,7 +78,6 @@ public class EntityConverterTest {
 		assertThat(response.getStatusCode()).isEqualTo(200);
 		assertThat(response.getStatusMessage()).isEqualTo("OK");
 		assertThat(response.getBody()).isEqualTo(body);
-		assertThat(response.getText()).isEqualTo(body);
 		assertThat(response.getHeaders()).isEqualTo(headers);
 	}
 

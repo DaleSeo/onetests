@@ -1,5 +1,7 @@
 package com.onestorecorp.onetests.web;
 
+import com.onestorecorp.onetests.model.Request;
+import com.onestorecorp.onetests.model.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
@@ -37,7 +39,6 @@ public class EntityConverter {
 		response.setStatusMessage(entity.getStatusCode().getReasonPhrase());
 		response.setHeaders(entity.getHeaders().toSingleValueMap());
 		response.setBody(entity.getBody());
-		response.setText(entity.getBody());
 		return response;
 	}
 
