@@ -78,7 +78,7 @@ public class EntityConverterTest {
 		assertThat(response.getStatusCode()).isEqualTo(200);
 		assertThat(response.getStatusMessage()).isEqualTo("OK");
 		assertThat(response.getBody()).isEqualTo(body);
-		assertThat(response.getHeaders()).isEqualTo(headers);
+		assertThat(response.getHeaders()).isEqualTo(headers.toSingleValueMap());
 	}
 
 }

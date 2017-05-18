@@ -2,6 +2,7 @@ package com.onestorecorp.onetests;
 
 import com.onestorecorp.onetests.model.Api;
 import com.onestorecorp.onetests.repository.ApiRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Map;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DataMig {
@@ -20,6 +22,7 @@ public class DataMig {
 	@Autowired
 	private ApiRepository repo;
 
+	@Ignore
 	@Test
 	public void test() {
 		RestOperations restOps = new RestTemplate();
