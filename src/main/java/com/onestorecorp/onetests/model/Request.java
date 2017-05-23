@@ -1,6 +1,5 @@
 package com.onestorecorp.onetests.model;
 
-import com.fasterxml.jackson.annotation.JsonRawValue;
 import lombok.Data;
 
 import java.util.Map;
@@ -16,7 +15,6 @@ public class Request {
 
 	private Map<String, String> headers;
 
-	@JsonRawValue
-	private Object body;
+	private String body;
 
 }
