@@ -1,4 +1,4 @@
-package com.onestorecorp.onetests.web;
+package com.onestorecorp.onetests.service;
 
 import com.onestorecorp.onetests.model.Call;
 import com.onestorecorp.onetests.model.Request;
@@ -18,9 +18,15 @@ public class CallApiService {
 
 	private EntityConverter converter = new EntityConverter();
 
+	public Response callApiWithSuiteId(Request req, String suiteId) {
+		Response res = callApi(req);
+		addHistory(req, res, null, suiteId);
+		return res;
+	}
+
 	public Response callApi(Request req, String apiId) {
 		Response res = callApi(req);
-		addHistory(req, res, apiId);
+		addHistory(req, res, apiId, null);
 		return res;
 	}
 
@@ -32,11 +38,12 @@ public class CallApiService {
 		return res;
 	}
 
-	private void addHistory(Request req, Response res, String apiId) {
+	private void addHistory(Request req, Response res, String apiId, String suiteId) {
 		Call call = new Call();
 		call.setRequest(req);
 		call.setResponse(res);
 		call.setApiId(apiId);
+		call.setSuiteId(suiteId);
 		call.setStarred(false);
 		callRepo.insert(call);
 	}

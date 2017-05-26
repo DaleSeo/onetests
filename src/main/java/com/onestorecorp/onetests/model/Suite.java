@@ -3,26 +3,20 @@ package com.onestorecorp.onetests.model;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
-public class Call {
+public class Suite {
 
 	@Id
 	private String id;
+	private String title;
+	private String description;
 
-	private Request request;
-	private Response response;
-
-	private boolean starred;
-
-	@Indexed
-	private String apiId;
-
-	@Indexed
-	private String suiteId;
+	private List<Request> requests;
+	private SuiteResult result;
 
 	@CreatedDate
 	private Date createdDate;

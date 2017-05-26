@@ -1,9 +1,6 @@
 package com.onestorecorp.onetests;
 
-import com.onestorecorp.onetests.model.Api;
-import com.onestorecorp.onetests.model.Call;
-import com.onestorecorp.onetests.model.Host;
-import com.onestorecorp.onetests.model.Service;
+import com.onestorecorp.onetests.model.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
@@ -26,6 +23,7 @@ public class AppConfig {
 				config.exposeIdsFor(Host.class);
 				config.exposeIdsFor(Api.class);
 				config.exposeIdsFor(Call.class);
+				config.exposeIdsFor(Suite.class);
 			}
 
 		};

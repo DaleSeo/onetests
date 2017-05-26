@@ -1,4 +1,4 @@
-package com.onestorecorp.onetests.web;
+package com.onestorecorp.onetests.service;
 
 import com.onestorecorp.onetests.model.Request;
 import com.onestorecorp.onetests.model.Response;
