@@ -1,8 +1,8 @@
 package com.onestorecorp.onetests.service;
 
-import com.onestorecorp.onetests.model.Call;
-import com.onestorecorp.onetests.model.Request;
-import com.onestorecorp.onetests.model.Response;
+import com.onestorecorp.onetests.domain.Call;
+import com.onestorecorp.onetests.domain.Request;
+import com.onestorecorp.onetests.domain.Response;
 import com.onestorecorp.onetests.repository.CallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;

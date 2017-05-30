@@ -1,8 +1,8 @@
 package com.onestorecorp.onetests.service;
 
-import com.onestorecorp.onetests.model.Request;
-import com.onestorecorp.onetests.model.Suite;
-import com.onestorecorp.onetests.model.SuiteResult;
+import com.onestorecorp.onetests.domain.Request;
+import com.onestorecorp.onetests.domain.Suite;
+import com.onestorecorp.onetests.domain.SuiteResult;
 import com.onestorecorp.onetests.repository.CallRepository;
 import com.onestorecorp.onetests.repository.SuiteRepository;
 import org.slf4j.Logger;

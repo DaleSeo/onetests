@@ -1,6 +1,6 @@
 package com.onestorecorp.onetests.repository;
 
-import com.onestorecorp.onetests.model.Service;
+import com.onestorecorp.onetests.domain.Service;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 

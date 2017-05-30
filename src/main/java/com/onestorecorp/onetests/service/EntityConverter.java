@@ -1,7 +1,7 @@
 package com.onestorecorp.onetests.service;
 
-import com.onestorecorp.onetests.model.Request;
-import com.onestorecorp.onetests.model.Response;
+import com.onestorecorp.onetests.domain.Request;
+import com.onestorecorp.onetests.domain.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;

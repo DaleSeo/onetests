@@ -1,6 +1,6 @@
 package com.onestorecorp.onetests;
 
-import com.onestorecorp.onetests.model.Api;
+import com.onestorecorp.onetests.domain.Api;
 import com.onestorecorp.onetests.repository.ApiRepository;
 import org.junit.Ignore;
 import org.junit.Test;

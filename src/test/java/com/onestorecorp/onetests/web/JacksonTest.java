@@ -1,7 +1,7 @@
 package com.onestorecorp.onetests.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.onestorecorp.onetests.model.Request;
+import com.onestorecorp.onetests.domain.Request;
 import org.junit.Ignore;
 import org.junit.Test;
 

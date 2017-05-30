@@ -1,6 +1,6 @@
 package com.onestorecorp.onetests.web;
 
-import com.onestorecorp.onetests.model.SuiteResult;
+import com.onestorecorp.onetests.domain.SuiteResult;
 import com.onestorecorp.onetests.service.SuiteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

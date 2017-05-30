@@ -1,7 +1,7 @@
 package com.onestorecorp.onetests.web;
 
-import com.onestorecorp.onetests.model.Request;
-import com.onestorecorp.onetests.model.Response;
+import com.onestorecorp.onetests.domain.Request;
+import com.onestorecorp.onetests.domain.Response;
 import com.onestorecorp.onetests.service.CallApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
