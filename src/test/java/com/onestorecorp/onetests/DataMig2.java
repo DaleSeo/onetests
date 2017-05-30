@@ -48,7 +48,8 @@ public class DataMig2 {
 			req.setHeaders(headers);
 			req.setBody(api.getBody());
 			req.setUrl(api.getPath());
-			api.setMethod(api.getMethod());
+			req.setMethod(api.getMethod());
+			cas.setRequest(req);
 
 			caseRepo.save(cas);
 			System.out.println("##### " + cas);
