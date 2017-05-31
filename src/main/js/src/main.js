@@ -26,6 +26,7 @@ import Settings from './components/settings/Settings.vue'
 
 import Console from './components/console/Index.vue'
 import Case from './components/case/Index.vue'
+import CaseEdit from './components/case/Edit.vue'
 import CaseDetail from './components/case/Detail.vue'
 
 import Suite from './components/suite/Index.vue'
@@ -50,6 +51,7 @@ const router = new VueRouter({
     {path: '/settings', component: Settings},
     {path: '/console', component: Console},
     {path: '/cases', component: Case},
+    {path: '/cases/new', component: CaseEdit},
     {path: '/cases/:id', component: CaseDetail, props: true},
     {path: '/suites', component: Suite},
     {path: '/suites/new', component: SuiteEdit},

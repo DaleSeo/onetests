@@ -1,5 +1,18 @@
-# How to run
+## ONE tests
+
+## How to install
 
 ```
-$ ./gradlew bootRun
+$ npm install
+```
+
+## How to build
+
+```
+$ npm run compile
+```
+
+## How to run
+```
+$ npm start
 ```

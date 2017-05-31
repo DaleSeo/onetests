@@ -5,19 +5,19 @@
       <div class="content">
         Test Case
         <div class="sub header">
-          개별 검증 상세
+          개별 검증 등록
         </div>
       </div>
     </h3>
 
     <div class="ui right aligned basic segment">
-      <button class="ui mini labeled icon button" @click="list">
-        <i class="list icon"></i>
-        목록
-      </button>
       <button class="ui mini positive labeled icon button" @click="rerun">
         <i class="play icon"></i>
         재실행
+      </button>
+      <button class="ui mini labeled icon button" @click="list">
+        <i class="list icon"></i>
+        목록
       </button>
       <button class="ui mini negative labeled icon button" @click="del">
         <i class="trash icon"></i>
