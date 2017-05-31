@@ -11,6 +11,8 @@ public class Request {
 
 	private String url;
 
+	private String path;
+
 	private Map<String, String> queries;
 
 	private Map<String, String> headers;

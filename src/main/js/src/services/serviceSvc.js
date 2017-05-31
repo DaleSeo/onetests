@@ -1,5 +1,5 @@
 import superagent from 'superagent'
-import config from '../config'
+import config from '../../config'
 
 const restUrl = config.BACKEND_URL + '/services'
 

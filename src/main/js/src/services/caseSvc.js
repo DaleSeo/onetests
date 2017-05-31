@@ -1,5 +1,6 @@
 import superagent from 'superagent'
-import config from '../config'
+import utils from './utils'
+import config from '../../config'
 
 const restUrl = config.BACKEND_URL + '/cases'
 
@@ -7,13 +8,21 @@ function list(suiteId) {
   let url = restUrl
   if (suiteId) {
     url = restUrl + '/search/findBySuiteId?suiteId=' + suiteId
+  } else {
+    url = restUrl + '?size=1000&sort=id,desc'
   }
   console.log(url)
   return superagent.get(url)
     .then(res => res.body._embedded.cases)
 }
 
-function save(cas) {
+function save(_cas) {
+  let cas = Object.assign({}, _cas)
+  cas.request.queries = utils.arrayToObj(cas.request.queries)
+  cas.request.headers = utils.arrayToObj(cas.request.headers)
+
+  console.log('#cas:', cas)
+
   if (cas.id) {
     return modify(cas.id, cas)
   } else {

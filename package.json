@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "java -Dspring.profiles.active=production -jar build/libs/*.jar",
-    "stop": "kill -9 `ps -ef | grep onetest | grep -v grep | awk '{print $2}'`",
+    "stop": "kill -9 `ps -ef | grep onetests | grep -v grep | awk '{print $2}'`",
     "package": "./gradlew clean build -x test",
     "start-back": "cross-env NODE_ENV=development webpack-dev-server --open --hot --host 0.0.0.0 --public 172.21.197.80",
     "test": "mocha --compilers js:babel-register",

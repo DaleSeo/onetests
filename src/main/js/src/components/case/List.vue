@@ -13,10 +13,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="cas in revCases" @click="detail(cas.id)">
+        <tr v-for="cas in cases" @click="detail(cas.id)">
           <td>{{cas.serviceId}}</td>
           <td>{{cas.request.method}}</td>
-          <td>{{cas.request.url}}</td>
+          <td>{{cas.request.path}}</td>
           <td>{{keysLength(cas.request.queries)}}</td>
           <td>{{keysLength(cas.request.headers)}}</td>
           <td>{{cas.createdBy || '아무게'}}</td>
@@ -30,11 +30,6 @@
 <script>
 export default {
   props: ["cases"],
-  computed: {
-    revCases() {
-      return this.cases.slice().reverse();
-    }
-  },
   methods: {
     detail (id) {
       window.location.href = `/cases/${id}`
