@@ -17,7 +17,7 @@ public class SuiteController {
 	@Autowired
 	private SuiteService svc;
 
-	@RequestMapping(value = "/suites/run", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/suites/run", method = RequestMethod.POST)
 	public @ResponseBody SuiteResult run(@RequestParam String id) {
 		logger.info("##### id: {}", id);
 		SuiteResult result = svc.run(id);

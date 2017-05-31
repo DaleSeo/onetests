@@ -16,10 +16,8 @@
 *.iml
 *.ipr
 
-### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+### Node ###
+node_modules/
+npm-debug.log
+yarn-error.log
+.env

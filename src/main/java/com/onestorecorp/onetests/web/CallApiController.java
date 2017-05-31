@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin
-@RequestMapping("/callApi")
+@RequestMapping("/api/callApi")
 public class CallApiController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CallApiController.class);
