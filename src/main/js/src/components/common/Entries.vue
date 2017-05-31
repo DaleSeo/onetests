@@ -1,19 +1,25 @@
 <template>
-  <div>
-    <div class="row" v-if="entries" v-for="(entry, index) in entries">
-      <div class="col-sm-3">
-        <input type="text" class="form-control input-sm" v-model="entry.key"/>
+  <div class="ui mini form segment">
+    <div class="fields" v-if="entries" v-for="(entry, index) in entries">
+      <div class="five wide field">
+        <input type="text" v-model="entry.key" :placeholder="'key ' + (index + 1)"/>
       </div>
-      <div class="col-sm-8">
-        <input type="text" class="form-control input-sm" v-model="entry.value"/>
+      <div class="ten wide field">
+        <input type="text" v-model="entry.value" :placeholder="'value ' + (index + 1)"/>
       </div>
-      <div class="col-sm-1">
-        <button type="button" class="close" @click="del(index)">&times;</button>
+      <div class="one wide field" style="text-align: center">
+        <button type="button" class="ui circular mini compact negative icon button" @click="del(index)">
+          <i class="minus icon"/>
+        </button>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <button type="button" class="btn btn-default btn-sm" @click="add"><i class="fa fa-plus"/></button>
+    <div class="fields">
+      <div class="six wide field"/>
+      <div class="nine wide field"/>
+      <div class="one wide field" style="text-align: center">
+        <button type="button" class="ui circular mini compact positive icon button" @click="add">
+          <i class="plus icon"/>
+        </button>
       </div>
     </div>
   </div>
