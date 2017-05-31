@@ -33,7 +33,7 @@ public class DataMig2 {
 			cas.setCreatedDate(new Date());
 			cas.setTitle(api.getTitle());
 			cas.setDescription(api.getDescription());
-			cas.setServiceId(api.getServiceId());
+			//cas.setServiceId(api.getServiceId());
 			cas.setExclusions(api.getExclusions());
 
 			Request req = new Request();
