@@ -19,7 +19,7 @@ public class HomeController {
 			"/settings/**"
 	})
 	public String index() {
-		return "index";
+		return "forward:/index.html";
 	}
 
 }

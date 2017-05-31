@@ -4,8 +4,6 @@ spring:
       base-path: /api
     mongodb:
       uri: mongodb://user:pass@ds133241.mlab.com:33241/onetests
-  thymeleaf:
-    cache: false
 
 server:
   port: 3000
