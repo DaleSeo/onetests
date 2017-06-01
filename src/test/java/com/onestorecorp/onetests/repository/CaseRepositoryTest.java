@@ -7,13 +7,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
+import java.util.List;
 
 
 @RunWith(SpringRunner.class)
 @DataMongoTest
+@ActiveProfiles("production")
 public class CaseRepositoryTest {
 
     @Autowired
@@ -43,6 +46,19 @@ public class CaseRepositoryTest {
 
         Case found = repository.findOne(saved.getId());
         System.out.println("# found: " + found);
+    }
+
+    @Test
+	public void test2() {
+	    for (Case aCase : repository.findAll()) {
+		    System.out.println("# " + aCase);
+	    }
+    }
+
+    @Test
+	public void testFindByServiceId() {
+	    List<Case> cases = repository.findByServiceId("5912a299ec46ff6c417a9482");
+	    System.out.println("# cases: " + cases);
     }
 
 }

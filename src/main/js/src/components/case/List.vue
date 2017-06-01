@@ -14,9 +14,9 @@
       </thead>
       <tbody>
         <tr v-for="cas in cases" @click="detail(cas.id)">
-          <td>{{cas.serviceId}}</td>
+          <td>{{cas.service.code}}</td>
           <td>{{cas.request.method}}</td>
-          <td>{{cas.request.path}}</td>
+          <td>{{cas.request.path.slice(0, 30)}}</td>
           <td>{{keysLength(cas.request.queries)}}</td>
           <td>{{keysLength(cas.request.headers)}}</td>
           <td>{{cas.createdBy || '아무게'}}</td>

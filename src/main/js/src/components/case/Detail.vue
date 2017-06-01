@@ -34,8 +34,8 @@
         <dd>{{cas.id}}</dd>
       </p>
       <p>
-        <dt>Service ID</dt>
-        <dd>{{cas.serviceId}}</dd>
+        <dt>서비스 코드</dt>
+        <dd>{{cas.service.code}}</dd>
       </p>
       <p>
         <dt>수행 일시</dt>

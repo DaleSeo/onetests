@@ -1,4 +1,4 @@
-package com.onestorecorp.onetests;
+package com.onestorecorp.onetests.data;
 
 import com.onestorecorp.onetests.domain.Api;
 import com.onestorecorp.onetests.repository.ApiRepository;

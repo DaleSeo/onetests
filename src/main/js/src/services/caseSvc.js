@@ -9,7 +9,7 @@ function list(suiteId) {
   if (suiteId) {
     url = restUrl + '/search/findBySuiteId?suiteId=' + suiteId
   } else {
-    url = restUrl + '?size=1000&sort=id,desc'
+    url = restUrl + '?projection=inlineService&size=1000&sort=id,desc'
   }
   console.log(url)
   return superagent.get(url)
@@ -42,7 +42,7 @@ function modify(id, cas) {
 }
 
 function detail(id) {
-  return superagent.get(restUrl + '/' + id)
+  return superagent.get(restUrl + '/' + id + '?projection=inlineService')
     .then(res => res.body)
 }
 

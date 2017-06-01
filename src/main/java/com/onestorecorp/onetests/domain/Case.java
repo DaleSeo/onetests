@@ -3,7 +3,6 @@ package com.onestorecorp.onetests.domain;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,6 +23,8 @@ public class Case {
 
 	private Request request;
 	private Response response;
+
+	private String serviceId;
 
 	@DBRef
 	private Service service;

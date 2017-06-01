@@ -1,6 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
 
+process.noDeprecation = true
+
 module.exports = {
   entry: './src/main/js/src/main.js',
   output: {
@@ -56,7 +58,14 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      toastr: 'toastr'
+    })
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {

@@ -17,4 +17,11 @@ public class Service {
 	private String description;
 	private List<String> hosts;
 
+	public Service() {
+	}
+
+	public Service(String id) {
+		this.id = id;
+	}
+
 }

@@ -18,6 +18,9 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import '../semantic/dist/semantic.min.css'
 import '../semantic/dist/semantic.min.js'
 
+import 'toastr/build/toastr.min.css'
+import 'toastr/build/toastr.min.js'
+
 import Index from './components/Index.vue'
 import Service from './components/service/Service.vue'
 // import SuiteDetail from './components/suite_bak/SuiteDetail.vue'

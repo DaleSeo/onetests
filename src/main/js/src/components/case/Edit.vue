@@ -3,19 +3,26 @@
     <Title icon="cube" title="Test Case" subTitle="개별 검증 등록"/>
     <form class="ui form segment" :class="{loading}" @submit.prevent="saveCase">
       <div class="fields">
-        <div class="three wide required field">
+        <div class="four wide required field">
           <label>서비스</label>
           <select class="ui fluid search dropdown" v-model="cas.serviceId" required>
             <option :value="service.id" v-for="service in services">{{service.name}}</option>
           </select>
         </div>
-        <div class="three wide required field">
+        <div class="twelve wide required field">
+          <label>제목</label>
+          <input type="text" v-model="cas.title">
+        </div>
+      </div>
+
+      <div class="fields">
+        <div class="four wide required field">
           <label>메소드</label>
           <select class="ui fluid search dropdown" v-model="cas.request.method" required>
             <option v-for="method in methods">{{method}}</option>
           </select>
         </div>
-        <div class="ten wide required field">
+        <div class="twelve wide required field">
           <label>패스 (호스트를 제외한 URL)</label>
           <input type="text" v-model="cas.request.path">
         </div>
@@ -86,6 +93,8 @@ export default {
     initCase () {
       return {
         serviceId: '',
+        title: '',
+        description: '',
         request: {
           method: 'GET',
           path: '/posts/1',
@@ -95,8 +104,7 @@ export default {
             {key: 'Content-type', value: 'application/json;charset=UTF-8'}
           ],
           body: ''
-        },
-        description: ''
+        }
       }
     }
   }
