@@ -1,31 +1,34 @@
 <template>
-  <button class="list-group-item" @click="pick">
-    <h5 class="list-group-item-heading">
+  <div>
+    <div class="title">
+      <RequestLine :method="cas.request.method" :path="cas.request.path"/>
       {{cas.title}}
-    </h5>
-    <p class="list-group-item-text">
-      <span class="label" :class="className(cas.request.method)">{{cas.request.method}}</span>
-      &nbsp;<em>{{cas.request.path && cas.request.path.slice(0, 50)}}</em>
-    </p>
-  </button>
+    </div>
+    <div class="content">
+      <button class="ui right floated mini circular icon button" @click="pick">
+        <i class="chevron right icon"/>
+      </button>
+      <div v-if="cas.request.body || cas.request.queries">
+        <span v-if="cas.request.queries">{{cas.request.queries}}</span>
+        <span v-if="cas.request.body">{{cas.request.body}}</span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   props: ['cas'],
   methods: {
-    className (method) {
-      switch (method) {
-        case 'GET': return 'label-success'
-        case 'POST': return 'label-info'
-        case 'PUT': return 'label-warning'
-        case 'DELETE': return 'label-danger'
-        default: return 'label-primary'
-      }
-    },
     pick () {
       this.$emit('pick', this.cas)
     }
   }
 }
 </script>
+
+<style scoped>
+.content {
+  white-space: pre-wrap;
+}
+</style>
