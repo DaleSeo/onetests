@@ -11,7 +11,7 @@ import java.util.List;
 @CrossOrigin
 public interface ApiRepository extends MongoRepository<Api, String> {
 
-	@RestResource(path="findByServiceId", rel="findByServiceId")
+	@RestResource(path="findByServiceIdAndSuiteId", rel="findByServiceIdAndSuiteId")
 	List<Api> findByServiceId(@Param("serviceId") String serviceId);
 
 }

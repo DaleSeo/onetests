@@ -8,13 +8,13 @@
       </div>
     </h3>
 
-    <div class="row">
-      <div class="col-md-4">
-        <ApiList
+    <div class="ui grid">
+      <div class="five wide column">
+        <CaseList
           @pickApi="pickApi"
         />
       </div>
-      <div class="col-md-8">
+      <div class="eleven wide column">
         <Request
           :request="request"
           @callApi="callApi"
@@ -38,7 +38,7 @@
 import callApi from '../../services/callApi'
 import serviceSvc from '../../services/serviceSvc'
 
-import ApiList from './ApiList.vue'
+import CaseList from './CaseList.vue'
 import Request from './Request.vue'
 import Buttons from './Buttons.vue'
 import Response from './Response.vue'
@@ -46,7 +46,7 @@ import Share from './Share.vue'
 import Curl from './Curl.vue'
 
 export default {
-  components: {ApiList, Request, Buttons, Response, Share, Curl},
+  components: {CaseList, Request, Buttons, Response, Share, Curl},
   data () {
     return {
       request: this.initRequest(),

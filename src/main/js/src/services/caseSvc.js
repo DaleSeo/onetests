@@ -4,13 +4,15 @@ import config from '../../config'
 
 const restUrl = config.BACKEND_URL + '/cases'
 
-function list(suiteId) {
+function list(serviceId) {
   let url = restUrl
-  if (suiteId) {
-    url = restUrl + '/search/findBySuiteId?suiteId=' + suiteId
+
+  if (serviceId) {
+    url += `/search/findByServiceId?serviceId=${serviceId}`
   } else {
-    url = restUrl + '?projection=inlineService&size=1000&sort=id,desc'
+    url += '?sort=id,desc'
   }
+
   console.log(url)
   return superagent.get(url)
     .then(res => res.body._embedded.cases)

@@ -14,7 +14,7 @@ public interface CaseRepository extends MongoRepository<Case, String> {
 
 
 	@RestResource(path="findByServiceId", rel="findByServiceId")
-	@Query("{ 'service': { '$ref': 'service', '$id' : ?0 }}")
+//	@Query("{ 'service': { '$ref': 'service', '$id' : ?0 }}")
 	List<Case> findByServiceId(@Param("serviceId") String serviceId);
 
 }

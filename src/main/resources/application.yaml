@@ -10,9 +10,9 @@ server:
 
 logging:
   level:
-    ROOT: INFO
     com.onestorecorp.onetests: DEBUG
-    org.springframework: DEBUG
+    org.springframework: INFO
+    ROOT: INFO
 
 ---
 spring:

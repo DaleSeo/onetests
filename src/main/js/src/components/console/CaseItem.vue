@@ -1,18 +1,18 @@
 <template>
   <button class="list-group-item" @click="pick">
     <h5 class="list-group-item-heading">
-      {{api.title}}
+      {{cas.title}}
     </h5>
     <p class="list-group-item-text">
-      <span class="label" :class="className(api.method)">{{api.method}}</span>
-      &nbsp;<em>{{api.path.slice(0, 50)}}</em>
+      <span class="label" :class="className(cas.request.method)">{{cas.request.method}}</span>
+      &nbsp;<em>{{cas.request.path && cas.request.path.slice(0, 50)}}</em>
     </p>
   </button>
 </template>
 
 <script>
 export default {
-  props: ['api'],
+  props: ['cas'],
   methods: {
     className (method) {
       switch (method) {
@@ -24,7 +24,7 @@ export default {
       }
     },
     pick () {
-      this.$emit('pick', this.api)
+      this.$emit('pick', this.cas)
     }
   }
 }

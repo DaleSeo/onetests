@@ -11,7 +11,7 @@
     </h3>
 
     <div style="text-align: right">
-      <button class="ui mini primary labeled icon button" @click="rerun">
+      <button class="ui mini primary labeled icon button" @click="run">
         <i class="play icon"></i>
         실행
       </button>
@@ -104,8 +104,9 @@ export default {
     list () {
       window.location.href = '/cases'
     },
-    rerun () {
+    run () {
       window.location.href = '/console'
+      // window.location.href = '/console/' + this.id
     },
     del () {
       caseSvc.remove(this.id)

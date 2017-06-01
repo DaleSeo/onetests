@@ -5,7 +5,7 @@
       <div class="fields">
         <div class="four wide required field">
           <label>서비스</label>
-          <select class="ui fluid search dropdown" v-model="cas.serviceId" required>
+          <select v-model="cas.serviceId" required>
             <option :value="service.id" v-for="service in services">{{service.name}}</option>
           </select>
         </div>
@@ -18,7 +18,7 @@
       <div class="fields">
         <div class="four wide required field">
           <label>메소드</label>
-          <select class="ui fluid search dropdown" v-model="cas.request.method" required>
+          <select v-model="cas.request.method" required>
             <option v-for="method in methods">{{method}}</option>
           </select>
         </div>
