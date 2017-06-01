@@ -14,8 +14,10 @@ import Vue from 'vue'
 import Header1 from './components/Header.vue'
 import Footer1 from './components/Footer.vue'
 import Title from './components/common/Title.vue'
+import RequestLine from './components/common/RequestLine.vue'
 
 Vue.component('Title', Title)
+Vue.component('RequestLine', RequestLine)
 
 export default {
   components: { Header1, Footer1 }

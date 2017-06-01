@@ -1,6 +1,6 @@
 <template>
   <div class="ui container">
-    <Title icon="cube" title="Test Case" subTitle="개별 검증 등록"/>
+    <Title icon="cube" title="Test Case" subTitle="개별 검증 상세"/>
     <form class="ui form segment" :class="{loading}" @submit.prevent="saveCase">
       <div class="fields">
         <div class="four wide required field">
@@ -11,7 +11,7 @@
         </div>
         <div class="twelve wide required field">
           <label>제목</label>
-          <input type="text" v-model="cas.title">
+          <input type="text" v-model="cas.title" readonly disabled>
         </div>
       </div>
 
@@ -51,6 +51,7 @@
       <button type="submit" class="ui primary button" :class="{loading: inProgress}" tabindex="0">저장</button>
       <button type="reset" class="ui secondary button" tabindex="0">취소</button>
     </form>
+    <pre>{{cas}}</pre>
   </div>
 </template>
 
@@ -58,13 +59,16 @@
 import caseSvc from '../../services/caseSvc'
 import serviceSvc from '../../services/serviceSvc'
 
-import Entries from '../common/Entries.vue'
+import utils from '../../services/utils'
 
 export default {
-  components: { Entries },
-  data () {
+  props: ["id"],
+  data() {
     return {
-      cas: this.initCase(),
+      cas: {
+        request: {},
+        response: {}
+      },
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
       services: [],
       loading: false,
@@ -73,43 +77,45 @@ export default {
   },
   created () {
     this.listServices()
+      .then(_ => this.detail())
+      .then( _ => this.loading = false)
   },
   methods: {
     listServices () {
       this.loading = true
       console.log('ApiList.vue#listServices()')
-      serviceSvc.list()
+      return serviceSvc.list()
         .then(services => this.services = services)
         .catch(err => toastr.error('서비스 목록 조회 실패'))
-        .then(_ => this.loading = false)
     },
-    saveCase () {
-      this.inProgress = true
-      caseSvc.save(this.cas)
-        .then(id => {
-          toastr.success('테스트 케이스가 저장되었습니다.')
-          window.location.href = '/cases/' + id
-        })
-        .catch(err => toastr.error('테스트 케이스 저장 실패'))
-        .then(_ => this.inProgress = false)
+    detail () {
+      return caseSvc.detail(this.id)
+        .then(cas => this.cas = cas)
     },
-    initCase () {
-      return {
-        serviceId: '',
-        title: '',
-        description: '',
-        request: {
-          method: 'GET',
-          path: '/posts/1',
-          queries: [],
-          headers: [
-            {key: 'Accept', value: 'application/json;charset=UTF-8'},
-            {key: 'Content-type', value: 'application/json;charset=UTF-8'}
-          ],
-          body: ''
-        }
-      }
+    list () {
+      window.location.href = '/cases'
+    },
+    rerun () {
+      window.location.href = '/console'
+    },
+    del () {
+      caseSvc.remove(this.id)
+        .then(this.list)
+    },
+    methodClass (method) {
+      return utils.methodClass(method)
     }
   }
 }
 </script>
+
+<style scoped>
+.body {
+  background-color: white;
+  margin-bottom: 0px;
+}
+
+.dl-horizontal {
+  margin-bottom: 0px;
+}
+</style>

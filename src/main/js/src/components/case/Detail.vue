@@ -10,10 +10,10 @@
       </div>
     </h3>
 
-    <div class="ui right aligned basic segment">
-      <button class="ui mini positive labeled icon button" @click="rerun">
+    <div style="text-align: right">
+      <button class="ui mini primary labeled icon button" @click="rerun">
         <i class="play icon"></i>
-        재실행
+        실행
       </button>
       <button class="ui mini labeled icon button" @click="list">
         <i class="list icon"></i>
@@ -25,10 +25,10 @@
       </button>
     </div>
 
+    <h4 class="ui header">
+      기본 정보
+    </h4>
     <div class="ui segment">
-      <h4 class="ui dividing  header">
-        기본 정보
-      </h4>
       <p>
         <dt>Case ID</dt>
         <dd>{{cas.id}}</dd>
@@ -47,52 +47,33 @@
       </p>
     </div>
 
+    <h4 class="ui header">
+      요청 정보
+    </h4>
     <div class="ui segment">
-      <h4 class="ui dividing  header">
-        요청 정보
-      </h4>
+      <RequestLine :method="cas.request.method" :path="cas.request.path"/>
       <p>
-        <dt>요청 라인</dt>
+        <dt>쿼리 파리미터</dt>
+        <ul>
+          <div v-for="(val, key) in cas.request.queries">
+            <li>{{key}}: {{val}}</li>
+          </div>
+        </ul>
+      </p>
+      <p>
+        <dt>요청 헤더</dt>
+        <ul>
+          <div v-for="(val, key) in cas.request.headers">
+            <li>{{key}}: {{val}}</li>
+          </div>
+        </ul>
+      </p>
+      <p>
+        <dt>바디</dt>
         <dd>
-          <span class="label" :class="methodClass(cas.request.method)">{{cas.request.method}}</span>
-          &nbsp;<em>{{cas.request.url}}</em>
+          <pre class="body">{{cas.request.body}}</pre>
         </dd>
       </p>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <strong>요청 쿼리</strong>
-      </div>
-      <div class="panel-body" >
-        <dl class="dl-horizontal">
-          <div v-for="(val, key) in cas.request.queries">
-            <dt>{{key}}</dt>
-            <dd>{{val}}</dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <strong>요청 헤더</strong>
-      </div>
-      <div class="panel-body" >
-        <dl class="dl-horizontal">
-          <div v-for="(val, key) in cas.request.headers">
-            <dt>{{key}}</dt>
-            <dd>{{val}}</dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <strong>요청 바디</strong>
-      </div>
-      <pre class="body">{{cas.request.body}}</pre>
     </div>
   </div>
 </template>
@@ -107,7 +88,8 @@ export default {
     return {
       cas: {
         request: {},
-        response: {}
+        response: {},
+        service: {}
       }
     }
   },
@@ -127,6 +109,7 @@ export default {
     },
     del () {
       caseSvc.remove(this.id)
+        .then(toastr.success('테스트 케이스가 삭제되었습니다.'))
         .then(this.list)
     },
     methodClass (method) {

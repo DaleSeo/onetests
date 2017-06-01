@@ -22,6 +22,8 @@ public interface CaseProjection {
 
 	List<String> getExclusions();
 
+	String getServiceId();
+
 	Service getService();
 
 }

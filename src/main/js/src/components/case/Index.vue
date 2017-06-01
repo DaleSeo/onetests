@@ -2,12 +2,14 @@
   <div class="container">
     <Title icon="cube" title="Test Case" subTitle="개별 검증"/>
 
-    <div class="ui right aligned basic segment">
+    <div style="text-align: right">
       <button class="ui mini primary labeled icon button" @click="create">
         <i class="plus icon"></i>
         등록
       </button>
     </div>
+
+    <br/>
 
     <List :cases="cases"/>
   </div>

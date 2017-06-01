@@ -28,6 +28,7 @@ function save(_cas) {
   } else {
     delete cas.id
     return create(cas)
+      .then(res => res.body.id)
   }
 }
 
