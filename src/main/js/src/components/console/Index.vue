@@ -12,19 +12,19 @@
       <div class="five wide column">
         <CaseList
           @pickApi="pickApi"
+          @changeServiceId="changeServiceId"
         />
       </div>
       <div class="eleven wide column">
         <Request
           :request="request"
+          :serviceId="serviceId"
           @callApi="callApi"
         />
-        <Buttons
-          @callApi="callApi"
-          @cancel="cancel"
-        />
+        <br/>
         <Response
           :response="response"
+          :callId="callId"
           :inProgress="inProgress"
         />
       </div>
@@ -51,8 +51,9 @@ export default {
     return {
       request: this.initRequest(),
       response: this.initResponse(),
-      apiId: '',
-      callId: '5912a282ec46ff6c417a9481',
+      serviceId: '',
+      caseId: '',
+      callId: '',
       inProgress: false,
       loading: false
     }
@@ -66,7 +67,7 @@ export default {
           {key: 'Accept', value: 'application/json;charset=UTF-8'},
           {key: 'Content-type', value: 'application/json;charset=UTF-8'}
         ],
-        url: 'http://jsonplaceholder.typicode.com/posts/1',
+        host: '',
         path: '',
         body: ''
       }
@@ -83,8 +84,11 @@ export default {
     callApi () {
       this.inProgress = true
       this.response = this.initResponse()
-      callApi(this.request, this.apiId)
-        .then(res => this.response = res)
+      callApi(this.request, this.caseId)
+        .then(call => {
+          this.callId = call.id
+          this.response = call.response
+        })
         .catch(err => {
           console.log(err)
           this.response.error = err.response.body.message
@@ -96,13 +100,18 @@ export default {
       this.response = this.initResponse()
       toastr.success('모든 입력 값들이 삭제되었습니다.')
     },
-    pickApi (api) {
-      console.log('Index.vue#pickApi()', api)
-      this.apiId = api.id
-      this.request.method = api.method
-      this.request.url = api.url
-      this.request.body = api.body
+    pickApi (cas) {
+      console.log('Index.vue#pickApi()', cas)
+      this.caseId = cas.id
+      this.request.method = cas.request.method
+      this.request.url = cas.request.path
+      this.request.path = cas.request.path
+      this.request.body = cas.request.body
       this.response = this.initResponse
+    },
+    changeServiceId (serviceId) {
+      console.log('Index.vue#changeServiceId:', serviceId)
+      this.serviceId = serviceId
     }
   }
 }

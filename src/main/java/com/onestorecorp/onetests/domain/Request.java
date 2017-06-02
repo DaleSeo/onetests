@@ -9,7 +9,7 @@ public class Request {
 
 	private String method;
 
-	private String url;
+	private String host;
 
 	private String path;
 

@@ -1,11 +1,11 @@
 <template>
   <div class="ui container">
     <Title icon="cube" title="Test Case" subTitle="개별 검증 등록"/>
-    <form class="ui form segment" :class="{loading}" @submit.prevent="saveCase">
+    <form class="ui small form segment" :class="{loading}" @submit.prevent="saveCase">
       <div class="fields">
         <div class="four wide required field">
           <label>서비스</label>
-          <select v-model="cas.serviceId" required>
+          <select class="ui fluid dropdown" v-model="cas.serviceId" required>
             <option :value="service.id" v-for="service in services">{{service.name}}</option>
           </select>
         </div>
@@ -18,7 +18,7 @@
       <div class="fields">
         <div class="four wide required field">
           <label>메소드</label>
-          <select v-model="cas.request.method" required>
+          <select class="ui fluid dropdown" v-model="cas.request.method" required>
             <option v-for="method in methods">{{method}}</option>
           </select>
         </div>

@@ -48,7 +48,7 @@ public class ApiToCaseMig {
 			});
 			req.setHeaders(headers);
 			req.setBody(api.getBody());
-			req.setUrl(api.getPath());
+			req.setHost(api.getPath());
 			req.setPath(api.getPath());
 			req.setMethod(api.getMethod());
 			cas.setRequest(req);

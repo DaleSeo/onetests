@@ -19,7 +19,7 @@ public class Call {
 	private boolean starred;
 
 	@Indexed
-	private String apiId;
+	private String caseId;
 
 	@Indexed
 	private String suiteId;

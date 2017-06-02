@@ -24,10 +24,10 @@ public class CallApiService {
 		return res;
 	}
 
-	public Response callApi(Request req, String apiId) {
+	public Call callApi(Request req, String caseId) {
 		Response res = callApi(req);
-		addHistory(req, res, apiId, null);
-		return res;
+		Call call = addHistory(req, res, caseId, null);
+		return call;
 	}
 
 	public Response callApi(Request req) {
@@ -38,14 +38,14 @@ public class CallApiService {
 		return res;
 	}
 
-	private void addHistory(Request req, Response res, String apiId, String suiteId) {
+	private Call addHistory(Request req, Response res, String caseId, String suiteId) {
 		Call call = new Call();
 		call.setRequest(req);
 		call.setResponse(res);
-		call.setApiId(apiId);
+		call.setCaseId(caseId);
 		call.setSuiteId(suiteId);
 		call.setStarred(false);
-		callRepo.insert(call);
+		return callRepo.save(call);
 	}
 
 }

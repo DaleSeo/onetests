@@ -1,37 +1,53 @@
 <template>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <i class="fa fa-arrow-circle-left"/> <strong>응답</strong>
-    </div>
-    <div class="panel-body">
-      <ProgressBar v-if="inProgress"/>
-
-      <div class="alert alert-danger" v-if="response.error">
-        <strong>호출 실패</strong> {{response.error}}
+  <div>
+    <h5 class="ui top attached inverted small header">
+      <i class="arrow circle left icon"/>
+      <div class="content">
+        응답
       </div>
-
-      <div class="alert alert-success" v-if="response.statusCode">
-        <strong>{{response.statusCode}}</strong> {{response.statusMessage}}
-      </div>
-
-      <div v-if="response.body">
-        <ul class="nav nav-tabs">
-          <li :class="{active: tab === 'headers'}" @click="tab = 'headers'"><a href="#headers">헤더</a></li>
-          <li :class="{active: tab === 'body'}" @click="tab = 'body'"><a href="#body">바디</a></li>
-        </ul>
-
-        <div id="headers" v-if="tab === 'headers'" class="well">
-          <dl class="dl-horizontal">
-            <div v-for="(val, key) in response.headers">
-              <dt>{{key}}</dt>
-              <dd>{{val}}</dd>
-            </div>
-          </dl>
+    </h5>
+    <div class="ui attached segment" :class="{loading: inProgress}">
+      <div class="ui negative message" v-if="response.error">
+        <div class="header">
+          호출 실패
         </div>
+        <p>{{response.error}}</p>
+      </div>
 
-        <div id="body" v-if="tab === 'body'">
+      <div class="ui positive message" v-if="response.statusCode">
+        <div class="header">
+          {{response.statusCode}}
+        </div>
+        <p>{{response.statusMessage}}</p>
+      </div>
+
+      <div id="resTab" v-show="response.body">
+        <div class="ui tabular menu">
+          <a class="item" data-tab="res-first">헤더</a>
+          <a class="item ative" data-tab="res-second">바디</a>
+        </div>
+        <div class="ui tab" data-tab="res-first">
+          <table class="ui definition table">
+            <tbody>
+              <tr v-for="(val, key) in response.headers">
+                <td class="two wide column">{{key}}</td>
+                <td>{{val}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ui tab active" data-tab="res-second">
           <pre>{{response.body}}</pre>
         </div>
+      </div>
+
+      <div style="text-align: right" v-if="callId">
+        <button type="button" class="ui labeled icon small button" data-toggle="modal" data-target="#share">
+          <i class="share alternate icon"/> 공유
+        </button>
+        <button type="button" class="ui labeled icon small button" @click="register">
+          <i class="cube icon"/>등록
+        </button>
       </div>
     </div>
   </div>
@@ -42,10 +58,20 @@ import ProgressBar from '../common/ProgressBar.vue'
 
 export default {
   components: {ProgressBar},
-  props: ['response', 'inProgress'],
+  props: ['response', 'inProgress', 'callId'],
+  mounted () {
+    $('#resTab .menu .item').tab({
+      context: $('#resTab')
+    })
+  },
   data () {
     return {
       tab: 'body',
+    }
+  },
+  methods: {
+    register () {
+      toastr.info('구현 중입니다')
     }
   }
 }

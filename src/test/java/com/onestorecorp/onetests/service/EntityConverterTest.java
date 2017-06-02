@@ -23,7 +23,8 @@ public class EntityConverterTest {
 	public void testConvertRequestForGet() {
 		Request request = new Request();
 		request.setMethod("GET");
-		request.setUrl("http://jsonplaceholder.typicode.com/posts/1");
+		request.setHost("http://jsonplaceholder.typicode.com");
+		request.setPath("/posts/1");
 		request.setHeaders(null);
 		request.setBody("");
 
@@ -39,7 +40,8 @@ public class EntityConverterTest {
 	public void testConvertRequestForPost() {
 		Request request = new Request();
 		request.setMethod("POST");
-		request.setUrl("http://jsonplaceholder.typicode.com/posts");
+		request.setHost("http://jsonplaceholder.typicode.com");
+		request.setPath("/posts");
 		request.setHeaders(null);
 		request.setBody("{\n" +
 				"  \"body\": \"bar\",\n" +

@@ -29,7 +29,15 @@ public class EntityConverter {
 			params.setAll(request.getQueries());
 		}
 
-		URI uri = UriComponentsBuilder.fromHttpUrl(request.getUrl()).queryParams(params).build().encode().toUri();
+		String httpUrl = "";
+		if (request.getHost() != null) {
+			httpUrl += request.getHost();
+		}
+		if (request.getPath() != null) {
+			httpUrl += request.getPath();
+		}
+
+		URI uri = UriComponentsBuilder.fromHttpUrl(httpUrl).queryParams(params).build().encode().toUri();
 		return new RequestEntity<>(body, headers, method, uri);
 	}
 

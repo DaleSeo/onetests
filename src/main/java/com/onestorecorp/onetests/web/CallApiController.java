@@ -1,15 +1,14 @@
 package com.onestorecorp.onetests.web;
 
+import com.onestorecorp.onetests.domain.Call;
 import com.onestorecorp.onetests.domain.Request;
-import com.onestorecorp.onetests.domain.Response;
 import com.onestorecorp.onetests.service.CallApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @CrossOrigin
 @RequestMapping("/api/callApi")
 public class CallApiController {
@@ -19,12 +18,12 @@ public class CallApiController {
 	@Autowired
 	private CallApiService svc;
 
-	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody Response callApi(@RequestBody Request req, @RequestParam String apiId) {
+	@PostMapping
+	public Call callApi(@RequestBody Request req, @RequestParam String caseId) {
 		logger.info("##### {}", req);
-		Response res = svc.callApi(req, apiId);
-		logger.info("##### {}", res);
-		return res;
+		Call call = svc.callApi(req, caseId);
+		logger.info("##### {}", call);
+		return call;
 	}
 
 }

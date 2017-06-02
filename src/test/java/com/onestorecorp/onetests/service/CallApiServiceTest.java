@@ -20,7 +20,8 @@ public class CallApiServiceTest {
 	public void testCallApiForGet() {
 		Request req = new Request();
 		req.setMethod("GET");
-		req.setUrl("http://jsonplaceholder.typicode.com/posts/1");
+		req.setHost("http://jsonplaceholder.typicode.com");
+		req.setPath("/posts/1");
 		req.setHeaders(null);
 		req.setBody(null);
 
@@ -43,7 +44,8 @@ public class CallApiServiceTest {
 	public void testCallApiForPost() {
 		Request req = new Request();
 		req.setMethod("POST");
-		req.setUrl("http://jsonplaceholder.typicode.com/posts");
+		req.setHost("http://jsonplaceholder.typicode.com");
+		req.setPath("/posts");
 		req.setHeaders(null);
 		req.setBody("{\n" +
 				"  \"body\": \"bar\",\n" +
@@ -61,6 +63,18 @@ public class CallApiServiceTest {
 		assertThat(res.getBody()).isEqualTo("{\n" +
 				"  \"id\": 101\n" +
 				"}");
+	}
+
+	@Test
+	public void test() {
+		Request req = new Request();
+		req.setMethod("GET");
+		req.setPath("http://www.naver.com");
+		req.setHeaders(null);
+		req.setBody(null);
+
+		Response res = svc.callApi(req);
+		System.out.println(res);
 	}
 
 }
