@@ -42,7 +42,7 @@
       </div>
 
       <div style="text-align: right" v-if="callId">
-        <button type="button" class="ui labeled icon small button" data-toggle="modal" data-target="#share">
+        <button type="button" class="ui labeled icon small button" @click="share">
           <i class="share alternate icon"/> 공유
         </button>
         <button type="button" class="ui labeled icon small button" @click="register">
@@ -70,6 +70,9 @@ export default {
     }
   },
   methods: {
+    share () {
+      $('#modalShare').modal('show')
+    },
     register () {
       toastr.info('구현 중입니다')
     }

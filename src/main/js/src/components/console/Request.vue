@@ -47,7 +47,7 @@
           <button type="button" class="ui labeled icon small button" @click="cancel">
             <i class="undo icon"/> 취소
           </button>
-          <button type="button" class="ui labeled icon small button" data-toggle="modal" data-target="#curl">
+          <button type="button" class="ui labeled icon small button" @click="curl">
             <i class="code icon"/> CURL
           </button>
       </div>
@@ -99,6 +99,9 @@ export default {
     },
     cancel () {
       this.$emit('cancel')
+    },
+    curl () {
+      $('#modalCurl').modal('show')
     }
   }
 }

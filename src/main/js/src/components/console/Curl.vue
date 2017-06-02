@@ -1,26 +1,31 @@
 <template>
-  <div class="modal fade" id="curl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Curl 변환</h4>
+  <div id="modalCurl" class="ui small basic modal">
+    <div class="ui icon header">
+      <i class="share alternate icon"></i>
+      CURL 명령어로 변환
+    </div>
+    <div class="content">
+      <div class="ui form">
+        <div class="field">
+          <textarea :value="curl"/>
         </div>
-        <div class="modal-body">
-          <textarea rows=10 class="form-control" :value="curl"/>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary"
-            v-clipboard:copy="curl"
-            v-clipboard:success="onCopy"
-            v-clipboard:error="onError"
-          >
-            <i class="fa fa-clone"/> Copy
-          </button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui green inverted ok button"
+        v-clipboard:copy="curl"
+        v-clipboard:success="onCopy"
+        v-clipboard:error="onError"
+      >
+        <i class="copy icon"/>
+        Copy
+      </div>
+      <div class="ui red basic inverted cancel button">
+        <i class="remove icon"></i>
+        Close
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
