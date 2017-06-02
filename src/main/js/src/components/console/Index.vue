@@ -37,6 +37,8 @@
 <script>
 import callApi from '../../services/callApi'
 import serviceSvc from '../../services/serviceSvc'
+import callSvc from '../../services/callSvc'
+import utils from '../../services/utils'
 
 import CaseList from './CaseList.vue'
 import Request from './Request.vue'
@@ -53,10 +55,13 @@ export default {
       response: this.initResponse(),
       serviceId: '',
       caseId: '',
-      callId: '',
+      callId: this.$route.query.callId || '',
       inProgress: false,
       loading: false
     }
+  },
+  created () {
+    this.fetchCall ()
   },
   methods: {
     initRequest () {
@@ -80,6 +85,16 @@ export default {
         body: '',
         error: ''
       }
+    },
+    fetchCall () {
+      callSvc.detail(this.callId)
+        .then(call => {
+          let req = Object.assign({}, call.request)
+          req.queries = utils.objToArr(req.queries)
+          req.headers = utils.objToArr(req.headers)
+          this.request = req
+        })
+        .catch(toastr.error)
     },
     callApi () {
       this.inProgress = true

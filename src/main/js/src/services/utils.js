@@ -1,8 +1,15 @@
-exports.arrayToObj = function (array) {
+import _ from 'lodash'
+
+exports.arrToObj = function (array) {
   return array.reduce((prev, curr) => {
     prev[curr.key] = curr.value
     return prev
   }, {})
+}
+
+exports.objToArr = function (obj) {
+  return _.entries(obj)
+    .map(([key, value]) => ({key, value}))
 }
 
 exports.methodClass = function (method) {

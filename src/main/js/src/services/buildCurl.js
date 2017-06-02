@@ -27,7 +27,7 @@ function buildQueryString (queries) {
   if (!queries) {
     return null
   }
-  let queryObject = utils.arrayToObj(queries)
+  let queryObject = utils.arrToObj(queries)
   return querystring.stringify(queryObject)
 }
 
@@ -35,7 +35,7 @@ function buildHeaderString (headers) {
   if (!headers) {
     return null
   }
-  let headerObject = utils.arrayToObj(headers)
+  let headerObject = utils.arrToObj(headers)
 
   let headerString = ''
   _.entries(headerObject).forEach(([key, value]) => {

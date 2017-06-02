@@ -1,16 +1,17 @@
 <template>
   <div>
-    <table class="table table-hover table-bordered">
-      <thead>
+    <table class="ui selectable celled table">
+      <thead class="center aligned">
         <tr>
-          <th colspan="4">요청 정보</th>
+          <th colspan="5">요청 정보</th>
           <th colspan="3">응답 정보</th>
           <th rowspan="2">실행자</th>
           <th rowspan="2">수행 일시</th>
         </tr>
         <tr>
           <th>메소드</th>
-          <th>URL</th>
+          <th>호스트</th>
+          <th>패스</th>
           <th>쿼리 개수</th>
           <th>헤더 개수</th>
           <th>상태</th>
@@ -19,9 +20,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="call in revCalls" @click="detail(call.id)">
-          <td>{{call.request.method}}</td>
-          <td>{{call.request.url}}</td>
+        <tr v-for="call in calls" @click="detail(call.id)">
+          <td><Method :method="call.request.method"/></td>
+          <td>{{call.request.host}}</td>
+          <td>{{call.request.path}}</td>
           <td>{{keysLength(call.request.queries)}}</td>
           <td>{{keysLength(call.request.headers)}}</td>
           <td>{{call.response.statusCode}} {{call.response.statusMessage}}</td>
@@ -37,14 +39,9 @@
 <script>
 export default {
   props: ["calls"],
-  computed: {
-    revCalls() {
-      return this.calls.slice().reverse();
-    }
-  },
   methods: {
     detail (id) {
-      window.location.href = `/cases/${id}`
+      window.location.href = `/calls/${id}`
     },
     keysLength (object) {
       return object ? Object.keys(object).length : 0
@@ -52,14 +49,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.table > thead > tr > th, td {
-  text-align: center;
-  vertical-align: middle;
-}
-
-.table > thead > tr > th {
-  background-color: #f5f5f5;
-}
-</style>
