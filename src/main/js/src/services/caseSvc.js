@@ -20,8 +20,8 @@ function list(serviceId) {
 
 function save(_cas) {
   let cas = Object.assign({}, _cas)
-  cas.request.queries = utils.arrayToObj(cas.request.queries)
-  cas.request.headers = utils.arrayToObj(cas.request.headers)
+  cas.request.queries = utils.arrToObj(cas.request.queries)
+  cas.request.headers = utils.arrToObj(cas.request.headers)
 
   console.log('#cas:', cas)
 

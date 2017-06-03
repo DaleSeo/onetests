@@ -1,5 +1,6 @@
 import superagent from 'superagent'
 import config from '../../config'
+import utils from './utils'
 
 const restUrl = config.BACKEND_URL + '/calls'
 
@@ -13,6 +14,18 @@ function list(suiteId) {
   console.log(url)
   return superagent.get(url)
     .then(res => res.body._embedded.calls)
+}
+
+function findCallWithArray(id) {
+  return superagent.get(restUrl + '/' + id)
+    .then(res => res.body)
+    .then(call => {
+      let req = Object.assign({}, call.request)
+      req.queries = utils.objToArr(req.queries)
+      req.headers = utils.objToArr(req.headers)
+      call.req = req
+      return call
+    })
 }
 
 function save(call) {
@@ -44,5 +57,5 @@ function remove(id) {
 }
 
 export default {
-  list, save, detail, remove
+  list, save, detail, remove, findCallWithArray
 }

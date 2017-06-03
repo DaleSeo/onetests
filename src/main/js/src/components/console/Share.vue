@@ -33,7 +33,7 @@ export default {
   props: ["callId"],
   computed: {
     url () {
-      return window.location.href + '?callId=' + this.callId
+      return window.location.origin + '/calls/' + this.callId
     }
   },
   methods: {

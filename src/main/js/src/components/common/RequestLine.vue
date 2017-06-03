@@ -20,6 +20,9 @@ export default {
       }
     },
     shortPath () {
+      if (!this.path) {
+        return ''
+      }
       return this.path.length > 20 ? this.path.slice(0, 20) + '...' : this.path
     }
   }

@@ -57,6 +57,7 @@
 <script>
 import caseSvc from '../../services/caseSvc'
 import serviceSvc from '../../services/serviceSvc'
+import callSvc from '../../services/callSvc'
 
 import Entries from '../common/Entries.vue'
 
@@ -67,14 +68,32 @@ export default {
       cas: this.initCase(),
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
       services: [],
+      callId: this.$route.query.callId || '',
       loading: false,
       inProgress: false
     }
   },
   created () {
     this.listServices()
+    this.fetchCall ()
   },
   methods: {
+    fetchCall () {
+      console.log('#fetchCall:')
+      if (!this.callId) {
+        return
+      }
+      callSvc.findCallWithArray(this.callId)
+        .then(call => {
+          console.log('#call:', call)
+          this.cas.description = 'Call # ' + this.callId + ' 로 부터 만들어진 테스트 케이스'
+          this.cas.request = call.req
+          return call.caseId
+        })
+        .then(caseSvc.detail)
+        .then(cas => this.cas.serviceId = cas.serviceId)
+        .catch(toastr.error)
+    },
     listServices () {
       this.loading = true
       console.log('ApiList.vue#listServices()')

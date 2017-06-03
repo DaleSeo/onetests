@@ -38,7 +38,6 @@
 import callApi from '../../services/callApi'
 import serviceSvc from '../../services/serviceSvc'
 import callSvc from '../../services/callSvc'
-import utils from '../../services/utils'
 
 import CaseList from './CaseList.vue'
 import Request from './Request.vue'
@@ -87,13 +86,11 @@ export default {
       }
     },
     fetchCall () {
-      callSvc.detail(this.callId)
-        .then(call => {
-          let req = Object.assign({}, call.request)
-          req.queries = utils.objToArr(req.queries)
-          req.headers = utils.objToArr(req.headers)
-          this.request = req
-        })
+      if (!this.callId) {
+        return
+      }
+      callSvc.findCallWithArray(this.callId)
+        .then(call => this.request = call.req)
         .catch(toastr.error)
     },
     callApi () {
