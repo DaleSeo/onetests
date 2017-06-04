@@ -36,16 +36,6 @@ export default {
       email: '',
       password: ''
     }
-  },
-  methods: {
-    login () {
-      console.log(this.email + ':' + this.password)
-      superagent.get('http://localhost:3000/login?username=user&password=pass')
-        .then(res => {
-          console.log(res)
-          location.href = '/'
-        })
-    }
   }
 }
 </script>

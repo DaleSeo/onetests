@@ -61,8 +61,8 @@ export default {
         return this.error = '패스워드가 일치하지 않습니다.'
       }
       this.$http.get('/api/checkDup?email=' + this.user.email)
-        .then(isDup => {
-          if (isDup) {
+        .then(res => {
+          if (res.body) {
             return this.error = '이미 가입된 이메일입니다.'
           }
           this.$http.post('/api/signup', this.user)
