@@ -14,13 +14,12 @@ logging:
     org.springframework.security: DEBUG
     org.springframework: INFO
     ROOT: INFO
-
-security:
-  user:
-    name: user
-    password: pass
-    role: USER
-
+#
+#security:
+#  user:
+#    name: user
+#    password: pass
+#    role: USER
 
 ---
 spring:

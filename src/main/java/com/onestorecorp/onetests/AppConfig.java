@@ -3,6 +3,7 @@ package com.onestorecorp.onetests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onestorecorp.onetests.domain.*;
 import com.onestorecorp.onetests.core.MongoEventListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
@@ -10,6 +11,7 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,6 +28,9 @@ public class AppConfig {
     public WebSecurityConfigurer webSecurityConfigurer() {
 	    return new WebSecurityConfigurerAdapter() {
 
+	        @Autowired
+            private AuthenticationProvider authProvider;
+
             @Override
             protected void configure(HttpSecurity http) throws Exception {
                 http
@@ -39,14 +44,12 @@ public class AppConfig {
                         .permitAll();
             }
 
-//			@Override
-//			protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//            	auth.inMemoryAuthentication()
-//						.withUser("user")
-//						.password("password")
-//						.roles("USER");
-//				super.configure(auth);
-//			}
+			@Autowired
+			public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+				auth.authenticationProvider(authProvider)
+					.inMemoryAuthentication()
+					.withUser("user").password("password").roles("USER");
+			}
 
 		};
     }

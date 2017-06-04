@@ -41,6 +41,8 @@ import CallDetail from './components/history/Detail.vue'
 
 import Dashboard from './components/dashboard/Index.vue'
 import Login from './components/user/Login.vue'
+import Signup from './components/user/Signup.vue'
+import Profile from './components/user/Profile.vue'
 
 import NotFound from './components/NotFound.vue'
 
@@ -51,7 +53,6 @@ const router = new VueRouter({
     {path: '/services/:id', component: Service, props: true},
     {path: '/services/:serviceId/suites/:suiteId', component: SuiteDetail, props: true},
     {path: '/tests/:suiteId/:testId', component: TestDetail, props: true},
-    {path: '/profile', component: NotFound},
     {path: '/settings', component: Settings},
     {path: '/console', component: Console},
     {path: '/cases', component: Case},
@@ -63,7 +64,9 @@ const router = new VueRouter({
     {path: '/calls/:id', component: CallDetail, props: true},
     {path: '/suites/:id', component: SuiteDetail, props: true},
     {path: '/dashboard', component: Dashboard},
-    {path: '/login', component: Login}
+    {path: '/login', component: Login},
+    {path: '/signup', component: Signup},
+    {path: '/profile', component: Profile}
   ]
 })
 

@@ -3,6 +3,7 @@ package com.onestorecorp.onetests.repository;
 import com.onestorecorp.onetests.domain.Case;
 import com.onestorecorp.onetests.domain.Request;
 import com.onestorecorp.onetests.domain.Service;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 
+@Ignore
 @RunWith(SpringRunner.class)
 @DataMongoTest
 @ActiveProfiles("production")

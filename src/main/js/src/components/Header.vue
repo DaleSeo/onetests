@@ -22,14 +22,28 @@
       <a href="/dashboard" class="item">
         <i class="dashboard icon"/>Dashboard
       </a>
-      <div class="right menu">
-        <a href="/profile" class="item">
-          <i class="user icon"/>Profile
-        </a>
-        <a href="/settings" class="item">
-          <i class="settings icon"/>Settings
-        </a>
+      <div class="ui right dropdown item">
+        <i class="user icon"/>Profile<i class="dropdown icon"/>
+        <div class="menu">
+          <a href="/profile" class="item">
+            <i class="user icon"/>My Page
+          </a>
+          <a href="/settings" class="item">
+            <i class="settings icon"/>Settings
+          </a>
+          <a href="/logout" class="item">
+            <i class="sign out icon"/>Logout
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  mounted () {
+    $('.ui.menu > .ui.dropdown').dropdown()
+  }
+}
+</script>
