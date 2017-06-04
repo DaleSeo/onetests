@@ -14,6 +14,13 @@ logging:
     org.springframework: INFO
     ROOT: INFO
 
+#security:
+#  user:
+#    name: user
+#    password: pass
+#    role: USER
+
+
 ---
 spring:
   profiles: production

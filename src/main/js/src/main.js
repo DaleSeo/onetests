@@ -40,6 +40,7 @@ import Call from './components/history/Index.vue'
 import CallDetail from './components/history/Detail.vue'
 
 import Dashboard from './components/dashboard/Index.vue'
+import Login from './components/user/Login.vue'
 
 import NotFound from './components/NotFound.vue'
 
@@ -61,7 +62,8 @@ const router = new VueRouter({
     {path: '/calls', component: Call},
     {path: '/calls/:id', component: CallDetail, props: true},
     {path: '/suites/:id', component: SuiteDetail, props: true},
-    {path: '/dashboard', component: Dashboard}
+    {path: '/dashboard', component: Dashboard},
+    {path: '/login', component: Login}
   ]
 })
 

@@ -18,6 +18,22 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableMongoAuditing
 public class AppConfig {
 
+//	@Bean
+//    public WebSecurityConfigurer webSecurityConfigurer() {
+//	    return new WebSecurityConfigurerAdapter() {
+//
+//            @Override
+//            protected void configure(HttpSecurity http) throws Exception {
+//                http
+//                        .authorizeRequests()
+//                        .antMatchers("/api/**").hasRole("USER")
+//                        .and()
+//                        .formLogin();
+//            }
+//
+//        };
+//    }
+
 	@Bean
 	public RepositoryRestConfigurer repositoryRestConfigurer() {
 		return new RepositoryRestConfigurerAdapter() {
