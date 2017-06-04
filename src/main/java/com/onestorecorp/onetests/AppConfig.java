@@ -10,6 +10,10 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -18,21 +22,34 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableMongoAuditing
 public class AppConfig {
 
-//	@Bean
-//    public WebSecurityConfigurer webSecurityConfigurer() {
-//	    return new WebSecurityConfigurerAdapter() {
-//
-//            @Override
-//            protected void configure(HttpSecurity http) throws Exception {
-//                http
-//                        .authorizeRequests()
-//                        .antMatchers("/api/**").hasRole("USER")
-//                        .and()
-//                        .formLogin();
-//            }
-//
-//        };
-//    }
+	@Bean
+    public WebSecurityConfigurer webSecurityConfigurer() {
+	    return new WebSecurityConfigurerAdapter() {
+
+            @Override
+            protected void configure(HttpSecurity http) throws Exception {
+                http
+                    .csrf().disable()
+                    .authorizeRequests()
+                        .antMatchers("/dist/**", "/signup", "/about").permitAll()
+                        .anyRequest().authenticated()
+                        .and()
+                    .formLogin()
+                        .loginPage("/login")
+                        .permitAll();
+            }
+
+//			@Override
+//			protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//            	auth.inMemoryAuthentication()
+//						.withUser("user")
+//						.password("password")
+//						.roles("USER");
+//				super.configure(auth);
+//			}
+
+		};
+    }
 
 	@Bean
 	public RepositoryRestConfigurer repositoryRestConfigurer() {

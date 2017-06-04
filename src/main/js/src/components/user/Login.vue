@@ -3,16 +3,16 @@
     <div style="height: 100%" class="ui middle aligned center aligned grid">
       <div class="six wide column">
         <h2 class="ui teal header">LOG IN</h2>
-        <form method="POST" class="ui large form" @submit.prevent="login">
+        <form method="POST" class="ui large form">
           <div class="ui stacked segment">
             <div class="field">
               <div class="ui left icon input"><i class="user icon"></i>
-                <input type="email" v-model="email" placeholder="이메일"/>
+                <input type="text" name="username" v-model="email" placeholder="이메일"/>
               </div>
             </div>
             <div class="field">
               <div class="ui left icon input"><i class="lock icon"></i>
-                <input type="password" v-model="password" placeholder="패스워드"/>
+                <input type="password" name="password" v-model="password" placeholder="패스워드"/>
               </div>
             </div>
             <button type="submit" class="ui fluid large teal button">로그인</button>

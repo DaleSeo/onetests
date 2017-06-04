@@ -34,7 +34,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-rest'
     compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
     compile 'org.springframework.boot:spring-boot-devtools'
-//    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-security'
     compile 'org.projectlombok:lombok'
     compile 'org.apache.commons:commons-lang3:3.5'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
