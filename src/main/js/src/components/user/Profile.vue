@@ -1,18 +1,39 @@
 <template>
   <div class="container">
     <Title icon="user" title="Profile" subTitle="프로필"/>
-    <pre>{{user}}</pre>
-
+    <table class="ui definition table">
+      <tbody>
+        <tr>
+          <td>ID</td>
+          <td>{{user.id}}</td>
+        </tr>
+        <tr>
+          <td>이름</td>
+          <td>{{user.name}}</td>
+        </tr>
+        <tr>
+          <td>이메일</td>
+          <td>{{user.email}}</td>
+        </tr>
+        <tr>
+          <td>사번</td>
+          <td>{{user.employeeNo}}</td>
+        </tr>
+        <tr>
+          <td>가입일</td>
+          <td>{{user.createdDate}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
-import superagent from 'superagent'
-
 export default {
   data () {
     return {
       user: {
+        id: '',
         email: '',
         name: '',
         roles: [],
@@ -22,11 +43,7 @@ export default {
     }
   },
   created () {
-    superagent.get('/api/principal')
-      .then(res => {
-        console.log('#res:', res)
-        return res
-      })
+    this.$http.get('/api/principal')
       .then(res => res.body)
       .then(user => this.user = user)
       .catch(err => toastr.error)

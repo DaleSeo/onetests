@@ -22,6 +22,9 @@ Vue.component('RequestLine', RequestLine)
 Vue.component('Method', Method)
 
 export default {
-  components: { Header1, Footer1 }
+  components: { Header1, Footer1 },
+  mounted () {
+    $('.ui.dropdown').dropdown()
+  }
 }
 </script>

@@ -39,11 +39,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  mounted () {
-    $('.ui.menu > .ui.dropdown').dropdown()
-  }
-}
-</script>

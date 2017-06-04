@@ -6,7 +6,7 @@
         <form method="POST" class="ui large form">
           <div class="ui stacked segment">
             <div class="field">
-              <div class="ui left icon input"><i class="user icon"></i>
+              <div class="ui left icon input"><i class="mail icon"></i>
                 <input type="text" name="username" v-model="email" placeholder="이메일"/>
               </div>
             </div>

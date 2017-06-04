@@ -3,25 +3,34 @@
     <div style="height: 100%" class="ui middle aligned center aligned grid">
       <div class="six wide column">
         <h2 class="ui teal header">회원 가입</h2>
-        <form method="POST" class="ui large form">
+        <div class="ui negative message" v-if="error">
+          {{error}}
+        </div>
+        <form class="ui large form" @submit.prevent="signup">
           <div class="ui stacked segment">
-            <div class="field">
+            <div class="required field">
               <div class="ui left icon input"><i class="user icon"></i>
-                <input type="text" name="username" v-model="email" placeholder="이메일"/>
+                <input type="text" v-model="user.name" placeholder="이름"/>
               </div>
             </div>
-            <div class="field">
+            <div class="required field">
+              <div class="ui left icon input"><i class="mail icon"></i>
+                <input type="email" v-model="user.email" placeholder="이메일"/>
+              </div>
+            </div>
+            <div class="required field">
               <div class="ui left icon input"><i class="lock icon"></i>
-                <input type="password" name="password" v-model="password" placeholder="패스워드"/>
+                <input type="password" v-model="user.password" placeholder="패스워드"/>
+              </div>
+            </div>
+            <div class="required field">
+              <div class="ui left icon input"><i class="checkmark icon"></i>
+                <input type="password" v-model="confirmPassword" placeholder="패스워드 확인"/>
               </div>
             </div>
             <button type="submit" class="ui fluid large teal button">제출</button>
           </div>
         </form>
-        <div class="ui message">
-          아직 계정이 없으세요?
-          &nbsp;<a href="/signup"><b>회원가입</b></a>
-        </div>
       </div>
     </div>
   </div>
@@ -33,18 +42,35 @@ import superagent from 'superagent'
 export default {
   data () {
     return {
-      email: '',
-      password: ''
+      user: {
+        name: '',
+        email: '',
+        password: ''
+      },
+      confirmPassword: '',
+      error: ''
     }
   },
   methods: {
-    login () {
-      console.log(this.email + ':' + this.password)
-      superagent.get('http://localhost:3000/login?username=user&password=pass')
-        .then(res => {
-          console.log(res)
-          location.href = '/'
+    signup () {
+      this.error = ''
+      if (!(this.user.email && this.user.password && this.confirmPassword)) {
+        return this.error = '모든 필드를 입력해주세요.'
+      }
+      if (this.user.password != this.confirmPassword) {
+        return this.error = '패스워드가 일치하지 않습니다.'
+      }
+      this.$http.get('/api/checkDup?email=' + this.user.email)
+        .then(isDup => {
+          if (isDup) {
+            return this.error = '이미 가입된 이메일입니다.'
+          }
+          this.$http.post('/api/signup', this.user)
+            .then(_ => {
+              location.href = '/'
+            })
         })
+        .catch(toastr.error)
     }
   }
 }

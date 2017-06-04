@@ -36,7 +36,7 @@ public class AppConfig {
                 http
                     .csrf().disable()
                     .authorizeRequests()
-                        .antMatchers("/dist/**", "/signup", "/about").permitAll()
+                        .antMatchers("/dist/**", "/signup", "/about", "/api/signup", "/api/checkDup").permitAll()
                         .anyRequest().authenticated()
                         .and()
                     .formLogin()
