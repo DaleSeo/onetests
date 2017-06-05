@@ -1,12 +1,11 @@
 package com.onestorecorp.onetests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.onestorecorp.onetests.domain.*;
 import com.onestorecorp.onetests.core.MongoEventListener;
+import com.onestorecorp.onetests.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@EnableMongoAuditing
 public class AppConfig {
 
 	@Bean

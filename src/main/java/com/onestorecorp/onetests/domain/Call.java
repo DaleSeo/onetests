@@ -5,10 +5,12 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
+@Document
 @Data
 public class Call {
 
@@ -30,6 +32,8 @@ public class Call {
 	private Date createdDate;
 
 	@CreatedBy
-	private UserDetails createdBy;
+	@Indexed
+	@DBRef
+	private User createdBy;
 
 }

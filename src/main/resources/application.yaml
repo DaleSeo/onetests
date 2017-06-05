@@ -1,4 +1,7 @@
 spring:
+  output:
+      ansi:
+        enabled: ALWAYS
   data:
     rest:
       base-path: /api
