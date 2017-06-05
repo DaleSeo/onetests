@@ -1,0 +1,37 @@
+spring:
+  data:
+    rest:
+      base-path: /api
+    mongodb:
+      uri: mongodb://sqe:QASPBIS*36!@172.21.196.30:27017/sqe
+#      uri: mongodb://user:pass@ds133241.mlab.com:33241/onetests
+
+server:
+  port: 3000
+
+logging:
+  level:
+    com.onestorecorp.onetests: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework: INFO
+    ROOT: INFO
+#
+#security:
+#  user:
+#    name: user
+#    password: pass
+#    role: USER
+
+---
+spring:
+  profiles: production
+  data:
+    mongodb:
+      uri: mongodb://sqe:QASPBIS*36!@172.21.196.30:27017/sqe
+
+---
+spring:
+  profiles: development
+  data:
+      mongodb:
+        uri: mongodb://user:pass@ds133241.mlab.com:33241/onetests
