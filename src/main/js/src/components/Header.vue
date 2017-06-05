@@ -1,5 +1,5 @@
 <template>
-  <div class="ui stackable fixed inverted menu">
+  <div id="headerDiv" class="ui stackable fixed inverted menu">
     <div class="ui container">
       <div class="header item">
         <h1 class="ui teal inverted header">ONE tests</h1>

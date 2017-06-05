@@ -24,7 +24,7 @@ Vue.component('Method', Method)
 export default {
   components: { Header1, Footer1 },
   mounted () {
-    $('.ui.dropdown').dropdown()
+    $('#headerDiv .ui.dropdown').dropdown()
   }
 }
 </script>
