@@ -3,7 +3,9 @@ import _ from 'lodash'
 import utils from './utils'
 
 export default function buildCurl (req) {
-  let url = req.url
+  console.log('#req:', req)
+
+  let url = req.host + req.path
 
   let queryString = buildQueryString(req.queries)
   if (queryString) {
