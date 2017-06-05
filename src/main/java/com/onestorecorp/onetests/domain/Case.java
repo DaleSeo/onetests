@@ -1,6 +1,7 @@
 package com.onestorecorp.onetests.domain;
 
 import lombok.Data;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -19,6 +20,9 @@ public class Case {
 
 	@CreatedDate
 	private Date createdDate;
+
+	@CreatedBy
+	private String createdBy;
 
 	private String title, description;
 

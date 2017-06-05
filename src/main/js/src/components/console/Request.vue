@@ -8,18 +8,20 @@
     </h5>
     <form class="ui attached form segment" @submit.prevent @keyup.enter="callApi">
       <div class="fields">
-        <div class="four wide field">
-          <select class="ui fluid dropdown" v-model="request.method" required>
-            <option v-for="method in methods">{{method}}</option>
-          </select>
-        </div>
-        <div class="four wide field">
+        <div class="sixteen wide field">
           <select class="ui fluid dropdown" v-model="request.host">
             <option value="">호스트</option>
             <option :value="host.baseUrl" v-for="host in hosts">{{host.baseUrl}}</option>
           </select>
         </div>
-        <div class="eight wide field">
+      </div>
+      <div class="fields">
+        <div class="four wide field">
+          <select class="ui fluid dropdown" v-model="request.method" required>
+            <option v-for="method in methods">{{method}}</option>
+          </select>
+        </div>
+        <div class="twelve wide field">
           <input type="text" v-model="request.path" required/>
         </div>
       </div>
