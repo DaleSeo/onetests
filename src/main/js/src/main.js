@@ -11,7 +11,10 @@ Vue.use(VueResource)
 Vue.use(VueFire)
 Vue.use(VueClipboard)
 Vue.filter('formatDate', function (date) {
-    return moment(date).format('YY/MM/DD HH:mm:ss')
+  return moment(date).format('YY/MM/DD HH:mm:ss')
+})
+Vue.filter('userName', function (user) {
+  return (user && user.name) || ''
 })
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -22,6 +25,9 @@ import '../semantic/dist/semantic.min.js'
 
 import 'toastr/build/toastr.min.css'
 import 'toastr/build/toastr.min.js'
+
+import './assets/js/dataTables.semanticui.min.js'
+import './assets/css/dataTables.semanticui.min.css'
 
 import Index from './components/Index.vue'
 import Service from './components/service/Service.vue'

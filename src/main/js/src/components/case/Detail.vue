@@ -5,7 +5,7 @@
       <div class="content">
         Test Case
         <div class="sub header">
-          개별 검증 등록
+          개별 검증 상세
         </div>
       </div>
     </h3>
@@ -25,56 +25,75 @@
       </button>
     </div>
 
-    <h4 class="ui header">
-      기본 정보
-    </h4>
-    <div class="ui segment">
-      <p>
-        <dt>Case ID</dt>
-        <dd>{{cas.id}}</dd>
-      </p>
-      <p>
-        <dt>서비스 코드</dt>
-        <dd>{{cas.service.code}}</dd>
-      </p>
-      <p>
-        <dt>수행 일시</dt>
-        <dd>{{cas.createdDate | formatDate}}</dd>
-      </p>
-      <p>
-        <dt>작업자</dt>
-        <dd>{{cas.createdBy || '아무게'}}</dd>
-      </p>
-    </div>
+    <h5 class="ui horizontal divider header">
+      <i class="browser icon"/>기본 정보
+    </h5>
 
-    <h4 class="ui header">
-      요청 정보
-    </h4>
-    <div class="ui segment">
-      <RequestLine :method="cas.request.method" :path="cas.request.path"/>
-      <p>
-        <dt>쿼리 파리미터</dt>
-        <ul>
-          <div v-for="(val, key) in cas.request.queries">
-            <li>{{key}}: {{val}}</li>
-          </div>
-        </ul>
-      </p>
-      <p>
-        <dt>요청 헤더</dt>
-        <ul>
-          <div v-for="(val, key) in cas.request.headers">
-            <li>{{key}}: {{val}}</li>
-          </div>
-        </ul>
-      </p>
-      <p>
-        <dt>바디</dt>
-        <dd>
-          <pre class="body">{{cas.request.body}}</pre>
-        </dd>
-      </p>
-    </div>
+    <table class="ui definition table">
+      <tbody>
+        <tr>
+          <td class="two wide column">케이스 ID</td>
+          <td>{{cas.id}}</td>
+        </tr>
+        <tr>
+          <td>서비스 코드</td>
+          <td>{{cas.service.code}}</td>
+        </tr>
+        <tr>
+          <td>호출 시간</td>
+          <td>{{cas.createdDate | formatDate}}</td>
+        </tr>
+        <tr>
+          <td>호출자</td>
+          <td>{{cas.createdBy | userName}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h5 class="ui horizontal divider header">
+      <i class="browser icon"/>요청 상세
+    </h5>
+
+    <table class="ui attached definition table">
+      <tbody>
+        <tr>
+          <td class="two wide column">메서드</td>
+          <td><Method :method="cas.request.method"/></td>
+        </tr>
+        <tr>
+          <td>패스</td>
+          <td>{{cas.request.path}}</td>
+        </tr>
+        <tr>
+          <td>쿼리</td>
+          <td>
+            <dl>
+              <div v-for="(val, key) in cas.request.queries">
+                <dt>{{key}}</dt>
+                <dd>{{val}}</dd>
+              </div>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td>헤더</td>
+          <td>
+            <dl>
+              <div v-for="(val, key) in cas.request.headers">
+                <dt>{{key}}</dt>
+                <dd>{{val}}</dd>
+              </div>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td>바디</td>
+          <td>
+            <pre class="body">{{cas.request.body}}</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 

@@ -1,5 +1,6 @@
 package com.onestorecorp.onetests.repository;
 
+import com.onestorecorp.onetests.domain.Call;
 import com.onestorecorp.onetests.domain.Case;
 import com.onestorecorp.onetests.domain.Request;
 import com.onestorecorp.onetests.domain.Service;

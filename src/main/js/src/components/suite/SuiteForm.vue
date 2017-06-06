@@ -61,7 +61,7 @@ import _ from 'lodash'
 import suiteSvc from '../../services/suiteSvc'
 import serviceSvc from '../../services/serviceSvc'
 import hostSvc from '../../services/hostSvc'
-import apiSvc from '../../services/apiSvc'
+import caseSvc from '../../services/caseSvc'
 
 import AvailableApiList from './AvailableApiList.vue'
 import SelectedApiList from './SelectedApiList.vue'
@@ -109,8 +109,8 @@ export default {
     },
     listApis () {
       console.log('SuiteForm.vue#listApis()')
-      apiSvc.list(this.serviceId)
-        .then(apis => this.availableApis = apis)
+      caseSvc.list(this.serviceId)
+        .then(cases => this.availableApis = cases)
         .catch(err => {
           console.error(err)
           toastr.error('API 목록 조회 실패')

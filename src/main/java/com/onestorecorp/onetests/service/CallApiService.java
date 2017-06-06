@@ -44,7 +44,6 @@ public class CallApiService {
 		call.setResponse(res);
 		call.setCaseId(caseId);
 		call.setSuiteId(suiteId);
-		call.setStarred(false);
 		return callRepo.save(call);
 	}
 

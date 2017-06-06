@@ -14,16 +14,7 @@ import java.util.List;
 
 @Data
 @Document
-public class Case {
-
-	@Id
-	private String id;
-
-	@CreatedDate
-	private Date createdDate;
-
-	@CreatedBy
-	private UserDetails createdBy;
+public class Case extends Domain {
 
 	private String title, description;
 
@@ -33,7 +24,7 @@ public class Case {
 	@Indexed
 	private String serviceId;
 
-	@DBRef
+	@DBRef(lazy = true)
 	private Service service;
 
 	private List<String> exclusions;

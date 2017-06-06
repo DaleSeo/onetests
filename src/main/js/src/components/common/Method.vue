@@ -1,6 +1,6 @@
 <template>
   <span>
-    <div class="ui label" :class="color">
+    <div :class="className">
       {{method}}
     </div>
   </span>
@@ -8,8 +8,24 @@
 
 <script>
 export default {
-  props: ["method"],
+  props: ['method', 'type'],
+  data () {
+    return {
+      ribbon: 'ribbon'
+    }
+  },
   computed: {
+    className () {
+      let classNames = ['ui']
+      if (this.type === 'ribbon') {
+        classNames.push('ribbon')
+      }
+      classNames.push(this.color())
+      classNames.push('label')
+      return classNames.join(' ')
+    }
+  },
+  methods: {
     color () {
       switch (this.method) {
         case 'GET': return 'green'

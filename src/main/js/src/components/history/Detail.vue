@@ -25,12 +25,12 @@
           <td>{{call.id}}</td>
         </tr>
         <tr>
-          <td>수행자</td>
-          <td>{{call.createdBy || '아무게'}}</td>
+          <td>호출 시간</td>
+          <td>{{call.createdDate | formatDate}}</td>
         </tr>
         <tr>
-          <td>수행 시간</td>
-          <td>{{call.createdDate | formatDate}}</td>
+          <td>호출자</td>
+          <td>{{userName}}</td>
         </tr>
       </tbody>
     </table>
@@ -132,6 +132,11 @@ export default {
   },
   created () {
     this.detail()
+  },
+  computed: {
+    userName () {
+      return (this.call.createdBy && this.call.createdBy.name) || '아무게'
+    }
   },
   methods: {
     detail () {

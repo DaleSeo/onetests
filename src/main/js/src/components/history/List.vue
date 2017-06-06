@@ -5,8 +5,7 @@
         <tr>
           <th colspan="5">요청 정보</th>
           <th colspan="3">응답 정보</th>
-          <th rowspan="2">실행자</th>
-          <th rowspan="2">수행 일시</th>
+          <th rowspan="2">호출 일시</th>
         </tr>
         <tr>
           <th>메소드</th>
@@ -29,7 +28,6 @@
           <td>{{call.response.statusCode}} {{call.response.statusMessage}}</td>
           <td>{{keysLength(call.response.headers)}}</td>
           <td>{{call.response.headers['Content-Length'] || call.response.body.length}}</td>
-          <td>{{call.createdBy || '아무게'}}</td>
           <td>{{call.createdDate | formatDate}}</td>
         </tr>
       </tbody>

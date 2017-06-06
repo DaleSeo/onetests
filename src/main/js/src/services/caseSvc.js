@@ -10,7 +10,7 @@ function list(serviceId) {
   if (serviceId) {
     url += `/search/findByServiceId?serviceId=${serviceId}`
   } else {
-    url += '?sort=id,desc'
+    url += '?size=1000'
   }
 
   console.log(url)
@@ -45,7 +45,7 @@ function modify(id, cas) {
 }
 
 function detail(id) {
-  return superagent.get(restUrl + '/' + id + '?projection=inlineService')
+  return superagent.get(restUrl + '/' + id + '?projection=inline')
     .then(res => res.body)
 }
 

@@ -1,40 +1,20 @@
 <template>
   <div class="container">
     <Title icon="cube" title="Test Case" subTitle="개별 검증"/>
-
-    <div style="text-align: right">
-      <button class="ui mini primary labeled icon button" @click="create">
-        <i class="plus icon"></i>
-        등록
-      </button>
-    </div>
-
-    <br/>
-
-    <List :cases="cases"/>
+    <List/>
   </div>
 </template>
 <script>
-import caseSvc from '../../services/caseSvc'
-
 import List from './List.vue'
 
 export default {
   components: { List },
   data () {
     return {
-      cases: [],
       id: ''
     }
   },
-  created () {
-    this.list()
-  },
   methods: {
-    list () {
-      caseSvc.list(this.$route.query.suiteId)
-        .then(cases => this.cases = cases)
-    },
     create () {
       window.location.href = '/cases/new'
     }

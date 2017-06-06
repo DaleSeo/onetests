@@ -5,12 +5,14 @@ import org.springframework.data.rest.core.config.Projection;
 import java.util.Date;
 import java.util.List;
 
-@Projection(name = "inlineService", types = Case.class)
+@Projection(name = "inline", types = Case.class)
 public interface CaseProjection {
 
 	String getId();
 
 	Date getCreatedDate();
+
+	User getCreatedBy();
 
 	String getTitle();
 

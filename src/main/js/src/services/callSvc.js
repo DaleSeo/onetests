@@ -48,7 +48,7 @@ function modify(id, call) {
 }
 
 function detail(id) {
-  return superagent.get(restUrl + '/' + id)
+  return superagent.get(restUrl + '/' + id + '?projection=inline')
     .then(res => res.body)
 }
 

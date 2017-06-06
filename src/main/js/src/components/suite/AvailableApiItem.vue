@@ -6,8 +6,8 @@
           {{api.title}}
         </h5>
         <p class="list-group-item-text">
-          <span class="label" :class="className(api.method)">{{api.method}}</span>
-          &nbsp;<em>{{api.path.slice(0, 50)}}</em>
+          <span class="label" :class="className(api.request.method)">{{api.request.method}}</span>
+          &nbsp;<em>{{api.request.path.slice(0, 50)}}</em>
         </p>
       </div>
       <div class="col-sm-2 text-right">
