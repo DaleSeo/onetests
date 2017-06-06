@@ -19,6 +19,10 @@
         <i class="list icon"></i>
         목록
       </button>
+      <button class="ui mini yellow labeled icon button" @click="edit">
+        <i class="trash icon"></i>
+        수정
+      </button>
       <button class="ui mini negative labeled icon button" @click="del">
         <i class="trash icon"></i>
         삭제
@@ -40,11 +44,11 @@
           <td>{{cas.service.code}}</td>
         </tr>
         <tr>
-          <td>호출 시간</td>
+          <td>생성 일시</td>
           <td>{{cas.createdDate | formatDate}}</td>
         </tr>
         <tr>
-          <td>호출자</td>
+          <td>생성자</td>
           <td>{{cas.createdBy | userName}}</td>
         </tr>
       </tbody>
@@ -59,6 +63,10 @@
         <tr>
           <td class="two wide column">메서드</td>
           <td><Method :method="cas.request.method"/></td>
+        </tr>
+        <tr>
+          <td>호스트</td>
+          <td>{{cas.request.host}}</td>
         </tr>
         <tr>
           <td>패스</td>
@@ -90,6 +98,36 @@
           <td>바디</td>
           <td>
             <pre class="body">{{cas.request.body}}</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h5 class="ui horizontal divider header">
+      <i class="browser icon"/>기대 응답
+    </h5>
+
+    <table class="ui attached definition table" v-if="cas.response">
+      <tbody>
+        <tr>
+          <td class="two wide column">응답 상태</td>
+          <td>{{cas.response.statusCode}} {{cas.response.statusMessage}}</td>
+        </tr>
+        <tr>
+          <td>헤더</td>
+          <td>
+            <dl>
+              <div v-for="(val, key) in cas.response.headers">
+                <dt>{{key}}</dt>
+                <dd>{{val}}</dd>
+              </div>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td>바디</td>
+          <td>
+            <pre class="body">{{cas.response.body}}</pre>
           </td>
         </tr>
       </tbody>
@@ -131,6 +169,9 @@ export default {
       caseSvc.remove(this.id)
         .then(toastr.success('테스트 케이스가 삭제되었습니다.'))
         .then(this.list)
+    },
+    edit () {
+      window.location.href = '/cases/' + this.id + '/edit'
     },
     methodClass (method) {
       return utils.methodClass(method)

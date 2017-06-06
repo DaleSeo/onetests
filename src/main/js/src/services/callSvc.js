@@ -16,7 +16,7 @@ function list(suiteId) {
     .then(res => res.body._embedded.calls)
 }
 
-function findCallWithArray(id) {
+function findOneWithArray(id) {
   return superagent.get(restUrl + '/' + id)
     .then(res => res.body)
     .then(call => {
@@ -57,5 +57,5 @@ function remove(id) {
 }
 
 export default {
-  list, save, detail, remove, findCallWithArray
+  list, save, detail, remove, findOneWithArray
 }

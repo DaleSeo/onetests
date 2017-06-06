@@ -66,6 +66,7 @@ const router = new VueRouter({
     {path: '/cases', component: Case},
     {path: '/cases/new', component: CaseEdit},
     {path: '/cases/:id', component: CaseDetail, props: true},
+    {path: '/cases/:id/edit', component: CaseEdit, props: true},
     {path: '/suites', component: Suite},
     {path: '/suites/new', component: SuiteEdit},
     {path: '/calls', component: Call},

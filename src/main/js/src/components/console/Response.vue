@@ -24,7 +24,7 @@
       <div id="resTab" v-show="response.body">
         <div class="ui tabular menu">
           <a class="item" data-tab="res-first">헤더</a>
-          <a class="item ative" data-tab="res-second">바디</a>
+          <a class="active item" data-tab="res-second">바디</a>
         </div>
         <div class="ui tab" data-tab="res-first">
           <table class="ui definition table">
@@ -36,7 +36,7 @@
             </tbody>
           </table>
         </div>
-        <div class="ui tab active" data-tab="res-second">
+        <div class="ui active tab" data-tab="res-second">
           <pre>{{response.body}}</pre>
         </div>
       </div>
@@ -45,10 +45,10 @@
         <button type="button" class="ui labeled icon small button" @click="detail">
           <i class="browser icon"/> 상세
         </button>
-        <button type="button" class="ui labeled icon small button" @click="share">
+        <button type="button" class="ui labeled icon yellow small button" @click="share">
           <i class="share alternate icon"/> 공유
         </button>
-        <button type="button" class="ui labeled icon small button" @click="register">
+        <button type="button" class="ui labeled icon primary small button" @click="register">
           <i class="cube icon"/>등록
         </button>
       </div>
@@ -62,7 +62,7 @@ import ProgressBar from '../common/ProgressBar.vue'
 export default {
   components: {ProgressBar},
   props: ['response', 'inProgress', 'callId'],
-  mounted () {
+  updated () {
     $('#resTab .menu .item').tab({
       context: $('#resTab')
     })

@@ -24,6 +24,7 @@
         <tr>
           <th>서비스</th>
           <th>메소드</th>
+          <th>호스트</th>
           <th>패스</th>
           <th>제목</th>
           <th>쿼리 개수</th>
@@ -35,6 +36,7 @@
         <tr v-for="cas in cases" @click="detail(cas.id)">
           <td>{{cas.serviceId}}</td>
           <td><Method :method="cas.request.method" type="ribbon"/></td>
+          <td>{{cas.request.host}}</td>
           <td>{{cas.request && cas.request.path.slice(0, 30)}}</td>
           <td>{{cas.title}}</td>
           <td>{{cas.request && keysLength(cas.request.queries)}}</td>
@@ -83,10 +85,10 @@ export default {
         .then(cases => this.cases = cases)
         .then(_ =>
           this.dataTable = $('#tableCase').DataTable({
-            order: [[ 6, "desc" ]],
+            order: [[ 7, "desc" ]],
             columnDefs: [
               { targets: 0, visible: false },
-              { targets: [4, 5, 6], searchable: false }
+              { targets: [5, 6, 7], searchable: false }
             ]
           })
         )

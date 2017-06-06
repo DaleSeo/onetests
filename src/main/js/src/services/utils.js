@@ -1,6 +1,7 @@
 import _ from 'lodash'
 
 exports.arrToObj = function (array) {
+  if (!array || !Array.isArray(array)) return {}
   return array.reduce((prev, curr) => {
     prev[curr.key] = curr.value
     return prev
@@ -8,6 +9,7 @@ exports.arrToObj = function (array) {
 }
 
 exports.objToArr = function (obj) {
+  if (!obj || Array.isArray(obj)) return []
   return _.entries(obj)
     .map(([key, value]) => ({key, value}))
 }

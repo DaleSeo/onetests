@@ -89,7 +89,7 @@ export default {
       if (!this.callId) {
         return
       }
-      callSvc.findCallWithArray(this.callId)
+      callSvc.findOneWithArray(this.callId)
         .then(call => this.request = call.req)
         .catch(toastr.error)
     },

@@ -20,15 +20,20 @@ function list(serviceId) {
 
 function save(_cas) {
   let cas = Object.assign({}, _cas)
-  cas.request.queries = utils.arrToObj(cas.request.queries)
-  cas.request.headers = utils.arrToObj(cas.request.headers)
 
   console.log('#cas:', cas)
 
+  cas.request.queries = utils.arrToObj(cas.request.queries)
+  cas.request.headers = utils.arrToObj(cas.request.headers)
+  cas.response.headers = utils.arrToObj(cas.response.headers)
+
   if (cas.id) {
     return modify(cas.id, cas)
+      .then(res => {
+        console.log('###res.body:', res.body)
+        return cas.id
+      })
   } else {
-    delete cas.id
     return create(cas)
       .then(res => res.body.id)
   }
@@ -49,10 +54,32 @@ function detail(id) {
     .then(res => res.body)
 }
 
+function findOneWithArray(id) {
+  return superagent.get(restUrl + '/' + id + '?projection=inline')
+    .then(res => res.body)
+    .then(cas => {
+      let req = Object.assign({}, cas.request)
+      let res = Object.assign({}, cas.response)
+      req.queries = utils.objToArr(req.queries)
+      req.headers = utils.objToArr(req.headers)
+      res.headers = utils.objToArr(res.headers)
+      cas.request = req
+      cas.response = res
+      if (!cas.response) {
+        cas.response = {
+          statusCode: 200,
+          headers: [],
+          body: ''
+        }
+      }
+      return cas
+    })
+}
+
 function remove(id) {
   return superagent.delete(restUrl + '/' + id)
 }
 
 export default {
-  list, save, detail, remove
+  list, save, detail, remove, findOneWithArray
 }
