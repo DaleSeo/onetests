@@ -132,6 +132,9 @@
         </tr>
       </tbody>
     </table>
+
+    <History :caseId="id"/>
+
   </div>
 </template>
 
@@ -139,8 +142,11 @@
 import caseSvc from '../../services/caseSvc'
 import utils from '../../services/utils'
 
+import History from './History.vue'
+
 export default {
-  props: ["id"],
+  components: {History},
+  props: ['id'],
   data() {
     return {
       cas: {

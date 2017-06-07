@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestOperations;
 
 @Service
 public class CallApiService {
 
 	@Autowired
 	private CallRepository callRepo;
+
+	@Autowired
+	private RestOperations restOperations;
 
 	private EntityConverter converter = new EntityConverter();
 
@@ -31,9 +34,8 @@ public class CallApiService {
 	}
 
 	public Response callApi(Request req) {
-		RestTemplate restTemplate = new RestTemplate(); // TODO: Inject
 		RequestEntity<Object> requestEntity = converter.convertRequest(req);
-		ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
+		ResponseEntity<String> responseEntity = restOperations.exchange(requestEntity, String.class);
 		Response res = converter.convertResponse(responseEntity);
 		return res;
 	}

@@ -6,8 +6,9 @@ spring:
     rest:
       base-path: /api
     mongodb:
-      uri: mongodb://user:pass@ds133241.mlab.com:33241/onetests
-#      uri: mongodb://sqe:QASPBIS*36!@172.21.196.30:27017/sqe
+      uri: mongodb://sqe:QASPBIS*36!@172.21.196.30:27017/sqe
+#      uri: mongodb://user:pass@ds133241.mlab.com:33241/onetests
+
 
 
 server:

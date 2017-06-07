@@ -4,19 +4,22 @@ import utils from './utils'
 
 const restUrl = config.BACKEND_URL + '/calls'
 
-function list(suiteId) {
+exports.list = function ({caseId, suiteId}) {
   let url = restUrl
-  if (suiteId) {
-    url += '/search/findBySuiteId?suiteId=' + suiteId
+  if (caseId) {
+    url += '/search/byCaseId?caseId=' + caseId
+  } else if (suiteId) {
+    url += '/search/bySuiteId?suiteId=' + suiteId
   } else {
     url += '?sort=id,desc'
   }
+
   console.log(url)
   return superagent.get(url)
     .then(res => res.body._embedded.calls)
 }
 
-function findOneWithArray(id) {
+exports.findOneWithArray = function (id) {
   return superagent.get(restUrl + '/' + id)
     .then(res => res.body)
     .then(call => {
@@ -28,7 +31,7 @@ function findOneWithArray(id) {
     })
 }
 
-function save(call) {
+exports.save = function (call) {
   if (call.id) {
     return modify(call.id, call)
   } else {
@@ -37,25 +40,21 @@ function save(call) {
   }
 }
 
-function create(call) {
+exports.create = function (call) {
   return superagent.post(restUrl)
     .send(call)
 }
 
-function modify(id, call) {
+exports.modify = function (id, call) {
   return superagent.put(restUrl + '/' + id)
     .send(call)
 }
 
-function detail(id) {
+exports.detail = function (id) {
   return superagent.get(restUrl + '/' + id + '?projection=inline')
     .then(res => res.body)
 }
 
-function remove(id) {
+exports.remove = function (id) {
   return superagent.delete(restUrl + '/' + id)
-}
-
-export default {
-  list, save, detail, remove, findOneWithArray
 }

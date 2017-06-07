@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     list () {
-      callSvc.list(this.$route.query.suiteId)
+      callSvc.list({caseId: this.$route.query.caseId, suiteId: this.$route.query.suiteId})
         .then(calls => this.calls = calls)
     }
   }

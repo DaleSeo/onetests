@@ -87,7 +87,7 @@ export default {
           this.dataTable = $('#tableCase').DataTable({
             order: [[ 7, "desc" ]],
             columnDefs: [
-              { targets: 0, visible: false },
+              { targets: [0, 2], visible: false },
               { targets: [5, 6, 7], searchable: false }
             ]
           })

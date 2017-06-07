@@ -21,7 +21,7 @@
     <table class="ui definition table">
       <tbody>
         <tr>
-          <td class="two wide column">Call ID</td>
+          <td class="two wide column">호출 ID</td>
           <td>{{call.id}}</td>
         </tr>
         <tr>
@@ -31,6 +31,10 @@
         <tr>
           <td>호출자</td>
           <td>{{userName}}</td>
+        </tr>
+        <tr>
+          <td>테스트 케이스</td>
+          <td><a :href="/cases/ + call.caseId">{{call.caseId}}</a></td>
         </tr>
       </tbody>
     </table>
