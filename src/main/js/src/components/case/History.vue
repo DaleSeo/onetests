@@ -1,17 +1,13 @@
 <template>
-  <div>
-    <br/>
-    <h5 class="ui horizontal divider header">
-      <i class="browser icon"/>호출 이력
-    </h5>
-
-    <div class="ui divided selection animated list">
-      <div class="item" v-for="call in calls">
-        <i class="right triangle icon"/>
-        <div class="content">
-          <a class="header" :href="/calls/ + call.id">{{call.id}}</a>
-          <div class="description">{{call.createdDate | formatDate}}</div>
-        </div>
+  <div class="ui divided selection animated list">
+    <div class="item" v-for="call in calls">
+      <div class="right floated content">
+        <ResultLabel :result="call.result"/>
+      </div>
+      <i class="right triangle icon"/>
+      <div class="content">
+        <a class="header" :href="/calls/ + call.id">{{call.id}}</a>
+        <div class="description">{{call.createdDate | formatDate}}</div>
       </div>
     </div>
   </div>

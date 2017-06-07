@@ -10,142 +10,66 @@
       </div>
     </h3>
 
-    <div style="text-align: right">
-      <button class="ui mini primary labeled icon button" @click="run">
-        <i class="play icon"></i>
-        실행
-      </button>
-      <button class="ui mini labeled icon button" @click="list">
-        <i class="list icon"></i>
-        목록
-      </button>
-      <button class="ui mini yellow labeled icon button" @click="edit">
-        <i class="trash icon"></i>
-        수정
-      </button>
-      <button class="ui mini negative labeled icon button" @click="del">
-        <i class="trash icon"></i>
-        삭제
-      </button>
+    <div class="ui grid">
+      <div class="right aligned column">
+        <button class="ui mini primary labeled icon button" @click="run">
+          <i class="play icon"></i>
+          실행
+        </button>
+        <button class="ui mini labeled icon button" @click="list">
+          <i class="list icon"></i>
+          목록
+        </button>
+        <button class="ui mini yellow labeled icon button" @click="edit">
+          <i class="trash icon"></i>
+          수정
+        </button>
+        <button class="ui mini negative labeled icon button" @click="del">
+          <i class="trash icon"></i>
+          삭제
+        </button>
+      </div>
     </div>
 
-    <h5 class="ui horizontal divider header">
-      <i class="browser icon"/>기본 정보
-    </h5>
-
-    <table class="ui definition table">
-      <tbody>
-        <tr>
-          <td class="two wide column">케이스 ID</td>
-          <td>{{cas.id}}</td>
-        </tr>
-        <tr>
-          <td>서비스 코드</td>
-          <td>{{cas.service.code}}</td>
-        </tr>
-        <tr>
-          <td>생성 일시</td>
-          <td>{{cas.createdDate | formatDate}}</td>
-        </tr>
-        <tr>
-          <td>생성자</td>
-          <td>{{cas.createdBy | userName}}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h5 class="ui horizontal divider header">
-      <i class="browser icon"/>요청 상세
-    </h5>
-
-    <table class="ui attached definition table">
-      <tbody>
-        <tr>
-          <td class="two wide column">메서드</td>
-          <td><Method :method="cas.request.method"/></td>
-        </tr>
-        <tr>
-          <td>호스트</td>
-          <td>{{cas.request.host}}</td>
-        </tr>
-        <tr>
-          <td>패스</td>
-          <td>{{cas.request.path}}</td>
-        </tr>
-        <tr>
-          <td>쿼리</td>
-          <td>
-            <dl>
-              <div v-for="(val, key) in cas.request.queries">
-                <dt>{{key}}</dt>
-                <dd>{{val}}</dd>
-              </div>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td>헤더</td>
-          <td>
-            <dl>
-              <div v-for="(val, key) in cas.request.headers">
-                <dt>{{key}}</dt>
-                <dd>{{val}}</dd>
-              </div>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td>바디</td>
-          <td>
-            <pre class="body">{{cas.request.body}}</pre>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h5 class="ui horizontal divider header">
-      <i class="browser icon"/>기대 응답
-    </h5>
-
-    <table class="ui attached definition table" v-if="cas.response">
-      <tbody>
-        <tr>
-          <td class="two wide column">응답 상태</td>
-          <td>{{cas.response.statusCode}} {{cas.response.statusMessage}}</td>
-        </tr>
-        <tr>
-          <td>헤더</td>
-          <td>
-            <dl>
-              <div v-for="(val, key) in cas.response.headers">
-                <dt>{{key}}</dt>
-                <dd>{{val}}</dd>
-              </div>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td>바디</td>
-          <td>
-            <pre class="body">{{cas.response.body}}</pre>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <History :caseId="id"/>
-
+    <div class="ui grid">
+      <div class="three wide column">
+        <div class="ui vertical fluid tabular menu">
+          <a class="item" data-tab="basics">기본 정보</a>
+          <a class="item" data-tab="request">요청 상세</a>
+          <a class="item" data-tab="response">기대 응답</a>
+          <a class="active item" data-tab="history">호출 이력</a>
+        </div>
+      </div>
+      <div class="thirteen wide stretched column">
+        <div class="ui tab" data-tab="basics">
+          <Basics :cas="cas"/>
+        </div>
+        <div class="ui tab" data-tab="request">
+          <Request :cas="cas"/>
+        </div>
+        <div class="ui tab" data-tab="response">
+          <Response :cas="cas"/>
+        </div>
+        <div class="ui active tab" data-tab="history">
+          <History :caseId="id"/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import caseSvc from '../../services/caseSvc'
+import testRunner from '../../services/testRunner'
 import utils from '../../services/utils'
 
+import Basics from './Basics.vue'
+import Request from './Request.vue'
+import Response from './Response.vue'
 import History from './History.vue'
 
 export default {
-  components: {History},
+  components: {Basics, Request, Response, History},
   props: ['id'],
   data() {
     return {
@@ -159,6 +83,9 @@ export default {
   created () {
     this.detail()
   },
+  mounted () {
+    $('.menu .item').tab()
+  },
   methods: {
     detail () {
       caseSvc.detail(this.id)
@@ -168,8 +95,9 @@ export default {
       window.location.href = '/cases'
     },
     run () {
-      window.location.href = '/console'
-      // window.location.href = '/console/' + this.id
+      testRunner.runSingle(this.id)
+        .then(call => toastr.success('테스트 실행 완료'))
+        .catch(err => toastr.error('테스트 실행 실패'))
     },
     del () {
       caseSvc.remove(this.id)

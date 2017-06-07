@@ -3,6 +3,7 @@ package com.onestorecorp.onetests.service;
 import com.onestorecorp.onetests.domain.Call;
 import com.onestorecorp.onetests.domain.Request;
 import com.onestorecorp.onetests.domain.Response;
+import com.onestorecorp.onetests.domain.Result;
 import com.onestorecorp.onetests.repository.CallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
@@ -23,13 +24,13 @@ public class CallApiService {
 
 	public Response callApiWithSuiteId(Request req, String suiteId) {
 		Response res = callApi(req);
-		addHistory(req, res, null, suiteId);
+		addHistory(req, res, null, suiteId, null);
 		return res;
 	}
 
 	public Call callApi(Request req, String caseId) {
 		Response res = callApi(req);
-		Call call = addHistory(req, res, caseId, null);
+		Call call = addHistory(req, res, caseId, null, null);
 		return call;
 	}
 
@@ -40,12 +41,13 @@ public class CallApiService {
 		return res;
 	}
 
-	private Call addHistory(Request req, Response res, String caseId, String suiteId) {
+	public Call addHistory(Request req, Response res, String caseId, String suiteId, Result result) {
 		Call call = new Call();
 		call.setRequest(req);
 		call.setResponse(res);
 		call.setCaseId(caseId);
 		call.setSuiteId(suiteId);
+		call.setResult(result);
 		return callRepo.save(call);
 	}
 

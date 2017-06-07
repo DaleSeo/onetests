@@ -12,6 +12,7 @@ public class Call extends Domain {
 
 	private Request request;
 	private Response response;
+	private Result result;
 
 	@Indexed
 	private String caseId;
