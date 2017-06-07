@@ -33,7 +33,7 @@
           <td>{{userName}}</td>
         </tr>
         <tr>
-          <td>테스트 케이스</td>
+          <td>케이스</td>
           <td><a :href="/cases/ + call.caseId">{{call.caseId}}</a></td>
         </tr>
       </tbody>
@@ -117,6 +117,9 @@
         </tr>
       </tbody>
     </table>
+
+    <Result :result="call.result" v-if="call.result"/>
+
   </div>
 </template>
 
@@ -124,7 +127,10 @@
 import callSvc from '../../services/callSvc'
 import utils from '../../services/utils'
 
+import Result from './Result.vue'
+
 export default {
+  components: {Result},
   props: ["id"],
   data() {
     return {

@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class Result {
 
-	boolean passed;
-	boolean statusEqual;
-	boolean headersEqual;
-	boolean bodyEqual;
+	private boolean passed;
+	private boolean statusEqual;
+	private boolean headersEqual;
+	private boolean bodyEqual;
 
 }

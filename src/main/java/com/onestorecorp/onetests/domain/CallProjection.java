@@ -18,6 +18,8 @@ public interface CallProjection {
 
     Response getResponse();
 
+    Result getResult();
+
     String getCaseId();
 
     String getSuiteId();

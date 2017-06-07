@@ -14,7 +14,7 @@ public class SimpleResponseEqualer implements ResponseEqualer {
 		Result result = new Result();
 		result.setStatusEqual(expected.getStatusCode() == expected.getStatusCode());
 		result.setHeadersEqual(equalsHeaders(expected.getHeaders(), actual.getHeaders()));
-		result.setBodyEqual(expected.getBody().equals(actual.getBody()));
+		result.setBodyEqual(equalsBody(expected.getBody(), actual.getBody()));
 		result.setPassed(result.isStatusEqual() && result.isHeadersEqual() && result.isBodyEqual());
 		return result;
 	}
@@ -34,5 +34,10 @@ public class SimpleResponseEqualer implements ResponseEqualer {
 		}
 		return true;
 	}
+
+	private boolean equalsBody(String expected, String actual) {
+	    if (expected == null) return true;
+        return expected.equals(actual);
+    }
 
 }
