@@ -10,8 +10,8 @@ export default {
   props: ['result'],
   computed: {
     text () {
-      if (isResultUnavailable(this.result)) return '미정'
-      return this.result.passed ? '통과' : '실패'
+      if (isResultUnavailable(this.result)) return 'NONE'
+      return this.result.passed ? 'PASS' : 'FAIL'
     },
     color () {
       if (isResultUnavailable(this.result)) return 'yellow'

@@ -47,12 +47,12 @@ export default {
       window.location.href = '/cases'
     },
     del () {
-      caseSvc.remove(this.id)
+      caseSvc.remove(this.cas.id)
         .then(toastr.success('테스트 케이스가 삭제되었습니다.'))
         .then(this.list)
     },
     edit () {
-      window.location.href = '/cases/' + this.id + '/edit'
+      window.location.href = '/cases/' + this.cas.id + '/edit'
     }
   }
 }

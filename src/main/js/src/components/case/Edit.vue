@@ -4,7 +4,7 @@
     <form class="ui small form segment" :class="{loading}" @submit.prevent="saveCase">
       <div class="field required">
         <label>제목</label>
-        <input type="text" v-model="cas.title">
+        <input type="text" required v-model="cas.title">
       </div>
 
       <div class="field">
@@ -21,7 +21,7 @@
         </div>
         <div class="twelve wide required field">
           <label>호스트</label>
-          <select class="ui fluid dropdown" v-model="cas.request.host">
+          <select class="ui fluid dropdown" v-model="cas.request.host" required>
             <option :value="host.baseUrl" v-for="host in hosts">{{host.baseUrl}}</option>
           </select>
         </div>
@@ -40,7 +40,7 @@
         </div>
         <div class="twelve wide required field">
           <label>패스</label>
-          <input type="text" v-model="cas.request.path">
+          <input type="text" required v-model="cas.request.path">
         </div>
       </div>
 

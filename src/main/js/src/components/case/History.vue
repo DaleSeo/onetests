@@ -1,8 +1,12 @@
 <template>
   <div>
-    <button class="ui primary fluid button" :class="{loading}" @click="run">
-      <i class="play icon"/>테스트 실행
-    </button>
+    <div class="ui grid">
+      <div class="right aligned column">
+        <button class="ui labeled icon small button" :class="{loading}" @click="run">
+          <i class="play icon"/>테스트 실행
+        </button>
+      </div>
+    </div>
     <div class="ui divided selection animated list">
       <div class="item" v-for="call in calls">
         <div class="right floated content">

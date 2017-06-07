@@ -1,57 +1,45 @@
 <template>
-  <form @submit.prevent="createSuite" @reset.prevent="reset">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label for="title">검증 제목</label>
-          <input id="title" type="text" class="form-control" required v-model="suite.title"/>
-        </div>
+  <form class="ui small form segment" @submit.prevent="createSuite" @reset.prevent="reset">
+    <div class="field required">
+      <label for="title">제목</label>
+      <input id="title" type="text" required v-model="suite.title"/>
+    </div>
 
-        <div class="form-group">
-          <label for="description">검증 설명</label>
-          <textarea id="description" cols="3" class="form-control" required v-model="suite.description"/>
-        </div>
+    <div class="field">
+      <label for="description">설명</label>
+      <textarea id="description" cols="3" v-model="suite.description"/>
+    </div>
+
+    <div class="fields">
+      <div class="eight wide field">
+        <label for="serviceId">서비스</label>
+        <select id="serviceId" v-model="serviceId">
+          <option value="">서비스를 선택하세요</option>
+          <option :value="service.id" v-for="service in services">{{service.name}}</option>
+        </select>
+      </div>
+      <div class="eight wide field">
+        <label for="hostId">호스트</label>
+        <select id="hostId" v-model="hostId">
+          <option value="">호스트를 선택하세요</option>
+          <option :value="host.id" v-for="host in hosts">{{host.baseUrl}}</option>
+        </select>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="serviceId">서비스</label>
-          <select id="serviceId" class="form-control" v-model="serviceId">
-            <option value="">서비스를 선택하세요</option>
-            <option :value="service.id" v-for="service in services">{{service.name}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="hostId">서비스</label>
-          <select id="hostId" class="form-control" v-model="hostId">
-            <option value="">호스트를 선택하세요</option>
-            <option :value="host.id" v-for="host in hosts">{{host.baseUrl}}</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
+    <div class="fields">
+      <div class="eight wide field">
         <AvailableApiList :apis="availableApis" @pick="pickApi"/>
       </div>
-      <div class="col-md-6">
+      <div class="eight wide field">
         <SelectedApiList :apis="selectedApis" @unpick="unpickApi"/>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12 text-right">
-        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-floppy-o"/> 저장</button>
-        <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-undo"/> 취소</button>
-      </div>
+    <div class="right aligned field">
+      <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-floppy-o"/> 저장</button>
+      <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-undo"/> 취소</button>
     </div>
-
-    <br/>
   </form>
 </template>
 
