@@ -19,8 +19,8 @@ export default function buildCurl (req) {
     curl += headerString
   }
 
-  if (req.text) {
-    curl += ` -d '${req.text}'`
+  if (req.body) {
+    curl += ` -d '${req.body}'`
   }
   return curl
 }
