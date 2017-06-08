@@ -1,19 +1,16 @@
 package com.onestorecorp.onetests.domain;
 
 import lombok.Data;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Date;
 import java.util.List;
 
 @Data
 @Document
+@EqualsAndHashCode(callSuper=false)
 public class Case extends Domain {
 
 	private String title, description;
@@ -26,6 +23,12 @@ public class Case extends Domain {
 
 	@DBRef(lazy = true)
 	private Service service;
+
+	@Indexed
+	private String hostId;
+
+	@DBRef(lazy = true)
+	private Host host;
 
 	private List<String> exclusions;
 

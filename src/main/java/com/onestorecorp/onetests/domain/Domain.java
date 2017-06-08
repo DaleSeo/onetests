@@ -1,9 +1,7 @@
 package com.onestorecorp.onetests.domain;
 
 import lombok.Data;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,5 +23,13 @@ public abstract class Domain implements Serializable {
 	@Indexed
 	@DBRef(lazy = true)
 	private User createdBy;
+
+	@LastModifiedDate
+	private Date lastModifiedDate;
+
+	@LastModifiedBy
+	@Indexed
+	@DBRef(lazy = true)
+	private User lastModifiedBy;
 
 }

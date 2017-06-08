@@ -13,14 +13,14 @@
     <div class="ui grid">
       <div class="three wide column">
         <div class="ui vertical fluid tabular menu">
-          <a class="item" data-tab="basics">기본 정보</a>
+          <a class="active item" data-tab="basics">기본 정보</a>
           <a class="item" data-tab="request">요청 상세</a>
           <a class="item" data-tab="response">기대 응답</a>
-          <a class="active item" data-tab="history">검증 이력</a>
+          <a class="item" data-tab="history">검증 이력</a>
         </div>
       </div>
       <div class="thirteen wide stretched column">
-        <div class="ui tab" data-tab="basics">
+        <div class="ui active tab" data-tab="basics">
           <Basics :cas="cas"/>
         </div>
         <div class="ui tab" data-tab="request">
@@ -29,7 +29,7 @@
         <div class="ui tab" data-tab="response">
           <Response :cas="cas"/>
         </div>
-        <div class="ui active tab" data-tab="history">
+        <div class="ui tab" data-tab="history">
           <History :caseId="id"/>
         </div>
       </div>

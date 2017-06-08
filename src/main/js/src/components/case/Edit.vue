@@ -160,6 +160,7 @@ export default {
         .catch(err => toastr.error('호스트 목록 조회 실패'))
     },
     saveCase () {
+      console.log('#saveCase:', this.cas)
       this.inProgress = true
       caseSvc.save(this.cas)
         .then(id => {
@@ -172,6 +173,7 @@ export default {
     initCase () {
       return {
         serviceId: '',
+        hostId: '',
         title: '',
         description: '',
         request: {

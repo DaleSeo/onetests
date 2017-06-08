@@ -18,8 +18,6 @@ public class RunTestService {
 	@Autowired
 	private ResponseEqualer responseEqualer;
 
-	private EntityConverter converter = new EntityConverter();
-
 	public Call runTest(String caseId) {
 		Case cas = caseRepo.findOne(caseId);
 		Request req = cas.getRequest();

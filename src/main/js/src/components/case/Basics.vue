@@ -34,6 +34,14 @@
           <td>생성자</td>
           <td>{{cas.createdBy | userName}}</td>
         </tr>
+        <tr>
+          <td>변경 일시</td>
+          <td>{{cas.lastModifiedDate | formatDate}}</td>
+        </tr>
+        <tr>
+          <td>변경자</td>
+          <td>{{cas.lastModifiedBy | userName}}</td>
+        </tr>
       </tbody>
     </table>
   </div>

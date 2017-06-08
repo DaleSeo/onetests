@@ -1,6 +1,7 @@
 package com.onestorecorp.onetests.core;
 
 import com.onestorecorp.onetests.domain.Case;
+import com.onestorecorp.onetests.domain.Host;
 import com.onestorecorp.onetests.domain.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +19,11 @@ public class MongoEventListener extends AbstractMongoEventListener<Object> {
 			Case aCase = (Case) source;
 			if (aCase.getServiceId() != null) {
 				aCase.setService(new Service(aCase.getServiceId()));
-				logger.debug("# before save a case: {}", aCase);
 			}
+			if (aCase.getHostId() != null) {
+				aCase.setHost(new Host(aCase.getHostId()));
+			}
+			logger.debug("# before save a case: {}", aCase);
 		}
 	}
 }

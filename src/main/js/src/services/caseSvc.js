@@ -21,11 +21,11 @@ function list(serviceId) {
 function save(_cas) {
   let cas = Object.assign({}, _cas)
 
-  console.log('#cas:', cas)
-
   cas.request.queries = utils.arrToObj(cas.request.queries)
   cas.request.headers = utils.arrToObj(cas.request.headers)
   cas.response.headers = utils.arrToObj(cas.response.headers)
+
+  console.log('#cas:', cas)
 
   if (cas.id) {
     return modify(cas.id, cas)
@@ -40,13 +40,19 @@ function save(_cas) {
 }
 
 function create(cas) {
+  console.log('#create:', cas)
   return superagent.post(restUrl)
     .send(cas)
 }
 
 function modify(id, cas) {
-  return superagent.put(restUrl + '/' + id)
+  console.log('#modify:', cas)
+  return superagent.patch(restUrl + '/' + id)
     .send(cas)
+    .then(res => {
+      console.log('#res.body:', res.body)
+      return res
+    })
 }
 
 function detail(id) {
