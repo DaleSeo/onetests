@@ -17,8 +17,8 @@ Vue.filter('userName', function (user) {
   return (user && user.name) || ''
 })
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/js/bootstrap.min.js'
 
 import '../semantic/dist/semantic.min.css'
 import '../semantic/dist/semantic.min.js'
@@ -29,7 +29,7 @@ import 'toastr/build/toastr.min.js'
 import './assets/js/dataTables.semanticui.min.js'
 import './assets/css/dataTables.semanticui.min.css'
 
-import Index from './components/Index.vue'
+import Index from './components/home/Index.vue'
 import Service from './components/service/Service.vue'
 // import SuiteDetail from './components/suite_bak/SuiteDetail.vue'
 import TestDetail from './components/test/TestDetail.vue'
@@ -44,13 +44,14 @@ import Suite from './components/suite/Index.vue'
 import SuiteEdit from './components/suite/Edit.vue'
 import SuiteDetail from './components/suite/Detail.vue'
 
-import Call from './components/history/Index.vue'
-import CallDetail from './components/history/Detail.vue'
+import Call from './components/call/Index.vue'
+import CallDetail from './components/call/Detail.vue'
 
 import Dashboard from './components/dashboard/Index.vue'
 import Login from './components/user/Login.vue'
 import Signup from './components/user/Signup.vue'
 import Profile from './components/user/Profile.vue'
+import Admin from './components/admin/Index.vue'
 
 import NotFound from './components/NotFound.vue'
 
@@ -75,7 +76,8 @@ const router = new VueRouter({
     {path: '/dashboard', component: Dashboard},
     {path: '/login', component: Login},
     {path: '/signup', component: Signup},
-    {path: '/profile', component: Profile}
+    {path: '/profile', component: Profile},
+    {path: '/admin', component: Admin},
   ]
 })
 

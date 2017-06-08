@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="ui container">
     <Title icon="cube" title="Test Case" subTitle="개별 검증"/>
     <List/>
   </div>

@@ -1,10 +1,16 @@
 <template>
   <div>
-    <Header1/>
-    <br/><br/><br/><br/><br/>
-    <router-view></router-view>
+    <div class="ui inverted vertical segment" style="padding: 0">
+      <Header1/>
+    </div>
+    <div class="ui vertical segment" style="padding: 0">
+      <br v-if="!isHome"/>
+      <router-view></router-view>
+    </div>
     <br/>
-    <Footer1/>
+    <div class="ui inverted vertical segment">
+      <Footer1/>
+    </div>
   </div>
 </template>
 
@@ -31,6 +37,11 @@ Vue.component('ServiceFilter', ServiceFilter)
 
 export default {
   components: { Header1, Footer1 },
+  computed: {
+    isHome () {
+      return this.$route.path === '/'
+    }
+  },
   mounted () {
     $('#headerDiv .ui.dropdown').dropdown()
   }

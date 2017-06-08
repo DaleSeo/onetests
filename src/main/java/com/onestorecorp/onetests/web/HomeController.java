@@ -19,7 +19,8 @@ public class HomeController {
 			"/calls/**",
 			"/dashboard/**",
 			"/profile/**",
-			"/settings/**"
+			"/settings/**",
+			"/admin/**"
 	})
 	public String index() {
 		return "forward:/index.html";

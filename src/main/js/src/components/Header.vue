@@ -1,5 +1,5 @@
 <template>
-  <div id="headerDiv" class="ui stackable fixed inverted menu">
+  <div id="headerDiv" class="ui stackable inverted menu">
     <div class="ui container">
       <div class="header item">
         <h1 class="ui teal inverted header">ONE tests</h1>
@@ -30,6 +30,9 @@
           </a>
           <a href="/settings" class="item">
             <i class="settings icon"/>Settings
+          </a>
+          <a href="/admin" class="item">
+            <i class="doctor icon"/>Admin
           </a>
           <a href="/logout" class="item">
             <i class="sign out icon"/>Logout
