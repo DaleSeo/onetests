@@ -1,0 +1,40 @@
+<template>
+  <div id="service" class="ui pointing dropdown labeled icon button">
+    <input type="hidden" name="serviceId" :vlaue="serviceId" @change="onChange">
+    <i class="filter icon"></i>
+    <span class="text">서비스 필터</span>
+    <div class="menu">
+      <div class="item" data-value="">서비스 필터</div>
+      <div class="item" :data-value="service.id" v-for="service in services">{{service.name}}</div>
+    </div>
+  </div>
+</template>
+
+<script>
+import serviceSvc from '../../services/serviceSvc'
+
+export default {
+  props: ['serviceId'],
+  data () {
+    return {
+      services: []
+    }
+  },
+  created () {
+    this.fetchServices()
+  },
+  mounted () {
+    $('#service.ui.dropdown').dropdown()
+  },
+  methods: {
+    fetchServices () {
+      serviceSvc.list()
+        .then(services => this.services = services)
+        .catch(err => toastr.error('서비스 목록 조회 실패'))
+    },
+    onChange (event) {
+      this.$emit('change', event.target.value)
+    }
+  }
+}
+</script>

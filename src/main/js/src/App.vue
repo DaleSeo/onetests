@@ -17,11 +17,13 @@ import Title from './components/common/Title.vue'
 import RequestLine from './components/common/RequestLine.vue'
 import Method from './components/common/Method.vue'
 import ResultLabel from './components/common/ResultLabel.vue'
+import ServiceDropdown from './components/common/ServiceDropdown.vue'
 
 Vue.component('Title', Title)
 Vue.component('RequestLine', RequestLine)
 Vue.component('Method', Method)
 Vue.component('ResultLabel', ResultLabel)
+Vue.component('ServiceDropdown', ServiceDropdown)
 
 export default {
   components: { Header1, Footer1 },

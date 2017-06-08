@@ -6,10 +6,7 @@
 
     <div class="ui stackable grid">
       <div class="eight wide column">
-        <select class="ui dropdown" v-model="serviceId">
-          <option value="">서비스를 선택하세요</option>
-          <option :value="service.id" v-for="service in services">{{service.name}}</option>
-        </select>
+        <ServiceDropdown :serviceId="serviceId" @change="onServiceIdChange" />
       </div>
       <div class="right aligned eight wide column">
         <button class="ui labeled icon button" @click="create">
@@ -67,11 +64,6 @@ export default {
     this.fetchServices()
     this.fetchCases()
   },
-  watch: {
-    serviceId (newVal) {
-      this.dataTable.column(0).search(newVal).draw()
-    }
-  },
   methods: {
     fetchServices () {
       console.log('#fetchServices')
@@ -103,6 +95,9 @@ export default {
     },
     create () {
       window.location.href = '/cases/new'
+    },
+    onServiceIdChange (serviceId) {
+      this.dataTable.column(0).search(serviceId).draw()
     }
   }
 
