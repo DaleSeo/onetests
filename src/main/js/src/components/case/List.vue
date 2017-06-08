@@ -6,7 +6,7 @@
 
     <div class="ui stackable grid">
       <div class="eight wide column">
-        <ServiceDropdown :serviceId="serviceId" @change="onServiceIdChange" />
+        <ServiceFilter :serviceId="serviceId" @change="onServiceIdChange" />
       </div>
       <div class="right aligned eight wide column">
         <button class="ui labeled icon button" @click="create">

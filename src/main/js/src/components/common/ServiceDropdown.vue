@@ -1,10 +1,10 @@
 <template>
-  <div id="service" class="ui pointing dropdown labeled icon button">
-    <input type="hidden" name="serviceId" :vlaue="serviceId" @change="onChange">
-    <i class="filter icon"></i>
-    <span class="text">서비스 필터</span>
+  <div id="serviceDropdown" class="ui selection dropdown">
+    <input type="hidden" :value="value" @change="change">
+    <i class="dropdown icon"></i>
+    <span class="default text">서비스를 선택하세요</span>
     <div class="menu">
-      <div class="item" data-value="">서비스 필터</div>
+      <div class="item" data-value="">서비스를 선택하세요</div>
       <div class="item" :data-value="service.id" v-for="service in services">{{service.name}}</div>
     </div>
   </div>
@@ -14,7 +14,7 @@
 import serviceSvc from '../../services/serviceSvc'
 
 export default {
-  props: ['serviceId'],
+  props: ['value'],
   data () {
     return {
       services: []
@@ -24,7 +24,7 @@ export default {
     this.fetchServices()
   },
   mounted () {
-    $('#service.ui.dropdown').dropdown()
+    $('#serviceDropdown.ui.dropdown').dropdown()
   },
   methods: {
     fetchServices () {
@@ -32,8 +32,8 @@ export default {
         .then(services => this.services = services)
         .catch(err => toastr.error('서비스 목록 조회 실패'))
     },
-    onChange (event) {
-      this.$emit('change', event.target.value)
+    change (event) {
+      this.$emit('input', event.target.value)
     }
   }
 }
