@@ -1,6 +1,7 @@
 package com.onestorecorp.onetests.repository;
 
 import com.onestorecorp.onetests.domain.Case;
+import org.springframework.data.domain.Page;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,5 +17,7 @@ public interface CaseRepository extends MongoRepository<Case, String> {
 	@RestResource(path="findByServiceId", rel="findByServiceId")
 //	@Query("{ 'service': { '$ref': 'service', '$id' : ?0 }}")
 	List<Case> findByServiceId(@Param("serviceId") String serviceId);
+
+	List<Case> findByServiceIdAndRequestPathContaining(String serviceId, String path);
 
 }

@@ -19,6 +19,7 @@ logging:
     com.onestorecorp.onetests: DEBUG
     org.springframework.data.mongodb.core.MongoTemplate: DEBUG
     org.springframework: INFO
+    org.mongodb.driver.protocol.command: INFO
     org.mongodb.driver.cluster: INFO
     org.mongodb.driver: DEBUG
     ROOT: INFO

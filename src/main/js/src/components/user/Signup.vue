@@ -60,12 +60,12 @@ export default {
       if (this.user.password != this.confirmPassword) {
         return this.error = '패스워드가 일치하지 않습니다.'
       }
-      this.$http.get('/api/checkDup?email=' + this.user.email)
+      this.$http.get('/api/auth/checkDup?email=' + this.user.email)
         .then(res => {
           if (res.body) {
             return this.error = '이미 가입된 이메일입니다.'
           }
-          this.$http.post('/api/signup', this.user)
+          this.$http.post('/api/auth/signup', this.user)
             .then(_ => {
               location.href = '/'
             })

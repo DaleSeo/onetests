@@ -43,7 +43,7 @@ export default {
     }
   },
   created () {
-    this.$http.get('/api/principal')
+    this.$http.get('/api/auth/principal')
       .then(res => res.body)
       .then(user => this.user = user)
       .catch(err => toastr.error)

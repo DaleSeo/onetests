@@ -8,6 +8,7 @@ public class HomeController {
 
 	@RequestMapping(value = {
 			"/",
+			"/test",
             "/login",
 			"/signup",
             "/profile",

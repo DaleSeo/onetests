@@ -36,12 +36,22 @@ public class AppConfig {
                 http
                     .csrf().disable()
                     .authorizeRequests()
-                        .antMatchers("/dist/**", "/signup", "/about", "/api/signup", "/api/checkDup").permitAll()
+                        .antMatchers(
+                                "/",
+                                "/dist/**",
+                                "/about",
+                                "/api/search",
+                                "/api/auth/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                         .and()
                     .formLogin()
                         .loginPage("/login")
-                        .permitAll();
+                        .permitAll()
+						.and()
+					.logout()
+						.logoutUrl("/logout")
+						.logoutSuccessUrl("/");
             }
 
 			@Autowired
