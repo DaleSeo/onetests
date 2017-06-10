@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="step" :class="{active: isActive(2)}">
-      <i class="play icon"></i>
+      <i class="toggle right icon"></i>
       <div class="content">
         <div class="title">테스트 스위트 실행</div>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="ui container">
     <Title icon="history" title="History" subTitle="호출 이력 상세"/>
 
     <div style="text-align: right">

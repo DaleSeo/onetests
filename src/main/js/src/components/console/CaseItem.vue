@@ -8,10 +8,8 @@
       <button class="ui right floated mini circular icon button" @click="pick">
         <i class="chevron right icon"/>
       </button>
-      <div v-if="cas.request.body || cas.request.queries">
-        <span v-if="cas.request.queries">{{cas.request.queries}}</span>
-        <span v-if="cas.request.body">{{cas.request.body}}</span>
-      </div>
+      <div v-if="cas.request.queries && Object.keys(cas.request.queries) > 0">{{cas.request.queries}}</div>
+      <div v-if="cas.request.body">{{cas.request.body}}</div>
     </div>
   </div>
 </template>

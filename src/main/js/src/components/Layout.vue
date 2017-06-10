@@ -36,10 +36,7 @@ export default {
   created () {
     this.$http.get('/api/auth/isAuthenticated')
       .then(res => res.body)
-      .then(authenticated => {
-        console.log('#isAuthenticated:', authenticated)
-        this.authenticated = authenticated
-      })
+      .then(authenticated => this.authenticated = authenticated)
       .catch(err => toastr.error('인증 여부 확인 실패'))
   }
 }

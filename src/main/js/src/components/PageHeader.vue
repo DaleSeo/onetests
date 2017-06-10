@@ -66,11 +66,11 @@ export default {
     }
   },
   mounted () {
-    console.log('#pageHeader#mounted')
+    // console.log('#pageHeader#mounted')
     this.dropdown()
   },
   updated () {
-    console.log('#pageHeader#updated')
+    // console.log('#pageHeader#updated')
     this.dropdown()
   },
   methods: {

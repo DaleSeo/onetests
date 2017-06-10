@@ -3,30 +3,44 @@
     <Title icon="cubes" title="Test Suite" subTitle="일괄 검증"/>
     <Steps :step="step" />
     <div class="ui segment">
-      <Form0 :basics="form0" v-if="step === 0" />
-      <Form1 v-if="step === 1" />
+      <component :is="view"
+        :suite="suite"
+        @updateStep="updateStep"
+      />
     </div>
-    <pre>
-      {{form0}}
-    </pre>
   </div>
 </template>
 <script>
 import Steps from './Steps.vue'
 import Form0 from './Form0.vue'
+import Form1 from './Form1.vue'
 
 export default {
-  components: {Steps, Form0},
+  components: {Steps, Form0, Form1},
   data () {
     return {
-      step: 0,
-      form0: {
+      step: 1,
+      suite: {
         title: '',
         description: '',
-        serviceId: '',
-        hostId: ''
-      },
-      form1: {}
+        serviceId: '5912a299ec46ff6c417a9482',
+        hostId: '',
+        cases: []
+      }
+    }
+  },
+  computed: {
+    view () {
+      switch (this.step) {
+        case 0: return Form0
+        case 1: return Form1
+        default: return Form0
+      }
+    }
+  },
+  methods: {
+    updateStep (step) {
+      this.step = step
     }
   }
 }

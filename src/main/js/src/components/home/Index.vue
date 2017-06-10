@@ -5,13 +5,16 @@
     </div>
     <div class="ui container">
       <div class="ui vertical center aligned segment">
-        <Ranking/>
+        <Notice/>
       </div>
       <div class="ui vertical center aligned segment">
         <Statistics/>
       </div>
       <div class="ui vertical center aligned segment">
-        <Notice/>
+        <Ranking/>
+      </div>
+      <div class="ui vertical center aligned segment">
+        <Quotes/>
       </div>
     </div>
   </div>
@@ -22,9 +25,10 @@ import Jumbotron from './Jumbotron.vue'
 import Ranking from './Ranking.vue'
 import Statistics from './Statistics.vue'
 import Notice from './Notice.vue'
+import Quotes from './Quotes.vue'
 
 export default {
-  components: {Jumbotron, Ranking, Statistics, Notice}
+  components: {Jumbotron, Ranking, Statistics, Notice, Quotes}
 }
 </script>
 
