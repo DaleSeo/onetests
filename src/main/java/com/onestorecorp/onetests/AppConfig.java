@@ -70,12 +70,15 @@ public class AppConfig {
 
 			@Override
 			public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+				config.exposeIdsFor(User.class);
 				config.exposeIdsFor(Service.class);
 				config.exposeIdsFor(Host.class);
 				config.exposeIdsFor(Api.class);
 				config.exposeIdsFor(Call.class);
 				config.exposeIdsFor(Case.class);
+				config.exposeIdsFor(CaseResult.class);
 				config.exposeIdsFor(Suite.class);
+				config.exposeIdsFor(SuiteResult.class);
 			}
 
 		};
@@ -97,11 +100,6 @@ public class AppConfig {
 				.indentOutput(true)
 				.simpleDateFormat("yyyy/MM/dd HH:mm:ss")
 				.build();
-	}
-
-	@Bean
-	public MongoEventListener mongoEventListener() {
-		return new MongoEventListener();
 	}
 
 	@Bean

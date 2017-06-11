@@ -10,12 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="suite in revSuites" @click="detail(suite.id)">
-          <td>{{suite.title}}</td>
-          <td>{{Object.keys(suite.requests).length}}</td>
-          <td>{{suite.status || '미완료'}}</td>
-          <td>{{suite.createdDate | formatDate}}</td>
-        </tr>
+        <Item :key="suite.id" :suite="suite" v-for="suite in revSuites"/>
       </tbody>
     </table>
   </div>
@@ -23,8 +18,10 @@
 
 <script>
 import suiteSvc from '../../services/suiteSvc'
+import Item from './Item.vue'
 
 export default {
+  components: {Item},
   data () {
     return {
       suites: []

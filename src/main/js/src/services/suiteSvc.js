@@ -9,15 +9,8 @@ exports.list = function () {
     .then(res => res.body._embedded.suites)
 }
 
-exports.create = function (suite, selectedApis) {
-  let requests = selectedApis.map(api => {
-    return {
-      method: api.method,
-      url: api.url,
-      body: api.body
-    }
-  })
-  suite.requests = requests
+exports.create = function (suite) {
+  delete suite.id
   return superagent.post(restUrl)
     .send(suite)
     .then(res => res.body.id)

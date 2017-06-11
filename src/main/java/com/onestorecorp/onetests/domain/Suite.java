@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -14,9 +15,19 @@ import java.util.List;
 @EqualsAndHashCode(callSuper=false)
 public class Suite extends Domain {
 
-	private String title, description;
+	String title, description;
 
-	private List<Request> requests;
-	private SuiteResult result;
+	String serviceId;
+
+	String hostId;
+
+	List<String> caseIds;
+
+	@DBRef(lazy = true)
+    List<Case> cases;
+
+	List<Request> requests;
+
+	SuiteResult result;
 
 }

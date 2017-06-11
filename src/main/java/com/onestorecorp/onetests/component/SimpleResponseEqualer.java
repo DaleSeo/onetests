@@ -12,10 +12,17 @@ public class SimpleResponseEqualer implements ResponseEqualer {
 	@Override
 	public Result equals(Response expected, Response actual) {
 		Result result = new Result();
-		result.setStatusEqual(expected.getStatusCode() == expected.getStatusCode());
-		result.setHeadersEqual(equalsHeaders(expected.getHeaders(), actual.getHeaders()));
-		result.setBodyEqual(equalsBody(expected.getBody(), actual.getBody()));
-		result.setPassed(result.isStatusEqual() && result.isHeadersEqual() && result.isBodyEqual());
+		if (expected == null) {
+			result.setStatusEqual(true);
+			result.setHeadersEqual(true);
+			result.setBodyEqual(true);
+			result.setPassed(true);
+		} else {
+			result.setStatusEqual(expected.getStatusCode() == expected.getStatusCode());
+			result.setHeadersEqual(equalsHeaders(expected.getHeaders(), actual.getHeaders()));
+			result.setBodyEqual(equalsBody(expected.getBody(), actual.getBody()));
+			result.setPassed(result.isStatusEqual() && result.isHeadersEqual() && result.isBodyEqual());
+		}
 		return result;
 	}
 

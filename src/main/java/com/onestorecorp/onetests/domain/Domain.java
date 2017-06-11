@@ -14,22 +14,22 @@ import java.util.Date;
 public abstract class Domain implements Serializable {
 
 	@Id
-	private String id;
+	String id;
 
 	@CreatedDate
-	private Date createdDate;
+	Date createdDate;
 
 	@CreatedBy
 	@Indexed
 	@DBRef(lazy = true)
-	private User createdBy;
+	User createdBy;
 
 	@LastModifiedDate
-	private Date lastModifiedDate;
+	Date lastModifiedDate;
 
 	@LastModifiedBy
 	@Indexed
 	@DBRef(lazy = true)
-	private User lastModifiedBy;
+	User lastModifiedBy;
 
 }

@@ -32,4 +32,11 @@ public class Case extends Domain {
 
 	private List<String> exclusions;
 
+	public Case() {
+	}
+
+	public Case(String id) {
+		this.id = id;
+	}
+
 }

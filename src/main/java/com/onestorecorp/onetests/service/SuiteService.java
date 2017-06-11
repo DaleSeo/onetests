@@ -40,7 +40,6 @@ public class SuiteService {
 
 		SuiteResult result = new SuiteResult();
 		result.setSuccess(success);
-		result.setFailure(failure);
 		result.setTotal(success + failure);
 		suite.setResult(result);
 

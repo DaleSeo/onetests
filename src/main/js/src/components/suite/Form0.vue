@@ -23,7 +23,7 @@
 
     <div style="text-align: right">
       <button type="button" class="ui labeled icon button" @click="next">
-        <i class="arrow circle right icon"/>다음
+        <i class="step forward icon"/>다음
       </button>
     </div>
   </form>
@@ -34,7 +34,7 @@ export default {
   props: ['suite'],
   methods: {
     next() {
-      this.$emit('updateStep', 1)
+      this.$emit('changeStep', 1)
     }
   }
 }

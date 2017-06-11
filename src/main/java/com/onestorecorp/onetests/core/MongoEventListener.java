@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MongoEventListener extends AbstractMongoEventListener<Object> {
 
 	private static final Logger logger = LoggerFactory.getLogger(MongoEventListener.class);
