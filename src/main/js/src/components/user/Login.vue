@@ -20,7 +20,7 @@
         </form>
         <div class="ui message">
           아직 계정이 없으세요?
-          &nbsp;<a href="/signup"><b>회원가입</b></a>
+          &nbsp;<a href="/auth/signup"><b>회원가입</b></a>
         </div>
       </div>
     </div>
