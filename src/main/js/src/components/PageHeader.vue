@@ -48,7 +48,7 @@
             로그인
           </a>
           &nbsp;&nbsp;&nbsp;
-          <a href="/auth/signup" class="ui inverted button">
+          <a href="/signup" class="ui inverted button">
             회원가입
           </a>
         </div>

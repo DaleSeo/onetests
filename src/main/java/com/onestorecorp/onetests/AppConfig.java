@@ -1,7 +1,6 @@
 package com.onestorecorp.onetests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.onestorecorp.onetests.core.MongoEventListener;
 import com.onestorecorp.onetests.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -40,6 +39,7 @@ public class AppConfig {
                                 "/",
                                 "/dist/**",
                                 "/about",
+                                "/signup",
                                 "/api/search",
                                 "/api/auth/**"
                         ).permitAll()
