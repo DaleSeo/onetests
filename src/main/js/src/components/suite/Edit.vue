@@ -8,7 +8,7 @@
         @changeStep="changeStep"
       />
     </div>
-    <pre>{{suite}}</pre>
+    <!-- <pre>{{suite}}</pre> -->
   </div>
 </template>
 <script>

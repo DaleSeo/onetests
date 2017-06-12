@@ -11,7 +11,6 @@
         <SelectedCases
           :cases="cases"
         />
-        <pre>{{suite.caseIds}}</pre>
       </div>
     </div>
     <div class="row">
