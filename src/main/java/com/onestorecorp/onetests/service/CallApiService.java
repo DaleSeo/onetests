@@ -41,6 +41,19 @@ public class CallApiService {
 		return res;
 	}
 
+	public Response callApiThenAddHistory(Request req) {
+		RequestEntity<Object> requestEntity = converter.convertRequest(req);
+		ResponseEntity<String> responseEntity = restOperations.exchange(requestEntity, String.class);
+		Response res = converter.convertResponse(responseEntity);
+
+		Call call = new Call();
+		call.setRequest(req);
+		call.setResponse(res);
+		callRepo.save(call);
+
+		return res;
+	}
+
 	public Call addHistory(Request req, Response res, String caseId, String suiteId, Result result) {
 		Call call = new Call();
 		call.setRequest(req);

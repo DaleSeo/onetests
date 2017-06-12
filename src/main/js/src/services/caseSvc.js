@@ -4,7 +4,7 @@ import config from '../../config'
 
 const restUrl = config.BACKEND_URL + '/cases'
 
-function list(serviceId) {
+exports.list = function (serviceId) {
   let url = restUrl
 
   if (serviceId) {
@@ -18,7 +18,7 @@ function list(serviceId) {
     .then(res => res.body._embedded.cases)
 }
 
-function save(_cas) {
+exports.save = function (_cas) {
   let cas = Object.assign({}, _cas)
 
   cas.request.queries = utils.arrToObj(cas.request.queries)
@@ -39,13 +39,13 @@ function save(_cas) {
   }
 }
 
-function create(cas) {
+exports.create = function (cas) {
   console.log('#create:', cas)
   return superagent.post(restUrl)
     .send(cas)
 }
 
-function modify(id, cas) {
+exports.modify = function (id, cas) {
   console.log('#modify:', cas)
   return superagent.patch(restUrl + '/' + id)
     .send(cas)
@@ -55,12 +55,12 @@ function modify(id, cas) {
     })
 }
 
-function detail(id) {
+exports.detail = function (id) {
   return superagent.get(restUrl + '/' + id + '?projection=inline')
     .then(res => res.body)
 }
 
-function findOneWithArray(id) {
+exports.findOneWithArray = function (id) {
   return superagent.get(restUrl + '/' + id + '?projection=inline')
     .then(res => res.body)
     .then(cas => {
@@ -82,10 +82,18 @@ function findOneWithArray(id) {
     })
 }
 
-function remove(id) {
+exports.remove = function (id) {
   return superagent.delete(restUrl + '/' + id)
 }
 
-export default {
-  list, save, detail, remove, findOneWithArray
+exports.saveResponse = function (_cas) {
+  let cas = {id: _cas.id, response: _cas.response}
+  console.log('###cas', cas)
+  cas.response.headers = utils.arrToObj(cas.response.headers)
+  return this.modify(cas.id, cas)
+}
+
+exports.recordResponse = function (id) {
+  return superagent.patch(restUrl + '/' + id + '/recordResponse')
+    .then(res => res.body)
 }
