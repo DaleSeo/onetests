@@ -15,6 +15,10 @@ public class AuditorAwareImpl implements AuditorAware<User> {
         	return null;
         }
 
+        if (!(authentication.getPrincipal() instanceof User)) {
+	        return null;
+        }
+
     	return (User) authentication.getPrincipal();
     }
 
