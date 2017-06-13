@@ -1,5 +1,5 @@
 <template>
-  <div id="serviceDropdown" class="ui selection dropdown">
+  <div id="serviceDropdown" class="ui selection dropdown" :class="{disabled: readonly}">
     <input type="hidden" :value="value" @change="change">
     <i class="dropdown icon"></i>
     <span class="default text">서비스를 선택하세요</span>
@@ -14,10 +14,21 @@
 import serviceSvc from '../../services/serviceSvc'
 
 export default {
-  props: ['value'],
+  props: {
+    value: String,
+    readonly: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       services: []
+    }
+  },
+  watch: {
+    value (val) {
+      $('#serviceDropdown.ui.dropdown').dropdown('set selected', val)
     }
   },
   created () {

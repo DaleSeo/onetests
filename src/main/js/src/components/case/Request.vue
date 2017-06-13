@@ -1,52 +1,74 @@
 <template>
-  <table class="ui attached definition table">
-    <tbody>
-      <tr>
-        <td class="two wide column">메서드</td>
-        <td><Method :method="cas.request.method"/></td>
-      </tr>
-      <tr>
-        <td>호스트</td>
-        <td>{{cas.request.host}}</td>
-      </tr>
-      <tr>
-        <td>패스</td>
-        <td>{{cas.request.path}}</td>
-      </tr>
-      <tr>
-        <td>쿼리</td>
-        <td>
-          <dl>
-            <div v-for="(val, key) in cas.request.queries">
-              <dt>{{key}}</dt>
-              <dd>{{val}}</dd>
-            </div>
-          </dl>
-        </td>
-      </tr>
-      <tr>
-        <td>헤더</td>
-        <td>
-          <dl>
-            <div v-for="(val, key) in cas.request.headers">
-              <dt>{{key}}</dt>
-              <dd>{{val}}</dd>
-            </div>
-          </dl>
-        </td>
-      </tr>
-      <tr>
-        <td>바디</td>
-        <td>
-          <pre class="body">{{cas.request.body}}</pre>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="ui basic segment form" :class="{loading: inProgress}">
+    <div style="text-align: right">
+      <button class="ui icon labeled tiny button" :class="color" @click="edit">
+        <i class="edit icon"/>{{label}}
+      </button>
+    </div>
+    <div class="ui segment" v-if="cas.request">
+      <div class="fields">
+        <div class="four wide required field">
+          <label>메소드</label>
+          <select class="ui fluid dropdown" required v-model="cas.request.method">
+            <option v-for="method in methods">{{method}}</option>
+          </select>
+        </div>
+        <div class="twelve wide required field">
+          <label>패스</label>
+          <input type="text" required v-model="cas.request.path" :disabled="readonly"/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>쿼리</label>
+        <Pairs v-model="cas.request.queries" :readonly="readonly"/>
+      </div>
+
+      <div class="field">
+        <label>헤더</label>
+        <Pairs v-model="cas.request.headers" :readonly="readonly"/>
+      </div>
+
+      <div class="field">
+        <label>바디</label>
+        <textarea v-model="cas.request.body" :disabled="readonly"/>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import caseSvc from '../../services/caseSvc'
+import Pairs from '../common/Pairs.vue'
+
 export default {
-  props: ['cas']
+  components: {Pairs},
+  props: ['cas'],
+  data () {
+    return {
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
+      inProgress: false,
+      readonly: true
+    }
+  },
+  computed: {
+    label() {
+      return this.readonly ? '수정' : '저장'
+    },
+    color() {
+      return this.readonly ? '' : 'pink'
+    }
+  },
+  methods: {
+    edit () {
+      if (this.readonly) return this.readonly = false
+      this.inProgress = true
+      caseSvc.saveRequest(this.cas)
+        .then(_ => toastr.success('요청 상세 데이터가 저장되었습니다.'))
+        .catch(err => toastr.error('요청 상세 데이터가 저장 실패'))
+        .then(_ => this.inProgress = false)
+        .then(_ => this.readonly = true)
+    }
+  }
 }
 </script>

@@ -51,7 +51,7 @@ exports.modify = function (id, cas) {
   delete cas.createdDate
   delete cas.lastModifiedBy
   delete cas.lastModifiedDate
-  return superagent.post(restUrl)
+  return superagent.patch(`${restUrl}/${cas.id}`)
     .send(cas)
     .then(res => {
       console.log('#res.body:', res.body)
@@ -88,6 +88,11 @@ exports.findOneWithArray = function (id) {
 
 exports.remove = function (id) {
   return superagent.delete(restUrl + '/' + id)
+}
+
+exports.saveRequest = function (cas) {
+  return superagent.put(`${restUrl}/${cas.id}/request`)
+    .send(cas.request)
 }
 
 exports.saveResponse = function (cas) {

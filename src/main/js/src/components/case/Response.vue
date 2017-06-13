@@ -11,17 +11,17 @@
     <div class="ui segment" v-if="cas.response">
       <div class="field">
         <label>상태 코드</label>
-        <input type="text" :disabled="!editing" v-model="cas.response.statusCode">
+        <input type="text" :disabled="readonly" v-model="cas.response.statusCode">
       </div>
 
       <div class="field">
         <label>헤더</label>
-        <Pairs v-model="cas.response.headers" :readonly="!editing"/>
+        <Pairs v-model="cas.response.headers" :readonly="readonly"/>
       </div>
 
       <div class="field">
         <label>바디</label>
-        <textarea :disabled="!editing" v-model="cas.response.body"/>
+        <textarea :disabled="readonly" v-model="cas.response.body"/>
       </div>
     </div>
     <div class="ui info message" v-else>
@@ -32,7 +32,6 @@
 
 <script>
 import caseSvc from '../../services/caseSvc'
-
 import Pairs from '../common/Pairs.vue'
 
 export default {
@@ -41,21 +40,21 @@ export default {
   data () {
     return {
       inProgress: false,
-      editing: false
+      readonly: true
     }
   },
   computed: {
     label() {
-      return this.editing ? '저장' : '수정'
+      return this.readonly ? '수정' : '저장'
     },
     color() {
-      return this.editing ? 'yellow' : ''
+      return this.readonly ? '' : 'pink'
     }
   },
   methods: {
     edit () {
-      if (!this.editing) {
-        return this.editing = true
+      if (this.readonly) {
+        return this.readonly = false
       }
 
       this.inProgress = true
@@ -63,7 +62,7 @@ export default {
         .then(_ => toastr.success('기대 응답 데이터가 저장되었습니다.'))
         .catch(err => toastr.error('기대 응답 데이터가 저장 실패'))
         .then(_ => this.inProgress = false)
-        .then(_ => this.editing = false)
+        .then(_ => this.readonly = true)
     },
     record () {
       this.inProgress = true

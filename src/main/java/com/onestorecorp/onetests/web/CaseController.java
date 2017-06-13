@@ -1,6 +1,7 @@
 package com.onestorecorp.onetests.web;
 
 import com.onestorecorp.onetests.domain.Case;
+import com.onestorecorp.onetests.domain.Request;
 import com.onestorecorp.onetests.domain.Response;
 import com.onestorecorp.onetests.repository.CaseRepository;
 import com.onestorecorp.onetests.service.CaseService;
@@ -29,6 +30,24 @@ public class CaseController {
 		Response response = svc.recordResponse(id);
 		logger.debug("response: {}", response);
 		return response;
+	}
+
+	@PutMapping("/api/cases/{id}/basics")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void replaceBasics(@PathVariable String id, @RequestBody Case cas) {
+		Case found = repo.findOne(id);
+		found.setTitle(cas.getTitle());
+		found.setDescription(cas.getDescription());
+		repo.save(found);
+	}
+
+
+	@PutMapping("/api/cases/{id}/request")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void replaceRequest(@PathVariable String id, @RequestBody Request request) {
+		Case found = repo.findOne(id);
+		found.setRequest(request);
+		repo.save(found);
 	}
 
 	@PutMapping("/api/cases/{id}/response")

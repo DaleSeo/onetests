@@ -1,56 +1,98 @@
 <template>
-  <div>
-    <div class="ui grid">
-      <div class="right aligned column">
-        <button class="ui mini labeled icon button" @click="list">
-          <i class="list icon"></i>
-          목록
-        </button>
-        <button class="ui mini yellow labeled icon button" @click="edit">
-          <i class="edit icon"></i>
-          수정
-        </button>
-        <button class="ui mini negative labeled icon button" @click="del" v-if="false">
-          <i class="trash icon"></i>
-          삭제
-        </button>
+  <div class="ui basic segment form" :class="{loading: inProgress}">
+    <div style="text-align: right">
+      <button class="ui icon labeled tiny button" @click="list">
+        <i class="list icon"/>목록
+      </button>
+      <button class="ui icon labeled tiny button" :class="color" @click="edit">
+        <i class="edit icon"/>{{label}}
+      </button>
+      <button class="ui icon labeled tiny red button" @click="del">
+        <i class="trash icon"/>삭제
+      </button>
+    </div>
+    <div class="ui segment" v-if="cas.request">
+      <div class="field">
+        <label>ID</label>
+        <input type="text" readonly :value="cas.id">
+      </div>
+
+      <div class="field required">
+        <label>제목</label>
+        <input type="text" v-model="cas.title" :disabled="readonly">
+      </div>
+
+      <div class="field">
+        <label>설명</label>
+        <textarea v-model="cas.description" :disabled="readonly"/>
+      </div>
+
+      <div class="fields">
+        <div class="six wide required field">
+          <label>서비스</label>
+          <ServiceDropdown v-model="cas.serviceId" :readonly="true"/>
+        </div>
+        <div class="ten wide required field">
+          <label>호스트</label>
+          <HostDropdown v-model="cas.hostId" :serviceId="cas.serviceId" :readonly="true"/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>생성 일시</label>
+        <input type="text" readonly :value="cas.createdDate | formatDate">
+      </div>
+
+      <div class="field">
+        <label>생성자</label>
+        <input type="text" readonly :value="cas.createdBy | userName">
+      </div>
+
+      <div class="field">
+        <label>변경 일시</label>
+        <input type="text" readonly :value="cas.lastModifiedDate | formatDate">
+      </div>
+
+      <div class="field">
+        <label>변경자</label>
+        <input type="text" readonly :value="cas.lastModifiedBy | userName">
       </div>
     </div>
-    <table class="ui definition table">
-      <tbody>
-        <tr>
-          <td class="two wide column">케이스 ID</td>
-          <td>{{cas.id}}</td>
-        </tr>
-        <tr>
-          <td>서비스 코드</td>
-          <td>{{cas.service.code}}</td>
-        </tr>
-        <tr>
-          <td>생성 일시</td>
-          <td>{{cas.createdDate | formatDate}}</td>
-        </tr>
-        <tr>
-          <td>생성자</td>
-          <td>{{cas.createdBy | userName}}</td>
-        </tr>
-        <tr>
-          <td>변경 일시</td>
-          <td>{{cas.lastModifiedDate | formatDate}}</td>
-        </tr>
-        <tr>
-          <td>변경자</td>
-          <td>{{cas.lastModifiedBy | userName}}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </template>
 
 <script>
+import caseSvc from '../../services/caseSvc'
+import Pairs from '../common/Pairs.vue'
+
 export default {
+  components: {Pairs},
   props: ['cas'],
+  data () {
+    return {
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
+      inProgress: false,
+      readonly: true
+    }
+  },
+  computed: {
+    label() {
+      return this.readonly ? '수정' : '저장'
+    },
+    color() {
+      return this.readonly ? '' : 'pink'
+    }
+  },
   methods: {
+    edit () {
+      if (this.readonly) return this.readonly = false
+      this.inProgress = true
+      caseSvc.saveRequest(this.cas)
+        .then(_ => toastr.success('기본 정보가 저장되었습니다.'))
+        .catch(err => toastr.error('기본 정보 저장 실패'))
+        .then(_ => this.inProgress = false)
+        .then(_ => this.readonly = true)
+    },
     list () {
       window.location.href = '/cases'
     },
@@ -59,9 +101,12 @@ export default {
         .then(toastr.success('테스트 케이스가 삭제되었습니다.'))
         .then(this.list)
     },
-    edit () {
-      window.location.href = '/cases/' + this.cas.id + '/edit'
-    }
   }
 }
 </script>
+
+<style scoped>
+input[readonly='readonly'] {
+  border: none !important;
+}
+</style>
