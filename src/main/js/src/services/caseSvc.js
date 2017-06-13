@@ -28,13 +28,13 @@ exports.save = function (_cas) {
   console.log('#cas:', cas)
 
   if (cas.id) {
-    return modify(cas.id, cas)
+    return this.modify(cas.id, cas)
       .then(res => {
         console.log('###res.body:', res.body)
         return cas.id
       })
   } else {
-    return create(cas)
+    return this.create(cas)
       .then(res => res.body.id)
   }
 }
@@ -47,7 +47,11 @@ exports.create = function (cas) {
 
 exports.modify = function (id, cas) {
   console.log('#modify:', cas)
-  return superagent.patch(restUrl + '/' + id)
+  delete cas.createdBy
+  delete cas.createdDate
+  delete cas.lastModifiedBy
+  delete cas.lastModifiedDate
+  return superagent.post(restUrl)
     .send(cas)
     .then(res => {
       console.log('#res.body:', res.body)
@@ -86,11 +90,9 @@ exports.remove = function (id) {
   return superagent.delete(restUrl + '/' + id)
 }
 
-exports.saveResponse = function (_cas) {
-  let cas = {id: _cas.id, response: _cas.response}
-  console.log('###cas', cas)
-  cas.response.headers = utils.arrToObj(cas.response.headers)
-  return this.modify(cas.id, cas)
+exports.saveResponse = function (cas) {
+  return superagent.put(`${restUrl}/${cas.id}/response`)
+    .send(cas.response)
 }
 
 exports.recordResponse = function (id) {

@@ -1,14 +1,14 @@
 package com.onestorecorp.onetests.repository;
 
-import com.onestorecorp.onetests.domain.Call;
 import com.onestorecorp.onetests.domain.Case;
 import com.onestorecorp.onetests.domain.Request;
 import com.onestorecorp.onetests.domain.Service;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-@Ignore
+//@Ignore
 @RunWith(SpringRunner.class)
 @DataMongoTest
 @ActiveProfiles("production")
@@ -46,9 +46,22 @@ public class CaseRepositoryTest {
 
         Case saved = repository.save(toSave);
         System.out.println("# saved: " + saved);
+	    System.out.println("# saved.getCreatedDate(): " + saved.getCreatedDate());
 
         Case found = repository.findOne(saved.getId());
         System.out.println("# found: " + found);
+	    System.out.println("# found.getCreatedDate(): " + saved.getCreatedDate());
+	    System.out.println("# found.getLastModifiedDate(): " + saved.getLastModifiedDate());
+
+	    request.setQueries(Collections.singletonMap("b", "2"));
+        found.setRequest(request);
+
+	    Case updated = repository.save(toSave);
+	    System.out.println("# updated: " + saved);
+	    System.out.println("# updated.getCreatedDate(): " + saved.getCreatedDate());
+	    System.out.println("# updated.getLastModifiedDate(): " + saved.getLastModifiedDate());
+
+		repository.delete(updated);
     }
 
     @Test
@@ -63,5 +76,9 @@ public class CaseRepositoryTest {
 	    List<Case> cases = repository.findByServiceId("5912a299ec46ff6c417a9482");
 	    System.out.println("# cases: " + cases);
     }
+
+	@Configuration
+	@EnableMongoAuditing
+	static class Config {}
 
 }

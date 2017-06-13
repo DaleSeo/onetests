@@ -16,7 +16,7 @@
 
       <div class="field">
         <label>헤더</label>
-        <Entries :entries="cas.response.headers"/>
+        <Pairs v-model="cas.response.headers" :readonly="!editing"/>
       </div>
 
       <div class="field">
@@ -27,17 +27,16 @@
     <div class="ui info message" v-else>
       등록된 기대 응답 정보가 없습니다.
     </div>
-    <pre>{{cas.response}}</pre>
   </div>
 </template>
 
 <script>
 import caseSvc from '../../services/caseSvc'
 
-import Entries from '../common/Entries.vue'
+import Pairs from '../common/Pairs.vue'
 
 export default {
-  components: {Entries},
+  components: {Pairs},
   props: ['cas'],
   data () {
     return {
