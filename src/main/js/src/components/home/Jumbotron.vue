@@ -4,7 +4,7 @@
       <span style="color: #ff695e">원스토어</span> 구성원들이 함께 만들어나가는
     </h1>
     <h2>하나의 테스트 플랫폼을 경험해보세요!</h2>
-    <a href="/login" class="ui huge teal button">ONE tests 시작하기 <i class="right arrow icon"></i></a>
+    <a href="/console" class="ui huge teal button">ONE tests 시작하기 <i class="right arrow icon"></i></a>
   </div>
 </template>
 
