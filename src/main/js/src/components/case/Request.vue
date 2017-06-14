@@ -9,9 +9,7 @@
       <div class="fields">
         <div class="four wide required field">
           <label>메소드</label>
-          <select class="ui fluid dropdown" required v-model="cas.request.method">
-            <option v-for="method in methods">{{method}}</option>
-          </select>
+          <MethodDropdown v-model="cas.request.method" :readonly="readonly"/>
         </div>
         <div class="twelve wide required field">
           <label>패스</label>
@@ -46,7 +44,6 @@ export default {
   props: ['cas'],
   data () {
     return {
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
       inProgress: false,
       readonly: true
     }

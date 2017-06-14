@@ -1,6 +1,6 @@
 package com.onestorecorp.onetests.web;
 
-import com.onestorecorp.onetests.domain.Call;
+import com.onestorecorp.onetests.domain.CaseResult;
 import com.onestorecorp.onetests.domain.SuiteResult;
 import com.onestorecorp.onetests.service.RunTestService;
 import org.slf4j.Logger;
@@ -21,11 +21,11 @@ public class RunTestController {
 	private RunTestService svc;
 
 	@PostMapping("/api/cases/{id}/run")
-	public Call runTestCase(@PathVariable String id) {
-		logger.info("# Start Test: {}", id);
-		Call call = svc.runTestCase(id);
-		logger.info("# Finish Test: {}", call);
-		return call;
+	public CaseResult runTestCase(@PathVariable String id) {
+		logger.info("# Start TestCase: {}", id);
+		CaseResult result = svc.runTestCase(id);
+		logger.info("# Finish TestCase: {}", result);
+		return result;
 	}
 
 	@PostMapping("/api/suites/{id}/run")

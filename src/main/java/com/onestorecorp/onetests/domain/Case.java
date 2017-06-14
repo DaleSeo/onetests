@@ -11,24 +11,24 @@ import java.util.List;
 @Document
 public class Case extends Domain {
 
-	private String title, description;
+	String title, description;
 
-	private Request request;
-	private Response response;
-
-	@Indexed
-	private String serviceId;
-
-	@DBRef(lazy = true)
-	private Service service;
+	Request request;
+	Response response;
 
 	@Indexed
-	private String hostId;
+	String serviceId;
 
 	@DBRef(lazy = true)
-	private Host host;
+	Service service;
 
-	private List<String> exclusions;
+	@Indexed
+	String hostId;
+
+	@DBRef(lazy = true)
+	Host host;
+
+	List<String> exclusions;
 
 	public Case() {
 	}

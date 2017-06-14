@@ -2,55 +2,48 @@
   <div>
     <div class="ui grid">
       <div class="right aligned column">
-        <button class="ui labeled icon small button" :class="{loading}" @click="run">
-          <i class="play icon"/>테스트 실행
+        <button class="ui labeled icon primary tiny button" :class="{loading}" @click="run">
+          <i class="rocket icon"/>테스트 실행
         </button>
       </div>
     </div>
-    <div class="ui divided selection animated list">
-      <div class="item" v-for="call in calls">
-        <div class="right floated content">
-          <ResultLabel :result="call.result"/>
-        </div>
-        <i class="right triangle icon"/>
-        <div class="content">
-          <a class="header" :href="/calls/ + call.id">{{call.id}}</a>
-          <div class="description">{{call.createdDate | formatDate}}</div>
-        </div>
-      </div>
-    </div>
+    <ResultList :results="results"/>
   </div>
 </template>
 
 <script>
 import testRunner from '../../services/testRunner'
-import callSvc from '../../services/callSvc'
+import ResultList from './ResultList.vue'
 
 export default {
+  components: {ResultList},
   props: ['caseId'],
   data () {
     return {
-      calls: [],
+      results: [],
       loading: false
     }
   },
   created () {
-    this.fetchCalls()
+    this.fetchResults()
   },
   methods: {
-    fetchCalls () {
-      callSvc.list({caseId: this.caseId})
-        .then(calls => this.calls = calls)
-        .catch(err => toastr.error('호출 이력 조회 실패'))
+    fetchResults () {
+      let url = `/api/caseResults/search/byCase?id=${this.caseId}&sort=id,desc`
+      console.log('#url:', url)
+      return this.$http.get(url)
+        .then(res => res.body._embedded.caseResults)
+        .then(results => this.results = results)
+        .catch(err => toastr.error('테스트 결과 조회 실패'))
     },
     run () {
       this.loading = true
-      testRunner.runSingle(this.caseId)
-        .then(call => toastr.success('테스트 실행 완료'))
-        .catch(err => toastr.error('테스트 실행 실패'))
-        .then(_ => this.fetchCalls())
+      testRunner.runCase(this.caseId)
+        .then(this.fetchResults)
+        .then(_ => toastr.success('테스트가 완료되었습니다.'))
+        .catch(err => toastr.error('테스트 케이스 실행 실패'))
         .then(_ => this.loading = false)
-    },
+    }
   }
 }
 </script>

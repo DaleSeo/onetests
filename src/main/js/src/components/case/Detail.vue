@@ -16,7 +16,7 @@
           <a class="active item" data-tab="basics">기본 정보</a>
           <a class="item" data-tab="request">요청 상세</a>
           <a class="item" data-tab="response">기대 응답</a>
-          <a class="item" data-tab="history">검증 이력</a>
+          <a class="item" data-tab="history">검증 결과</a>
         </div>
       </div>
       <div class="thirteen wide stretched column">

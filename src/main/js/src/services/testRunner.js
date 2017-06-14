@@ -4,13 +4,13 @@ import config from '../../config'
 
 const restUrl = config.BACKEND_URL
 
-exports.runSingle = function (caseId) {
-  console.log('#runSingle:', caseId)
+exports.runCase = function (caseId) {
+  console.log('#runCase:', caseId)
   return superagent.post(restUrl + `/cases/${caseId}/run`)
     .then(res => res.body)
-    .then(call => {
-      console.log('#call:', call)
-      return call
+    .then(result => {
+      console.log('#result:', result)
+      return result
     })
     .catch(err => {
       console.error(err)

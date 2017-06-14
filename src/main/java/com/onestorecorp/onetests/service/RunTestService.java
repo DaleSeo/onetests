@@ -33,7 +33,7 @@ public class RunTestService {
 	@Autowired
 	private ResponseEqualer responseEqualer;
 
-	public Call runTestCase(String caseId) {
+	public CaseResult runTestCase(String caseId) {
 		Case cas = caseRepo.findOne(caseId);
 		Request req = cas.getRequest();
 
@@ -41,9 +41,14 @@ public class RunTestService {
 		Response res = callApiSvc.callApi(req);
 
 		Result result = responseEqualer.equals(expectedRes, res);
-		Call call = callApiSvc.addHistory(req, res, caseId, null, result);
+		Call call = callApiSvc.addHistory(req, res, caseId, null, null);
 
-		return call;
+		CaseResult caseResult = convert(result);
+		caseResult.setCaseId(cas.getId());
+		caseResult.setCallId(call.getId());
+		caseResultRepo.save(caseResult);
+
+		return caseResult;
 	}
 
     public SuiteResult runTestSuite(String id) {
