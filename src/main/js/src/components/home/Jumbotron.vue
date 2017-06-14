@@ -12,7 +12,7 @@
 h1.ui.header {
   margin-top: 1.5em;
   margin-bottom: 0em;
-  font-size: 2.5em;
+  font-size: 2.4em;
   font-weight: normal;
 }
 h2 {
