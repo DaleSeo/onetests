@@ -1,13 +1,19 @@
 <template>
-  <div class="ui divided selection animated list">
-    <div class="item" v-for="caseResult in caseResults">
-      <div class="right floated content">
-        <ResultLabel :result="caseResult"/>
+  <div class="ui items">
+    <div class="item" v-for="result in results" @click="callDetail(result)">
+      <div class="ui tiny image">
+        <ResultHeader :result="result"/>
       </div>
-      <i class="right triangle icon"/>
-      <div class="content">
-        <a class="header" :href="/calls/ + caseResult.callId">{{caseResult.callId}}</a>
-        <div class="description">{{caseResult.createdDate | formatDate}}</div>
+      <div class="middle aligned content">
+        <div class="meta">
+          <i class="calendar icon"/>
+          {{result.createdDate | formatDate}}
+        </div>
+        <div class="description">
+          <ResultItem title="상태" :result="result.statusPassed"/>
+          <ResultItem title="헤더" :result="result.headersPassed"/>
+          <ResultItem title="바디" :result="result.bodyPassed"/>
+        </div>
       </div>
     </div>
   </div>
@@ -18,7 +24,7 @@ export default {
   props: ['resultId'],
   data () {
     return {
-      caseResults: []
+      results: []
     }
   },
   watch: {
@@ -33,7 +39,7 @@ export default {
     fetchCaseResults () {
       this.$http.get(`/api/suiteResults/${this.resultId}/caseResults`)
         .then(res => res.body._embedded.caseResults)
-        .then(caseResults => this.caseResults = caseResults)
+        .then(caseResults => this.results = caseResults)
     }
   }
 }
