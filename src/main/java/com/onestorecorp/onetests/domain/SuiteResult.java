@@ -18,6 +18,7 @@ public class SuiteResult extends Domain {
 
     int total;
     int success;
+    long elapsedTime;
 
     @Indexed
     String suiteId;

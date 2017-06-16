@@ -1,19 +1,17 @@
 <template>
-  <div class="ui items">
-    <div class="item" v-for="result in results" @click="callDetail(result)">
-      <div class="ui tiny image">
-        <ResultHeader :result="result"/>
-      </div>
-      <div class="middle aligned content">
-        <div class="meta">
-          <i class="calendar icon"/>
-          {{result.createdDate | formatDate}}
+  <div class="ui list">
+    <div class="ui icon message" v-for="result in results" @click="callDetail(result)">
+      <ResultHeader :result="result"/>
+      <div class="content">
+        <div class="header">
+          {{title(result)}}
         </div>
-        <div class="description">
+        <p>
           <ResultItem title="상태" :result="result.statusPassed"/>
           <ResultItem title="헤더" :result="result.headersPassed"/>
           <ResultItem title="바디" :result="result.bodyPassed"/>
-        </div>
+        </p>
+        <i class="calendar icon"/>{{result.createdDate | formatDate}}
       </div>
     </div>
   </div>
@@ -23,6 +21,9 @@
 export default {
   props: ['results'],
   methods: {
+    title (result) {
+      return result.passed ? '검증 성공' : '검증 실패'
+    },
     callDetail (result) {
       console.log('#callDetail:', result.callId)
       location.href = `/calls/${result.callId}`

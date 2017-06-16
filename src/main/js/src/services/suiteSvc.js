@@ -5,7 +5,7 @@ const restUrl = config.BACKEND_URL + '/suites'
 
 exports.list = function () {
   let url = restUrl
-  return superagent.get(url)
+  return superagent.get(url + '?projection=inline')
     .then(res => res.body._embedded.suites)
 }
 
@@ -17,7 +17,7 @@ exports.create = function (suite) {
 }
 
 exports.detail = function (id) {
-  return superagent.get(restUrl + '/' + id)
+  return superagent.get(`${restUrl}/${id}?projection=inline`)
     .then(res => res.body)
 }
 

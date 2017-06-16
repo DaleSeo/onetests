@@ -1,14 +1,17 @@
 <template>
   <div class="ui container">
     <Title icon="cubes" title="Test Suite" subTitle="일괄 검증"/>
-    <div>
-      <button class="ui right floated labeled icon button" @click="run">
-        <i class="play icon"/>실행
-      </button>
+    <DetailBasics :suite="suite"/>
+    <div class="ui grid">
+      <div class="right aligned column">
+        <button class="ui labeled icon primary tiny button" :class="{loading: inProgress}" @click="run">
+          <i class="rocket icon"/>검증 수행
+        </button>
+        <button class="ui labeled icon pink tiny button" @click="edit">
+          <i class="edit icon"/>스위트 수정
+        </button>
+      </div>
     </div>
-    <h5 class="ui header">{{suite.title}}</h5>
-    <pre>{{suite.description}}</pre>
-    <p>{{suite.lastModifiedDate | formatDate}} 작성됨</p>
     <h5 class="ui horizontal divider header">
       <i class="browser icon"/>검증 결과
     </h5>
@@ -34,15 +37,17 @@ import suiteSvc from '../../services/suiteSvc'
 import testRunner from '../../services/testRunner'
 import ResultList from './ResultList.vue'
 import ResultView from './ResultView.vue'
+import DetailBasics from './DetailBasics.vue'
 
 export default {
-  components: {ResultList, ResultView},
+  components: {ResultList, ResultView, DetailBasics},
   props: ['id'],
   data () {
     return {
       suite: {},
       results: [],
-      resultId: ''
+      resultId: '',
+      inProgress: false
     }
   },
   created () {
@@ -64,10 +69,15 @@ export default {
         .catch(err => toastr.error('테스트 결과 조회 실패'))
     },
     run () {
+      this.inProgress = true
       testRunner.runSuite(this.suite.id)
         .then(this.fetchResults)
         .then(_ => toastr.success('테스트가 완료되었습니다'))
         .catch(err => toastr.error('테스트 스위트 실행 실패'))
+        .then(_ => this.inProgress = false)
+    },
+    edit() {
+
     },
     view (id) {
       console.log('#view:', id)

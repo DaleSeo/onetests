@@ -52,7 +52,8 @@ public class RunTestService {
 	}
 
     public SuiteResult runTestSuite(String id) {
-        SuiteResult suiteResult = new SuiteResult(id);
+	    long start = System.currentTimeMillis();
+	    SuiteResult suiteResult = new SuiteResult(id);
 
 	    Suite suite = suiteRepo.findOne(id);
 		List<CaseResult> caseResults = suite.getCases()
@@ -81,6 +82,9 @@ public class RunTestService {
 
 		suiteResult.setCaseResults(caseResults);
         suiteResult.setTotal(caseResults.size());
+
+	    long end = System.currentTimeMillis();
+	    suiteResult.setElapsedTime(end - start);
 
         suiteResultRepo.save(suiteResult);
 

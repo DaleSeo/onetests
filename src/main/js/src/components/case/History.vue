@@ -3,7 +3,7 @@
     <div class="ui grid">
       <div class="right aligned column">
         <button class="ui labeled icon primary tiny button" :class="{loading}" @click="run">
-          <i class="rocket icon"/>테스트 실행
+          <i class="rocket icon"/>검증 수행
         </button>
       </div>
     </div>

@@ -1,10 +1,10 @@
 <template>
-  <div class="ui left labeled button">
-    <div class="ui basic right pointing label" :class="color">
+  <div class="ui left labeled mini button">
+    <div class="ui basic right pointing mini label" :class="color">
       {{title}}
     </div>
-    <div class="ui button" :class="color">
-      <i class="icon" :class="icon"/>
+    <div class="ui mini button" :class="color">
+      <i class="mini icon" :class="icon"/>
       {{text}}
     </div>
   </div>
