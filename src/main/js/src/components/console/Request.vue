@@ -16,12 +16,10 @@
         </div>
       </div>
       <div class="fields">
-        <div class="four wide field">
-          <select class="ui fluid dropdown" v-model="request.method" required>
-            <option v-for="method in methods">{{method}}</option>
-          </select>
+        <div class="five wide field">
+          <MethodDropdown v-model="request.method"/>
         </div>
-        <div class="twelve wide field">
+        <div class="eleven wide field">
           <input type="text" v-model="request.path" required/>
         </div>
       </div>
@@ -32,7 +30,7 @@
           <a class="item active" data-tab="req-third">바디</a>
         </div>
         <div class="ui tab" data-tab="req-first">
-          <Entries :entries="request.queries"/>
+          <Pairs v-model="request.queries"/>
         </div>
         <div class="ui tab" data-tab="req-second">
           <Entries :entries="request.headers"/>
@@ -68,7 +66,6 @@ export default {
   data () {
     return {
       tab: 'body',
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
       hosts: []
     }
   },

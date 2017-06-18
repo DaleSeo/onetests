@@ -66,7 +66,7 @@ export default {
     initRequest () {
       return {
         method: 'GET',
-        queries: [],
+        queries: {},
         headers: [
           {key: 'Accept', value: 'application/json;charset=UTF-8'},
           {key: 'Content-type', value: 'application/json;charset=UTF-8'}
@@ -116,8 +116,10 @@ export default {
       console.log('Index.vue#pickApi()', cas)
       this.caseId = cas.id
       this.request.method = cas.request.method
-      this.request.url = cas.request.path
+      this.request.host = cas.request.host
       this.request.path = cas.request.path
+      this.request.queries = cas.request.queries
+      // this.request.headers = cas.request.headers
       this.request.body = cas.request.body
       this.response = this.initResponse
     },

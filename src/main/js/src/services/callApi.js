@@ -6,7 +6,7 @@ const restUrl = config.BACKEND_URL
 
 export default function callApi (request, caseId) {
   let req = Object.assign({}, request)
-  req.queries = utils.arrToObj(req.queries)
+  //req.queries = utils.arrToObj(req.queries)
   req.headers = utils.arrToObj(req.headers)
   console.log(req)
 

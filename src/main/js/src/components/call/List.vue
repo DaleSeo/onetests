@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="ui selectable celled table">
+    <table class="ui selectable very compact celled table">
       <thead class="center aligned">
         <tr>
           <th colspan="5">요청 정보</th>
@@ -22,7 +22,7 @@
         <tr v-for="call in calls" @click="detail(call.id)">
           <td><Method :method="call.request.method"/></td>
           <td>{{call.request.host}}</td>
-          <td>{{call.request.path}}</td>
+          <td>{{call.request.path.length > 10 ? call.request.path.slice(0, 10) + '...' : call.request.path}}</td>
           <td>{{keysLength(call.request.queries)}}</td>
           <td>{{keysLength(call.request.headers)}}</td>
           <td>{{call.response.statusCode}} {{call.response.statusMessage}}</td>

@@ -10,6 +10,7 @@ import Layout from './components/Layout.vue'
 import Title from './components/common/Title.vue'
 import RequestLine from './components/common/RequestLine.vue'
 import Method from './components/common/Method.vue'
+import Pairs from './components/common/Pairs.vue'
 import ResultLabel from './components/common/ResultLabel.vue'
 import ResultHeader from './components/common/ResultHeader.vue'
 import ResultItem from './components/common/ResultItem.vue'
@@ -24,6 +25,7 @@ import CaseItem from './components/common/CaseItem.vue'
 Vue.component('Title', Title)
 Vue.component('RequestLine', RequestLine)
 Vue.component('Method', Method)
+Vue.component('Pairs', Pairs)
 Vue.component('ResultLabel', ResultLabel)
 Vue.component('ResultHeader', ResultHeader)
 Vue.component('ResultItem', ResultItem)
