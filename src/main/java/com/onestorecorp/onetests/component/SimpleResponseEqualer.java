@@ -18,7 +18,7 @@ public class SimpleResponseEqualer implements ResponseEqualer {
 			result.setBodyEqual(true);
 			result.setPassed(true);
 		} else {
-			result.setStatusEqual(expected.getStatusCode() == expected.getStatusCode());
+			result.setStatusEqual(expected.getStatusCode() == actual.getStatusCode());
 			result.setHeadersEqual(equalsHeaders(expected.getHeaders(), actual.getHeaders()));
 			result.setBodyEqual(equalsBody(expected.getBody(), actual.getBody()));
 			result.setPassed(result.isStatusEqual() && result.isHeadersEqual() && result.isBodyEqual());
