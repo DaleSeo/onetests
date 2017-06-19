@@ -1,13 +1,23 @@
 package com.onestorecorp.onetests.component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onestorecorp.onetests.domain.Response;
 import com.onestorecorp.onetests.domain.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Map;
 
 @Component
 public class SimpleResponseEqualer implements ResponseEqualer {
+
+	private BodyEqualer bodyEqualer;
+
+	@Autowired
+	public SimpleResponseEqualer(ObjectMapper objectMapper) {
+		this.bodyEqualer = new BodyEqualer(objectMapper, Arrays.asList("date", "time", "reqTime"));
+	}
 
 	@Override
 	public Result equals(Response expected, Response actual) {
@@ -44,7 +54,7 @@ public class SimpleResponseEqualer implements ResponseEqualer {
 
 	private boolean equalsBody(String expected, String actual) {
 	    if (expected == null) return true;
-        return expected.equals(actual);
+        return bodyEqualer.isEqual(expected, actual);
     }
 
 }

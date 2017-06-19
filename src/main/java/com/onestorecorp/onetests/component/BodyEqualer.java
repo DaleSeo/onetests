@@ -22,8 +22,8 @@ public class BodyEqualer {
     }
 
     boolean isEqual(String expected, String actual) {
-        if (areBothBlank(expected, actual)) return true;
-        if (isEitherBlank(expected, actual)) return false;
+        if (StringUtils.isBlank(expected)) return true;
+        if (StringUtils.isBlank(actual)) return false;
 
         try {
             JsonNode expectedNode = objectMapper.readTree(expected);
@@ -33,15 +33,6 @@ public class BodyEqualer {
         } catch (IOException e) {
             throw new RuntimeException("Failed to parse the JSON.", e);
         }
-    }
-
-    private boolean areBothBlank(String expected, String actual) {
-        return StringUtils.isBlank(expected) && StringUtils.isBlank(actual);
-    }
-
-    private boolean isEitherBlank(String expected, String actual) {
-        return (StringUtils.isBlank(expected) && StringUtils.isNotBlank(actual))
-            || (StringUtils.isNotBlank(expected) && StringUtils.isBlank(actual));
     }
 
 }

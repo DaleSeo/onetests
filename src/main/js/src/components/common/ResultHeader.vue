@@ -1,5 +1,5 @@
 <template>
-  <i class="circular icon" :class="icon"/>
+  <i class="icon" :class="icon"/>
 </template>
 
 <script>
@@ -7,7 +7,7 @@ export default {
   props: ['result'],
   computed: {
     icon () {
-      return this.result.passed ? 'thumbs up' : 'thumbs down'
+      return this.result.passed ? 'green smile' : 'red frown'
     }
   }
 }

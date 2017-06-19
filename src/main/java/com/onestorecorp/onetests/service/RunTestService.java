@@ -6,6 +6,8 @@ import com.onestorecorp.onetests.repository.CaseRepository;
 import com.onestorecorp.onetests.repository.CaseResultRepository;
 import com.onestorecorp.onetests.repository.SuiteRepository;
 import com.onestorecorp.onetests.repository.SuiteResultRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class RunTestService {
 
+	private static Logger logger = LoggerFactory.getLogger(RunTestService.class);
 	@Autowired
 	private CaseRepository caseRepo;
 
@@ -60,9 +63,11 @@ public class RunTestService {
 				.parallelStream()
 				.map(aCase -> {
 					Request req = aCase.getRequest();
+					logger.debug("#req: {}", req);
 
 					Response expectedRes = aCase.getResponse();
 					Response res = callApiSvc.invoke(req);
+					logger.debug("#res: {}", res);
 
 					Result result = responseEqualer.equals(expectedRes, res);
                     Call call = callApiSvc.addHistory(req, res, aCase.getId(), suite.getId(), null);

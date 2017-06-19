@@ -24,7 +24,7 @@ public class BodyEqualerTest {
     public void givenBlank() {
         assertThat(equaler.isEqual(null, null)).isTrue();
         assertThat(equaler.isEqual("", "")).isTrue();
-        assertThat(equaler.isEqual("", "\"TEST\"")).isFalse();
+        assertThat(equaler.isEqual("", "\"TEST\"")).isTrue();
         assertThat(equaler.isEqual("\"TEST\"", null)).isFalse();
     }
 
