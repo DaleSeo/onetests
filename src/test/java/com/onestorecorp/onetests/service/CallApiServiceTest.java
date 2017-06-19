@@ -25,7 +25,7 @@ public class CallApiServiceTest {
 		req.setHeaders(null);
 		req.setBody(null);
 
-		Response res = svc.callApi(req);
+		Response res = svc.invoke(req);
 		System.out.println(res);
 
 		assertThat(res.getStatusCode()).isEqualTo(200);
@@ -53,7 +53,7 @@ public class CallApiServiceTest {
 				"  \"userId\": 1\n" +
 				"}");
 
-		Response res = svc.callApi(req);
+		Response res = svc.invoke(req);
 		System.out.println(res);
 
 		assertThat(res.getStatusCode()).isEqualTo(201);
@@ -73,7 +73,7 @@ public class CallApiServiceTest {
 		req.setHeaders(null);
 		req.setBody(null);
 
-		Response res = svc.callApi(req);
+		Response res = svc.invoke(req);
 		System.out.println(res);
 	}
 

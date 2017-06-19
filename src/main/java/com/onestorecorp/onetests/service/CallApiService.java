@@ -23,18 +23,24 @@ public class CallApiService {
 	private EntityConverter converter = new EntityConverter();
 
 	public Response callApiWithSuiteId(Request req, String suiteId) {
-		Response res = callApi(req);
+		Response res = invoke(req);
 		addHistory(req, res, null, suiteId, null);
 		return res;
 	}
 
-	public Call callApi(Request req, String caseId) {
-		Response res = callApi(req);
+	public Call callApiWithCaseId(Request req, String caseId) {
+		Response res = invoke(req);
 		Call call = addHistory(req, res, caseId, null, null);
 		return call;
 	}
 
-	public Response callApi(Request req) {
+	public Call callApi(Request req) {
+		Response res = invoke(req);
+		Call call = addHistory(req, res);
+		return call;
+	}
+
+	public Response invoke(Request req) {
 		RequestEntity<Object> requestEntity = converter.convertRequest(req);
 		ResponseEntity<String> responseEntity = restOperations.exchange(requestEntity, String.class);
 		Response res = converter.convertResponse(responseEntity);
@@ -53,6 +59,14 @@ public class CallApiService {
 
 		return res;
 	}
+
+	public Call addHistory(Request req, Response res) {
+		Call call = new Call();
+		call.setRequest(req);
+		call.setResponse(res);
+		return callRepo.save(call);
+	}
+
 
 	public Call addHistory(Request req, Response res, String caseId, String suiteId, Result result) {
 		Call call = new Call();

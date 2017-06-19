@@ -11,7 +11,7 @@ exports.list = function ({caseId, suiteId}) {
   } else if (suiteId) {
     url += '/search/bySuiteId?suiteId=' + suiteId
   } else {
-    url += '?sort=id,desc'
+    url += '?size=100&sort=id,desc'
   }
 
   console.log(url)

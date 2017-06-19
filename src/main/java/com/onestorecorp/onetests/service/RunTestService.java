@@ -38,7 +38,7 @@ public class RunTestService {
 		Request req = cas.getRequest();
 
 		Response expectedRes = cas.getResponse();
-		Response res = callApiSvc.callApi(req);
+		Response res = callApiSvc.invoke(req);
 
 		Result result = responseEqualer.equals(expectedRes, res);
 		Call call = callApiSvc.addHistory(req, res, caseId, null, null);
@@ -62,7 +62,7 @@ public class RunTestService {
 					Request req = aCase.getRequest();
 
 					Response expectedRes = aCase.getResponse();
-					Response res = callApiSvc.callApi(req);
+					Response res = callApiSvc.invoke(req);
 
 					Result result = responseEqualer.equals(expectedRes, res);
                     Call call = callApiSvc.addHistory(req, res, aCase.getId(), suite.getId(), null);
