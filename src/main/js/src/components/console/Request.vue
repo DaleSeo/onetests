@@ -9,10 +9,7 @@
     <form class="ui attached form segment" @submit.prevent @keyup.enter="callApi">
       <div class="fields">
         <div class="sixteen wide field">
-          <select class="ui fluid dropdown" v-model="request.host">
-            <option value="">호스트</option>
-            <option :value="host.baseUrl" v-for="host in hosts">{{host.baseUrl}}</option>
-          </select>
+          <HostDropdown v-model="request.hostId" :serviceId="serviceId"/>
         </div>
       </div>
       <div class="fields">
@@ -33,7 +30,7 @@
           <Pairs v-model="request.queries"/>
         </div>
         <div class="ui tab" data-tab="req-second">
-          <Entries :entries="request.headers"/>
+          <Pairs v-model="request.headers"/>
         </div>
         <div class="ui tab active" data-tab="req-third">
           <textarea rows="5" v-model="request.body"/>
@@ -56,27 +53,12 @@
 </template>
 
 <script>
-import hostSvc from '../../services/hostSvc'
-
-import Entries from '../common/Entries.vue'
-
 export default {
-  components: {Entries},
   props: ['request', 'serviceId'],
   data () {
     return {
       tab: 'body',
-      hosts: []
     }
-  },
-  watch: {
-    serviceId (val) {
-      console.log('serviceId: ', this.serviceId)
-      this.listHosts()
-    }
-  },
-  created () {
-    this.listHosts()
   },
   mounted () {
     $('#reqTab .menu .item').tab({
@@ -86,12 +68,6 @@ export default {
   methods: {
     callApi () {
       this.$emit('callApi')
-    },
-    listHosts () {
-      console.log('ApiList.vue#listHosts()', this.serviceId)
-      hostSvc.list(this.serviceId)
-        .then(hosts => this.hosts = hosts)
-        .catch(err => toastr.error('호스트 목록 조회 실패'))
     },
     callApi () {
       this.$emit('callApi')

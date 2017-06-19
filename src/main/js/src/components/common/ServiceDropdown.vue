@@ -1,5 +1,5 @@
 <template>
-  <div id="serviceDropdown" class="ui selection dropdown" :class="{disabled: readonly}">
+  <div id="serviceDropdown" class="ui selection dropdown" :class="{fluid: fluid, disabled: readonly}">
     <input type="hidden" :value="value" @change="change">
     <i class="dropdown icon"></i>
     <span class="default text">서비스를 선택하세요</span>
@@ -17,6 +17,10 @@ export default {
   props: {
     value: String,
     readonly: {
+      type: Boolean,
+      default: false
+    },
+    fluid: {
       type: Boolean,
       default: false
     }

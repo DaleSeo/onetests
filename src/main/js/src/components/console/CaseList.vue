@@ -4,10 +4,7 @@
       테스트 케이스 ({{cases.length}})
     </h5>
     <div class="ui attached segment">
-      <select class="ui fluid dropdown" v-model="serviceId" @change="changeServiceId">
-        <option value="">서비스를 선택하세요</option>
-        <option :value="service.id" v-for="service in services">{{service.name}}</option>
-      </select>
+      <ServiceDropdown v-model="serviceId" :fluid="true"/>
     </div>
     <div class="ui styled fluid accordion" v-show="cases.length > 0">
       <CaseItem
@@ -21,8 +18,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
-
 import serviceSvc from '../../services/serviceSvc'
 import caseSvc from '../../services/caseSvc'
 
@@ -66,13 +61,7 @@ export default {
     },
     pick (cas) {
       console.log('ApiList.vue#pick')
-      let host = _.find(this.hosts, {id: this.hostId})
-      cas.url = host ? host.baseUrl + cas.path : cas.path
       this.$emit('pickApi', cas)
-    },
-    changeServiceId () {
-      console.log('CaseList.vue#changeServiceId', this.serviceId)
-      this.$emit('changeServiceId', this.serviceId)
     }
   }
 

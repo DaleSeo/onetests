@@ -1,9 +1,9 @@
 <template>
   <div id="pageHeader" class="ui stackable inverted menu">
     <div class="ui container">
-      <div class="header item">
+      <a href="/" class="header item">
         <h1 class="ui teal inverted header">ONE tests</h1>
-      </div>
+      </a>
       <a href="/" class="red item">
         <i class="home icon"/>Home
       </a>

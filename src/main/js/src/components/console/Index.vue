@@ -12,7 +12,6 @@
       <div class="five wide column">
         <CaseList
           @pickApi="pickApi"
-          @changeServiceId="changeServiceId"
         />
       </div>
       <div class="eleven wide column">
@@ -67,13 +66,11 @@ export default {
       return {
         method: 'GET',
         queries: {},
-        headers: [
-          {key: 'Accept', value: 'application/json;charset=UTF-8'},
-          {key: 'Content-type', value: 'application/json;charset=UTF-8'}
-        ],
+        headers: {},
         host: '',
         path: '',
-        body: ''
+        body: '',
+        hostId: ''
       }
     },
     initResponse () {
@@ -114,18 +111,16 @@ export default {
     },
     pickApi (cas) {
       console.log('Index.vue#pickApi()', cas)
+      this.serviceId = cas.serviceId
       this.caseId = cas.id
+      this.request.hostId = cas.hostId
       this.request.method = cas.request.method
       this.request.host = cas.request.host
       this.request.path = cas.request.path
       this.request.queries = cas.request.queries
-      // this.request.headers = cas.request.headers
+      this.request.headers = cas.request.headers
       this.request.body = cas.request.body
       this.response = this.initResponse
-    },
-    changeServiceId (serviceId) {
-      console.log('Index.vue#changeServiceId:', serviceId)
-      this.serviceId = serviceId
     }
   }
 }

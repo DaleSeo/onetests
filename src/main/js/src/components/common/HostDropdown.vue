@@ -28,27 +28,41 @@ export default {
     }
   },
   watch: {
-    value (val) {
-      console.log('#watch value')
-
-    },
     serviceId (val) {
-      $('#hostDropdown.ui.dropdown').dropdown('restore defaults')
-      if (val) {
-        this.fetchHosts(val)
-          .then(_ => {
-            console.log(this.serviceId + '::' + this.value)
-            $('#hostDropdown.ui.dropdown').dropdown('set selected', this.value)
-          })
-      } else {
-        this.hosts = []
-      }
+      console.log('#serviceId is updated')
+      console.log(val + '::' + this.value)
+      this.refresh(val, this.value)
+      // if (val) {
+      //   this.fetchHosts(val)
+      // } else {
+      //   this.hosts = []
+      // }
+    },
+    value (val) {
+      console.log('#hostId is updated')
+      console.log(this.serviceId + '::' + val)
+      this.refresh(this.serviceId, val)
+      // $('#hostDropdown.ui.dropdown').dropdown('set selected', val)
     }
   },
   mounted () {
     $('#hostDropdown.ui.dropdown').dropdown()
   },
   methods: {
+    refresh (serviceId, hostId) {
+      if (serviceId) {
+        this.fetchHosts(serviceId)
+          .then(_ => {
+            if (hostId) {
+              $('#hostDropdown.ui.dropdown').dropdown('set selected', this.hostId)
+            } else {
+              $('#hostDropdown.ui.dropdown').dropdown('restore defaults')
+            }
+          })
+      } else {
+        this.hosts = []
+      }
+    },
     fetchHosts (serviceId) {
       return hostSvc.list(serviceId)
         .then(hosts => this.hosts = hosts)
