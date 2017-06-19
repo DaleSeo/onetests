@@ -36,24 +36,6 @@ public class RunTestService {
 	@Autowired
 	private ResponseEqualer responseEqualer;
 
-	public CaseResult runTestCase(String caseId) {
-		Case cas = caseRepo.findOne(caseId);
-		Request req = cas.getRequest();
-
-		Response expectedRes = cas.getResponse();
-		Response res = callApiSvc.invoke(req);
-
-		Result result = responseEqualer.equals(expectedRes, res);
-		Call call = callApiSvc.addHistory(req, res, caseId, null, null);
-
-		CaseResult caseResult = convert(result);
-		caseResult.setCaseId(cas.getId());
-		caseResult.setCallId(call.getId());
-		caseResultRepo.save(caseResult);
-
-		return caseResult;
-	}
-
     public SuiteResult runTestSuite(String id) {
 	    long start = System.currentTimeMillis();
 	    SuiteResult suiteResult = new SuiteResult(id);
@@ -62,20 +44,7 @@ public class RunTestService {
 		List<CaseResult> caseResults = suite.getCases()
 				.parallelStream()
 				.map(aCase -> {
-					Request req = aCase.getRequest();
-					logger.debug("#req: {}", req);
-
-					Response expectedRes = aCase.getResponse();
-					Response res = callApiSvc.invoke(req);
-					logger.debug("#res: {}", res);
-
-					Result result = responseEqualer.equals(expectedRes, res);
-                    Call call = callApiSvc.addHistory(req, res, aCase.getId(), suite.getId(), null);
-
-                    CaseResult caseResult = convert(result);
-                    caseResult.setCaseId(aCase.getId());
-                    caseResult.setCallId(call.getId());
-                    caseResultRepo.save(caseResult);
+                    CaseResult caseResult = run(aCase, suite);
 
                     if (caseResult.isPassed()) {
                         suiteResult.incrementSuccess();
@@ -95,6 +64,45 @@ public class RunTestService {
 
 		return suiteResult;
     }
+
+	public CaseResult runTestCase(String caseId) {
+		Case cas = caseRepo.findOne(caseId);
+		return run(cas, new Suite());
+	}
+
+	private CaseResult run(Case cas, Suite suite) {
+		long start = System.currentTimeMillis();
+		Request req = cas.getRequest();
+
+		Response expected = cas.getResponse();
+		Response actual;
+		CaseResult caseResult;
+
+		try {
+			actual = callApiSvc.invoke(req);
+			Result result = responseEqualer.equals(expected, actual);
+			Call call = callApiSvc.addHistory(req, actual, cas.getId(), suite.getId(), null);
+			caseResult = convert(result);
+			caseResult.setCaseId(cas.getId());
+			caseResult.setCallId(call.getId());
+			caseResult.setRequest(req);
+			caseResult.setExpected(expected);
+			caseResult.setActual(actual);
+		} catch (Exception e) {
+			caseResult = new CaseResult();
+			caseResult.setCaseId(cas.getId());
+			caseResult.setRequest(req);
+			caseResult.setExpected(expected);
+			caseResult.setError(e.toString());
+		}
+
+		long end = System.currentTimeMillis();
+		caseResult.setElapsedTime(end - start);
+
+		caseResultRepo.save(caseResult);
+
+		return caseResult;
+	}
 
     private static CaseResult convert(Result result) {
 		CaseResult caseResult = new CaseResult();

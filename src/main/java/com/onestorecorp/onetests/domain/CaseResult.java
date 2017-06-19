@@ -17,6 +17,14 @@ public class CaseResult extends Domain {
 
     String callId;
 
-    int elapsedTime;
+    String error;
+
+    Request request;
+
+	Response expected;
+
+	Response actual;
+
+    long elapsedTime;
 
 }

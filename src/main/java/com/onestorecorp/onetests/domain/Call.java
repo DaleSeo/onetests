@@ -10,14 +10,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @EqualsAndHashCode(callSuper=false)
 public class Call extends Domain {
 
-	private Request request;
-	private Response response;
-	private Result result;
+	Request request;
+	Response response;
+	Result result;
 
 	@Indexed
-	private String caseId;
+	String caseId;
 
 	@Indexed
-	private String suiteId;
+	String suiteId;
 
 }

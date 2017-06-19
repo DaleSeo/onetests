@@ -85,9 +85,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.dl-horizontal {
-  margin-bottom: 0px;
-}
-</style>
