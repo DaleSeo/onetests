@@ -1,32 +1,33 @@
 <template>
-  <div class="ui tag label" :class="color">
-    <i class="icon" :class="icon"/>
-    {{text}}
+  <div class="ui left labeled mini button">
+    <div class="ui basic right pointing mini label" :class="color">
+      {{title}}
+    </div>
+    <div class="ui mini button" :class="color" @click="click">
+      <i class="mini icon" :class="icon"/>
+      {{text}}
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['result'],
+  props: ['title', 'result'],
   computed: {
     text () {
-      if (isResultUnavailable(this.result)) return 'NONE'
-      return this.result.passed ? 'PASS' : 'FAIL'
+      return this.result ? 'GOOD' : 'BAD'
     },
     color () {
-      if (isResultUnavailable(this.result)) return 'yellow'
-      return this.result.passed ? 'green' : 'red'
+      return this.result ? 'green' : 'red'
     },
     icon () {
-      if (isResultUnavailable(this.result)) return 'meh'
-      return this.result.passed ? 'smile' : 'frown'
+      return this.result ? 'thumbs up' : 'thumbs down'
+    }
+  },
+  methods: {
+    click () {
+      this.$emit('click')
     }
   }
-}
-
-function isResultUnavailable (result) {
-  if (!result) return true
-  if (!result.passed === undefined || !result.passed === null) return true
-  return false
 }
 </script>

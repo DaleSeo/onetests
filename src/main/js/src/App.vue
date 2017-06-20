@@ -13,7 +13,6 @@ import Method from './components/common/Method.vue'
 import Pairs from './components/common/Pairs.vue'
 import ResultLabel from './components/common/ResultLabel.vue'
 import ResultHeader from './components/common/ResultHeader.vue'
-import ResultItem from './components/common/ResultItem.vue'
 import MethodDropdown from './components/common/MethodDropdown.vue'
 import ServiceDropdown from './components/common/ServiceDropdown.vue'
 import HostDropdown from './components/common/HostDropdown.vue'
@@ -28,7 +27,6 @@ Vue.component('Method', Method)
 Vue.component('Pairs', Pairs)
 Vue.component('ResultLabel', ResultLabel)
 Vue.component('ResultHeader', ResultHeader)
-Vue.component('ResultItem', ResultItem)
 Vue.component('MethodDropdown', MethodDropdown)
 Vue.component('ServiceDropdown', ServiceDropdown)
 Vue.component('HostDropdown', HostDropdown)

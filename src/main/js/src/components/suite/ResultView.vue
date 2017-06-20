@@ -1,24 +1,14 @@
 <template>
   <div class="ui list">
-    <div class="ui icon message" v-for="result in results" @click="callDetail(result)">
-      <ResultHeader :result="result"/>
-      <div class="content">
-        <div class="header">
-          {{title(result)}}
-        </div>
-        <p>
-          <ResultItem title="상태" :result="result.statusPassed"/>
-          <ResultItem title="헤더" :result="result.headersPassed"/>
-          <ResultItem title="바디" :result="result.bodyPassed"/>
-        </p>
-        <i class="calendar icon"/>{{result.createdDate | formatDate}}
-      </div>
-    </div>
+    <ResultItem :key="result.id" :result="result" v-for="result in results"/>
   </div>
 </template>
 
 <script>
+import ResultItem from '../case/ResultItem.vue'
+
 export default {
+  components: {ResultItem},
   props: ['resultId'],
   data () {
     return {
@@ -34,17 +24,10 @@ export default {
     this.fetchCaseResults()
   },
   methods: {
-    title (result) {
-      return result.passed ? '검증 성공' : '검증 실패'
-    },
     fetchCaseResults () {
       this.$http.get(`/api/suiteResults/${this.resultId}/caseResults`)
         .then(res => res.body._embedded.caseResults)
         .then(caseResults => this.results = caseResults)
-    },
-    callDetail (result) {
-      console.log('#callDetail:', result.callId)
-      location.href = `/calls/${result.callId}`
     }
   }
 }
