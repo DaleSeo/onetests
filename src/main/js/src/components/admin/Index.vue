@@ -5,16 +5,10 @@
 </template>
 
 <script>
-import ServiceList from '../service/ServiceList.vue'
+import ServiceList from '../service/Index.vue'
 
 export default {
-  components: {ServiceList},
-  methods: {
-    pick (id) {
-      console.log('#pick:', id)
-      this.id = id
-    }
-  }
+  components: {ServiceList}
 }
 </script>
 

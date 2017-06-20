@@ -3,21 +3,30 @@ import config from '../../config'
 
 const restUrl = config.BACKEND_URL + '/services'
 
-function list() {
+exports.list = function () {
   return superagent.get(restUrl)
     .then(res => res.body._embedded.services)
 }
 
-function create(service) {
+exports.save = function (service) {
+  if (service.id) {
+    return this.modify(service)
+  } else {
+    return this.create(service)
+  }
+}
+
+exports.create = function (service) {
   return superagent.post(restUrl)
     .send(service)
 }
 
-function detail(id) {
-  return superagent.get(restUrl + '/' + id)
-    .then(res => res.body)
+exports.modify = function (service) {
+  return superagent.patch(restUrl + '/' + service.id)
+    .send(service)
 }
 
-export default {
-  list, create, detail
+exports.detail = function detail(id) {
+  return superagent.get(restUrl + '/' + id)
+    .then(res => res.body)
 }
