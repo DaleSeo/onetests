@@ -1,20 +1,23 @@
 package com.onestorecorp.onetests.domain;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Document
-public class Host {
+@EqualsAndHashCode(callSuper=false)
+public class Host extends Domain {
 
-	@Id
-	private String id;
-	private String title;
-	private String baseUrl;
+	String title, description, baseUrl, environment;
+
 	@Indexed
-	private String serviceId;
+	String serviceId;
+
+	@DBRef(lazy = true)
+	Service service;
 
 	public Host() {
 	}

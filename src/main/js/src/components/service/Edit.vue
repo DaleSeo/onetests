@@ -2,7 +2,7 @@
   <div>
     <div class="ui attached message">
       <div class="header">
-        서비스 상세 <small>({{service.id}})</small>
+        서비스 상세
       </div>
     </div>
     <form class="ui form attached fluid segment" @submit.prevent="save" @reset="cancel">

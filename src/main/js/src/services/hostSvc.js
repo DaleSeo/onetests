@@ -3,29 +3,40 @@ import config from '../../config'
 
 const restUrl = config.BACKEND_URL + '/hosts'
 
-function list(serviceId) {
+exports.list = function (serviceId) {
   let url = restUrl
   if (serviceId) {
-    url = restUrl + '/search/findByServiceId?serviceId=' + serviceId
+    url = restUrl + '/search/findByServiceId?projection=inline&serviceId=' + serviceId
+  } else {
+    url = restUrl + '?projection=inline' 
   }
   return superagent.get(url)
     .then(res => res.body._embedded.hosts)
 }
 
-function create(host) {
+exports.save = function (host) {
+  if (host.id) {
+    return this.modify(host)
+  } else {
+    return this.create(host)
+  }
+}
+
+exports.create = function (host) {
   return superagent.post(restUrl)
     .send(host)
 }
 
-function detail(id) {
+exports.modify = function (host) {
+  return superagent.patch(restUrl + '/' + host.id)
+    .send(host)
+}
+
+exports.detail = function (id) {
   return superagent.get(restUrl + '/' + id)
     .then(res => res.body)
 }
 
-function remove(id) {
+exports.remove = function (id) {
   return superagent.delete(restUrl + '/' + id)
-}
-
-export default {
-  list, create, detail, remove
 }

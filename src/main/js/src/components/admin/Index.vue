@@ -1,14 +1,24 @@
 <template>
   <div class="container">
-    <ServiceList/>
+    <component :is="view"/>
   </div>
 </template>
 
 <script>
-import ServiceList from '../service/Index.vue'
+import Services from '../service/Index.vue'
+import Hosts from '../host/Index.vue'
 
 export default {
-  components: {ServiceList}
+  components: {Services, Hosts},
+  props: ['category'],
+  computed: {
+    view () {
+      switch (this.category) {
+        case 'services': return Services
+        case 'hosts': return Hosts
+      }
+    }
+  }
 }
 </script>
 

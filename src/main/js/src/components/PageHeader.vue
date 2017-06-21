@@ -22,6 +22,20 @@
       <a href="/dashboard" class="item">
         <i class="dashboard icon"/>Dashboard
       </a>
+      <div class="ui dropdown item">
+        <i class="power icon"/>Admin<i class="dropdown icon"/>
+        <div class="menu">
+          <a href="/admin/services" class="item">
+            <i class="pagelines icon"/>Services
+          </a>
+          <a href="/admin/hosts" class="item">
+            <i class="cloud icon"/>Hosts
+          </a>
+          <a href="/admin/settings" class="item">
+            <i class="settings icon"/>Settings
+          </a>
+        </div>
+      </div>
       <!-- <div class="item">
         <CaseSearch :fluid="true"/>
       </div> -->
@@ -32,11 +46,8 @@
             <a href="/profile" class="item">
               <i class="user icon"/>My Page
             </a>
-            <a href="/settings" class="item">
-              <i class="settings icon"/>Settings
-            </a>
-            <a href="/admin" class="item">
-              <i class="doctor icon"/>Admin
+            <a href="/profile" class="item">
+              <i class="setting icon"/>Preference
             </a>
             <a href="/logout" class="item">
               <i class="sign out icon"/>Logout

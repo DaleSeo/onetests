@@ -5,7 +5,7 @@
       <div class="ten wide column">
         <List :services="services" :service="service" @pick="pick"/>
         <br/>
-        <button class="ui fluid button" @click="add" v-if="service && service.id">
+        <button class="ui fluid button" @click="add" v-if="!service">
           <i class="plus icon"/>추가
         </button>
       </div>

@@ -5,11 +5,11 @@
       <pre>{{result.expected.body}}</pre>
     </div>
     <div class="column">
-      <h5 class="ui header">차이</h5>
+      <h5 class="ui header">Unified Diff</h5>
       <Delta :result="result"/>
     </div>
     <div class="column">
-      <h5 class="ui header">기대 바디</h5>
+      <h5 class="ui header">실제 바디</h5>
       <pre>{{result.actual.body}}</pre>
     </div>
   </div>

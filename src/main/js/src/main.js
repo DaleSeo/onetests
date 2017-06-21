@@ -31,7 +31,6 @@ import './assets/css/dataTables.semanticui.min.css'
 
 import Index from './components/home/Index.vue'
 import Test from './components/test/Index.vue'
-import Service from './components/service/Service.vue'
 
 import TestDetail from './components/test/TestDetail.vue'
 import Settings from './components/settings/Settings.vue'
@@ -61,7 +60,6 @@ const router = new VueRouter({
   routes: [
     {path: '/', component: Index},
     {path: '/test', component: Test},
-    {path: '/services/:id', component: Service, props: true},
     {path: '/services/:serviceId/suites/:suiteId', component: SuiteDetail, props: true},
     {path: '/tests/:suiteId/:testId', component: TestDetail, props: true},
     {path: '/settings', component: Settings},
@@ -79,7 +77,7 @@ const router = new VueRouter({
     {path: '/login', component: Login},
     {path: '/signup', component: Signup},
     {path: '/profile', component: Profile},
-    {path: '/admin', component: Admin},
+    {path: '/admin/:category', component: Admin, props: true},
   ]
 })
 

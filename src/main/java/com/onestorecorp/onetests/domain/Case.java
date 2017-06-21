@@ -1,6 +1,7 @@
 package com.onestorecorp.onetests.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Data
 @Document
+@EqualsAndHashCode(callSuper=false)
 public class Case extends Domain {
 
 	String title, description;
