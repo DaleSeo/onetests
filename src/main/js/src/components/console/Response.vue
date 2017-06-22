@@ -48,7 +48,7 @@
         <button type="button" class="ui labeled icon yellow small button" @click="share">
           <i class="share alternate icon"/> 공유
         </button>
-        <button type="button" class="ui labeled icon primary small button" @click="register">
+        <button type="button" class="ui labeled icon teal small button" @click="register">
           <i class="cube icon"/>등록
         </button>
       </div>

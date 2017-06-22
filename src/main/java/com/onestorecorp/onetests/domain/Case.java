@@ -39,4 +39,16 @@ public class Case extends Domain {
 		this.id = id;
 	}
 
+	public Case clone() {
+		Case newCase = new Case();
+		newCase.setTitle(title);
+		newCase.setDescription(description);
+		newCase.setRequest(request);
+		newCase.setResponse(response);
+		newCase.setServiceId(serviceId);
+		newCase.setHostId(hostId);
+		newCase.setExclusions(exclusions);
+		return newCase;
+	}
+
 }

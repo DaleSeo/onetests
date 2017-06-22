@@ -58,4 +58,9 @@ public class CaseController {
 		repo.save(found);
 	}
 
+	@PostMapping("/api/cases/{id}/clone")
+	public @ResponseBody Case clone(@PathVariable String id) {
+		return svc.clone(id);
+	}
+
 }

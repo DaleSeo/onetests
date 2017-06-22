@@ -28,4 +28,11 @@ public class CaseService {
 		return res;
 	}
 
+	public Case clone(String id) {
+		Case aCase = caseRepo.findOne(id);
+		Case newCase = aCase.clone();
+		caseRepo.insert(newCase);
+		return newCase;
+	}
+
 }

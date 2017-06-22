@@ -29,18 +29,16 @@ function buildQueryString (queries) {
   if (!queries) {
     return null
   }
-  let queryObject = utils.arrToObj(queries)
-  return querystring.stringify(queryObject)
+  return querystring.stringify(queries)
 }
 
 function buildHeaderString (headers) {
   if (!headers) {
     return null
   }
-  let headerObject = utils.arrToObj(headers)
-
+  console.log('#headers:', headers)
   let headerString = ''
-  _.entries(headerObject).forEach(([key, value]) => {
+  _.entries(headers).forEach(([key, value]) => {
     headerString += ` -H '${key}: ${value}' `
   })
   return headerString

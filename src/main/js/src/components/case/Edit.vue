@@ -25,6 +25,8 @@
 
       <button type="submit" class="ui primary button" :class="{loading: inProgress}" tabindex="0">저장</button>
       <button type="reset" class="ui secondary button" tabindex="0">취소</button>
+
+      <pre>{{cas}}</pre>
     </form>
   </div>
 </template>
@@ -67,15 +69,16 @@ export default {
     },
     fetchCall () {
       console.log('#fetchCall:', this.callId)
-      callSvc.findOneWithArray(this.callId)
+      callSvc.detail(this.callId)
         .then(call => {
           console.log('#call:', call)
-          this.cas.description = 'Call # ' + this.callId + ' 로 부터 만들어진 테스트 케이스'
-          this.cas.request = call.req
-          return call.caseId
+          this.cas.description = 'Call #' + this.callId + ' 로 부터 만들어진 테스트 케이스'
+          this.cas.request = call.request
         })
-        .then(caseSvc.detail)
-        .then(cas => this.cas.serviceId = cas.serviceId)
+        .catch(err => {
+          console.error(err)
+          return err
+        })
         .catch(err => toastr.error('호출 이력 조회 오류'))
     },
     saveCase () {
@@ -97,14 +100,15 @@ export default {
         description: '',
         request: {
           method: 'GET',
+          host: '',
           path: '',
-          queries: [],
-          headers: [],
+          queries: {},
+          headers: {},
           body: ''
         },
         response: {
           statusCode: 200,
-          headers: [],
+          headers: {},
           body: ''
         }
       }

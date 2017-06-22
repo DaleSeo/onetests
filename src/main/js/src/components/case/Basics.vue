@@ -7,9 +7,12 @@
       <button class="ui icon labeled tiny button" :class="color" @click="edit">
         <i class="edit icon"/>{{label}}
       </button>
-      <button class="ui icon labeled tiny red button" @click="del">
-        <i class="trash icon"/>삭제
+      <button class="ui icon labeled tiny yellow button" @click="clone">
+        <i class="clone icon"/>복제
       </button>
+      <!-- <button class="ui icon labeled tiny red button" @click="del">
+        <i class="trash icon"/>삭제
+      </button> -->
     </div>
     <div class="ui segment" v-if="cas.request">
       <div class="field">
@@ -87,7 +90,7 @@ export default {
     edit () {
       if (this.readonly) return this.readonly = false
       this.inProgress = true
-      caseSvc.saveRequest(this.cas)
+      caseSvc.saveBasics(this.cas)
         .then(_ => toastr.success('기본 정보가 저장되었습니다.'))
         .catch(err => toastr.error('기본 정보 저장 실패'))
         .then(_ => this.inProgress = false)
@@ -96,11 +99,17 @@ export default {
     list () {
       window.location.href = '/cases'
     },
+    clone () {
+      caseSvc.clone(this.cas.id)
+        .then(cas => location.href = '/cases/' + cas.id)
+        .tehn(_ => toastr('테스크 케이스가 복제되었습다.'))
+        .catch(err => toastr.error('테스트 케이스 복제 실패'))
+    },
     del () {
       caseSvc.remove(this.cas.id)
         .then(toastr.success('테스트 케이스가 삭제되었습니다.'))
         .then(this.list)
-    },
+    }
   }
 }
 </script>

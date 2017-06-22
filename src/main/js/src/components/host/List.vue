@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Item :host="host" @pick="pick" v-for="host in hosts"/>
+    <Item :key="host.id" :host="host" @pick="pick" v-for="host in hosts"/>
   </div>
 </template>
 

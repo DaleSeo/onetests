@@ -8,7 +8,7 @@
 import List from './List.vue'
 
 export default {
-  components: { List },
+  components: {List},
   data () {
     return {
       id: ''

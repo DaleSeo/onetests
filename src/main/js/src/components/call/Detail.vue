@@ -32,7 +32,7 @@
           <td>호출자</td>
           <td>{{userName}}</td>
         </tr>
-        <tr>
+        <tr v-if="call.caseId">
           <td>케이스</td>
           <td><a :href="/cases/ + call.caseId">{{call.caseId}}</a></td>
         </tr>

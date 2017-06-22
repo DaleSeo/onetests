@@ -21,10 +21,6 @@ exports.list = function (serviceId) {
 exports.save = function (_cas) {
   let cas = Object.assign({}, _cas)
 
-  cas.request.queries = utils.arrToObj(cas.request.queries)
-  cas.request.headers = utils.arrToObj(cas.request.headers)
-  cas.response.headers = utils.arrToObj(cas.response.headers)
-
   console.log('#cas:', cas)
 
   if (cas.id) {
@@ -90,6 +86,11 @@ exports.remove = function (id) {
   return superagent.delete(restUrl + '/' + id)
 }
 
+exports.saveBasics = function (cas) {
+  return superagent.put(`${restUrl}/${cas.id}/basics`)
+    .send(cas)
+}
+
 exports.saveRequest = function (cas) {
   return superagent.put(`${restUrl}/${cas.id}/request`)
     .send(cas.request)
@@ -102,5 +103,10 @@ exports.saveResponse = function (cas) {
 
 exports.recordResponse = function (id) {
   return superagent.patch(restUrl + '/' + id + '/recordResponse')
+    .then(res => res.body)
+}
+
+exports.clone = function (id) {
+  return superagent.post(`${restUrl}/${id}/clone`)
     .then(res => res.body)
 }

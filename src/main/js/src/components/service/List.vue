@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Item :service="service" @pick="pick" v-for="service in services"/>
+    <Item :key="service.id" :service="service" @pick="pick" v-for="service in services"/>
   </div>
 </template>
 

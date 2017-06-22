@@ -2,10 +2,7 @@ package com.onestorecorp.onetests.service;
 
 import com.onestorecorp.onetests.component.ResponseEqualer;
 import com.onestorecorp.onetests.domain.*;
-import com.onestorecorp.onetests.repository.CaseRepository;
-import com.onestorecorp.onetests.repository.CaseResultRepository;
-import com.onestorecorp.onetests.repository.SuiteRepository;
-import com.onestorecorp.onetests.repository.SuiteResultRepository;
+import com.onestorecorp.onetests.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +15,7 @@ import java.util.stream.Collectors;
 public class RunTestService {
 
 	private static Logger logger = LoggerFactory.getLogger(RunTestService.class);
+
 	@Autowired
 	private CaseRepository caseRepo;
 
