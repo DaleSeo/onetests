@@ -1,6 +1,5 @@
 <template>
   <ListForm
-    variant="primary"
     title="바디 전역 예외"
     :items="exclusions"
     @add="add"

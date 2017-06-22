@@ -1,9 +1,9 @@
 <template>
-  <div class="row">
-    <div class="col-md-6">
+  <div class="ui two column grid">
+    <div class="column">
       <ExclusionsHeaders/>
     </div>
-    <div class="col-md-6">
+    <div class="column">
       <ExclusionsBody/>
     </div>
   </div>

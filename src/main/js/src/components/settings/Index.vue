@@ -1,7 +1,6 @@
 <template>
-  <div class="container">
-    <h3><i class="fa fa-cog"/> 설정</h3>
-    <hr/>
+  <div class="ui container">
+    <Title icon="settings" title="Settings" subTitle="환경 설정"/>
     <Exclusions/>
   </div>
 </template>

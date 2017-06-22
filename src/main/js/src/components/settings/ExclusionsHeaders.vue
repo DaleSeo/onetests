@@ -1,6 +1,5 @@
 <template>
   <ListForm
-    variant="primary"
     title="헤더 전역 예외"
     :items="exclusions"
     @add="add"

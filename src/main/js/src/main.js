@@ -33,7 +33,6 @@ import Index from './components/home/Index.vue'
 import Test from './components/test/Index.vue'
 
 import TestDetail from './components/test/TestDetail.vue'
-import Settings from './components/settings/Settings.vue'
 
 import Console from './components/console/Index.vue'
 import Case from './components/case/Index.vue'
@@ -62,7 +61,6 @@ const router = new VueRouter({
     {path: '/test', component: Test},
     {path: '/services/:serviceId/suites/:suiteId', component: SuiteDetail, props: true},
     {path: '/tests/:suiteId/:testId', component: TestDetail, props: true},
-    {path: '/settings', component: Settings},
     {path: '/console', component: Console},
     {path: '/cases', component: Case},
     {path: '/cases/new', component: CaseEdit},

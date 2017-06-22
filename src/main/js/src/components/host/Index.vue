@@ -1,7 +1,7 @@
 <template>
   <div class="ui container">
     <Title icon="cloud" title="Hosts" subTitle="호스트 관리"/>
-    <div class="ui column grid">
+    <div class="ui grid">
       <div class="ten wide column">
         <ServiceDropdown v-model="serviceId" :fluid="true"/>
         <br/>
