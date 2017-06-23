@@ -2,6 +2,7 @@
   <ListForm
     title="바디 전역 예외"
     :items="exclusions"
+    :loading="loading"
     @add="add"
     @del="del"
   />
@@ -10,31 +11,28 @@
 <script>
 import ListForm from '../common/ListForm.vue'
 
-import db from '../../services/database'
-
 export default {
   components: {ListForm},
-  computed: {
-    exclusions () {
-      return this.exclustionsObj['.value'] || []
-    }
-  },
-  firebase () {
-    return {
-      exclustionsObj: {
-        source: db.ref('settings/bodyExclusions'),
-        asObject: true
-      }
+  props: {
+    exclusions: Array,
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     add (exclusion) {
       this.exclusions.push(exclusion)
-      this.$firebaseRefs.exclustionsObj.set(this.exclusions)
+      this.$emit('save')
     },
     del (exclusion) {
-      let exclusions = this.exclusions.filter(e => e !== exclusion)
-      this.$firebaseRefs.exclustionsObj.set(exclusions)
+      for (let i in this.exclusions) {
+        if (this.exclusions[i] === exclusion) {
+          this.exclusions.splice(i, 1)
+          break
+        }
+      }
+      this.$emit('save')
     }
   }
 }

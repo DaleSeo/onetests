@@ -1,14 +1,15 @@
 <template>
   <div>
     <div class="ui top attached message">
-      <i class="info icon"/>{{title}}
-      <small v-if="items">({{items.length}})</small>
+      <div class="header">
+        {{title}} <small v-if="items">({{items.length}})</small>
+      </div>
     </div>
-    <div class="ui bottom attached segment">
-      <ul class="ui list">
+    <div class="ui bottom attached segment" :class="{loading}">
+      <ul class="ui animated list">
         <li class="item" v-for="item in items">
+          <i class="close icon" @click="del(item)" style="float: right"/>
           <span>{{item}}</span>
-          <button type="button" class="close" @click="del(item)">&times;</button>
         </li>
       </ul>
     </div>
@@ -21,7 +22,7 @@
 
 <script>
 export default {
-  props: ['variant', 'title', 'items'],
+  props: ['variant', 'title', 'items', 'loading'],
   computed: {
     disabled () {
       return this.newItem.trim().length === 0
@@ -44,3 +45,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+li {
+  height: 2em;
+}
+</style>

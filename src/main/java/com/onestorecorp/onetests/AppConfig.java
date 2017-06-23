@@ -80,6 +80,7 @@ public class AppConfig {
 				config.exposeIdsFor(CaseResult.class);
 				config.exposeIdsFor(Suite.class);
 				config.exposeIdsFor(SuiteResult.class);
+				config.exposeIdsFor(Setting.class);
 			}
 
 		};
