@@ -34,6 +34,9 @@
           <a href="/admin/settings" class="item">
             <i class="settings icon"/>Settings
           </a>
+          <a href="/admin/variables" class="item">
+            <i class="map signs icon"/>Variables
+          </a>
         </div>
       </div>
       <!-- <div class="item">

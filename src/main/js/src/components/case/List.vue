@@ -5,10 +5,11 @@
     </div>
 
     <div class="ui stackable grid">
-      <div class="eight wide column">
-        <ServiceFilter :serviceId="serviceId" @change="onServiceIdChange" />
+      <div class="ten wide column">
+        <ServiceFilter v-model="service"/>
+        <HostFilter v-model="host" :serviceId="service && service.id"/>
       </div>
-      <div class="right aligned eight wide column">
+      <div class="right aligned six wide column">
         <button class="ui labeled icon button" @click="create">
           <i class="plus icon"/>등록
         </button>
@@ -16,29 +17,25 @@
       </div>
     </div>
 
-    <table id="tableCase" class="ui celled table">
+    <table id="tableCase" class="ui very compact celled table">
       <thead class="center aligned">
         <tr>
-          <th>서비스</th>
           <th>메소드</th>
-          <th>호스트</th>
           <th>패스</th>
+          <th>서비스</th>
+          <th>호스트</th>
           <th>제목</th>
-          <th>쿼리 개수</th>
-          <th>헤더 개수</th>
-          <th>등록 일시</th>
+          <th>등록일</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="cas in cases" @click="detail(cas.id)">
-          <td>{{cas.serviceId}}</td>
           <td><Method :method="cas.request.method" type="ribbon"/></td>
+          <td>{{cas.request.path | limitLength}}</td>
+          <td>{{cas.service.code}}</td>
           <td>{{cas.request.host}}</td>
-          <td>{{cas.request && cas.request.path.slice(0, 30)}}</td>
-          <td>{{cas.title}}</td>
-          <td>{{cas.request && keysLength(cas.request.queries)}}</td>
-          <td>{{cas.request && keysLength(cas.request.headers)}}</td>
-          <td>{{cas.createdDate | formatDate}}</td>
+          <td>{{cas.title | limitLength}}</td>
+          <td>{{cas.createdDate | date}}</td>
         </tr>
       </tbody>
     </table>
@@ -47,57 +44,57 @@
 
 <script>
 import dt from 'datatables.net'
-import serviceSvc from '../../services/serviceSvc'
 import caseSvc from '../../services/caseSvc'
 
 export default {
   data () {
     return {
-      services: [],
-      serviceId: '',
+      service: null,
+      host: null,
       cases: [],
       dataTable: null,
       loading: false
     }
   },
   created () {
-    this.fetchServices()
     this.fetchCases()
   },
-  methods: {
-    fetchServices () {
-      console.log('#fetchServices')
-      serviceSvc.list()
-        .then(services => this.services = services)
-        .catch(err => toastr.error('서비스 목록 조회 실패'))
+  watch: {
+    service (val) {
+      let code = val ? val.code : ''
+      this.dataTable.column(2).search(code).draw()
     },
+    host (val) {
+      let baseUrl = val ? val.baseUrl : ''
+      this.dataTable.column(3).search(baseUrl).draw()
+    }
+  },
+  methods: {
     fetchCases () {
       this.loading = true
       return caseSvc.list(this.serviceId)
         .then(cases => this.cases = cases)
         .then(_ =>
           this.dataTable = $('#tableCase').DataTable({
-            order: [[ 7, "desc" ]],
+            order: [[ 5, "desc" ]],
             columnDefs: [
-              { targets: [0, 2], visible: false },
-              { targets: [5, 6, 7], searchable: false }
+              // { targets: [0], visible: false },
+              { targets: [5], searchable: false }
             ]
           })
         )
+        .catch(err => {
+          console.error(err)
+          throw err
+        })
         .catch(err => toastr.error('테스트 케이스 목록 조회 실패'))
         .then(_ => this.loading = false)
     },
     detail (id) {
       window.location.href = `/cases/${id}`
     },
-    keysLength (object) {
-      return object ? Object.keys(object).length : 0
-    },
     create () {
       window.location.href = '/cases/new'
-    },
-    onServiceIdChange (serviceId) {
-      this.dataTable.column(0).search(serviceId).draw()
     }
   }
 

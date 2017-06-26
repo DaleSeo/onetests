@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 public class BodyEqualer {
 
@@ -16,7 +16,7 @@ public class BodyEqualer {
     private ObjectMapper objectMapper;
     private JsonNodeEqualer jsonNodeEqualer;
 
-    public BodyEqualer(ObjectMapper objectMapper, List<String> exclusions) {
+    public BodyEqualer(ObjectMapper objectMapper, Collection<String> exclusions) {
         this.objectMapper = objectMapper;
         jsonNodeEqualer = new JsonNodeEqualer(exclusions);
     }

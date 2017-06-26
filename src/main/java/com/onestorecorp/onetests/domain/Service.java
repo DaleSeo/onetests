@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Document
@@ -15,6 +16,7 @@ public class Service extends Domain {
 	private String name;
 	private String description;
 	private List<String> hosts;
+	private Map<String, String> variables;
 
 	public Service() {
 	}

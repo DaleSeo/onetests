@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import serviceSvc from '../../services/serviceSvc'
+
 import Item from './Item.vue'
 
 export default {

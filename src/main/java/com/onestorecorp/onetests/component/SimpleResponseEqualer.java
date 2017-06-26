@@ -3,20 +3,28 @@ package com.onestorecorp.onetests.component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onestorecorp.onetests.domain.Response;
 import com.onestorecorp.onetests.domain.Result;
+import com.onestorecorp.onetests.domain.Setting;
+import com.onestorecorp.onetests.repository.SettingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Map;
 
-@Component
+@Service
 public class SimpleResponseEqualer implements ResponseEqualer {
 
+	private HeaderEqualer headerEqualer;
 	private BodyEqualer bodyEqualer;
 
 	@Autowired
-	public SimpleResponseEqualer(ObjectMapper objectMapper) {
-		this.bodyEqualer = new BodyEqualer(objectMapper, Arrays.asList("date", "time", "reqTime"));
+	public SimpleResponseEqualer(SettingRepository settingRepository, ObjectMapper objectMapper) {
+		System.out.println("#settingRepository.findAll(): " + settingRepository.findAll());
+		Setting setting = settingRepository.findAll()
+				.stream()
+				.findFirst()
+				.orElseGet(Setting::new);
+		headerEqualer = new HeaderEqualer(setting.getHeaderExclusions());
+		bodyEqualer = new BodyEqualer(objectMapper, setting.getHeaderExclusions());
 	}
 
 	@Override
@@ -37,19 +45,7 @@ public class SimpleResponseEqualer implements ResponseEqualer {
 	}
 
 	private boolean equalsHeaders(Map<String, String> expected, Map<String, String> actual) {
-		for (String key : expected.keySet()) {
-			if (!actual.containsKey(key)) {
-				return false;
-			}
-
-			String expectedValue = expected.get(key);
-			String actualValue = actual.get(key);
-
-			if (!expectedValue.equals(actualValue)) {
-				return false;
-			}
-		}
-		return true;
+		return headerEqualer.isEqual(expected, actual);
 	}
 
 	private boolean equalsBody(String expected, String actual) {

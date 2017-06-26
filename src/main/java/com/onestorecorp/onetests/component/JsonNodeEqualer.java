@@ -1,23 +1,22 @@
 package com.onestorecorp.onetests.component;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 public class JsonNodeEqualer {
 
     private static final Logger logger = LoggerFactory.getLogger(JsonNodeEqualer.class);
 
-    private List<String> exclusions;
+    private Set<String> exclusions;
 
-    public JsonNodeEqualer(List<String> exclusions) {
-        this.exclusions = exclusions;
+    public JsonNodeEqualer(Collection<String> exclusions) {
+        this.exclusions = new HashSet<>(exclusions);
     }
 
     public boolean isNodeEqual(JsonNode nodeA, JsonNode nodeB) {

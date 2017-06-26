@@ -13,6 +13,8 @@ exports.list = function (serviceId) {
     url += '?size=1000'
   }
 
+  url += '&projection=inline'
+
   console.log(url)
   return superagent.get(url)
     .then(res => res.body._embedded.cases)

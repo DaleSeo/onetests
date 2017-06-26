@@ -13,8 +13,22 @@ Vue.use(VueClipboard)
 Vue.filter('formatDate', function (date) {
   return moment(date).format('YY/MM/DD HH:mm:ss')
 })
+Vue.filter('dateTime', function (date) {
+  return moment(date).format('YY/MM/DD HH:mm:ss')
+})
+Vue.filter('time', function (date) {
+  return moment(date).format('HH:mm:ss')
+})
+Vue.filter('date', function (date) {
+  return moment(date).format('YY/MM/DD')
+})
 Vue.filter('userName', function (user) {
   return (user && user.name) || ''
+})
+Vue.filter('limitLength', function (text, size) {
+  if (!text) return ''
+  size = size ? +size : 20
+  return text.length > size ? text.slice(0, size) + '...' : text
 })
 
 // import 'bootstrap/dist/css/bootstrap.min.css'

@@ -17,6 +17,7 @@ import MethodDropdown from './components/common/MethodDropdown.vue'
 import ServiceDropdown from './components/common/ServiceDropdown.vue'
 import HostDropdown from './components/common/HostDropdown.vue'
 import ServiceFilter from './components/common/ServiceFilter.vue'
+import HostFilter from './components/common/HostFilter.vue'
 import CaseSearch from './components/common/CaseSearch.vue'
 import CaseList from './components/common/CaseList.vue'
 import CaseItem from './components/common/CaseItem.vue'
@@ -31,6 +32,7 @@ Vue.component('MethodDropdown', MethodDropdown)
 Vue.component('ServiceDropdown', ServiceDropdown)
 Vue.component('HostDropdown', HostDropdown)
 Vue.component('ServiceFilter', ServiceFilter)
+Vue.component('HostFilter', HostFilter)
 Vue.component('CaseSearch', CaseSearch)
 Vue.component('CaseList', CaseList)
 Vue.component('CaseItem', CaseItem)

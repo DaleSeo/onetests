@@ -8,9 +8,9 @@
 import Services from '../service/Index.vue'
 import Hosts from '../host/Index.vue'
 import Settings from '../settings/Index.vue'
+import Variables from '../variable/Index.vue'
 
 export default {
-  components: {Services, Hosts},
   props: ['category'],
   computed: {
     view () {
@@ -18,6 +18,7 @@ export default {
         case 'services': return Services
         case 'hosts': return Hosts
         case 'settings': return Settings
+        case 'variables': return Variables
       }
     }
   }
