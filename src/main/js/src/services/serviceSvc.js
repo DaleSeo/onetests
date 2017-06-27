@@ -9,6 +9,7 @@ exports.list = function () {
 }
 
 exports.save = function (service) {
+  console.log('#save:', service)
   if (service.id) {
     return this.modify(service)
   } else {
@@ -22,6 +23,7 @@ exports.create = function (service) {
 }
 
 exports.modify = function (service) {
+  console.log('modify:', service)
   return superagent.patch(restUrl + '/' + service.id)
     .send(service)
 }

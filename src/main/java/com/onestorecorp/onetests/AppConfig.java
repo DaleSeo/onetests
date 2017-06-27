@@ -81,6 +81,7 @@ public class AppConfig {
 				config.exposeIdsFor(Suite.class);
 				config.exposeIdsFor(SuiteResult.class);
 				config.exposeIdsFor(Setting.class);
+				config.exposeIdsFor(Environment.class);
 			}
 
 		};

@@ -1,46 +1,32 @@
 <template>
-  <div>
-    <div class="ui attached message">
-      <div class="header">
-        서비스 상세
+  <div class="ui tiny form segment">
+    <div class="fields">
+      <div class="six wide required field">
+        <label>코드</label>
+        <input v-model="environment.code"/>
+      </div>
+      <div class="ten wide required field">
+        <label>제목</label>
+        <input v-model="environment.title"/>
       </div>
     </div>
-    <form class="ui form attached fluid segment" @submit.prevent="save" @reset="cancel">
-      <div class="disabled field">
-        <label for="id">ID</label>
-        <input id="id" type="text" readonly v-model="service.id"/>
-      </div>
-      <div class="required field">
-        <label for="code">코드</label>
-        <input id="code" type="text" required v-model="service.code"/>
-      </div>
-      <div class="required field">
-        <label for="name">이름</label>
-        <input id="name" type="text" required v-model="service.name"/>
-      </div>
-      <div class="field">
-        <label for="description">설명</label>
-        <textarea id="description" v-model="service.description"/>
-      </div>
-      <div style="text-align: right">
-        <button type="submit" class="ui tiny button">저장</button>
-        <button type="reset" class="ui tiny button">취소</button>
-      </div>
-    </form>
+    <div class="field">
+      <label>변수</label>
+      <Variables :variables="environment.variables"/>
+    </div>
+    <div class="field">
+      <label>설명</label>
+      <textarea v-model="environment.description"/>
+    </div>
+    <pre>{{environment}}</pre>
   </div>
 </template>
 
 <script>
+import Variables from './Variables.vue'
+
 export default {
-  props: ['service'],
-  methods: {
-    save () {
-      console.log('#save:', this.service)
-      this.$emit('save')
-    },
-    cancel () {
-      this.$emit('cancel')
-    }
-  }
+  components: {Variables},
+  props: ['environment']
 }
 </script>

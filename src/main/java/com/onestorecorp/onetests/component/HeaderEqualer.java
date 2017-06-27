@@ -19,7 +19,7 @@ public class HeaderEqualer {
     }
 
     boolean isEqual(Map<String, String> expected, Map<String, String> actual) {
-	    Set<String> keySet = expected.keySet();
+	    Set<String> keySet = new HashSet<>(expected.keySet());
 	    keySet.removeAll(exclusions);
 	    for (String key : keySet) {
 		    if (!actual.containsKey(key)) {

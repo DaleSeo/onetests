@@ -1,15 +1,14 @@
 <template>
-  <ListForm
-    title="바디 전역 예외"
-    :variables="variables"
-    :loading="loading"
-    @add="add"
-    @del="del"
-  />
+  <div>
+    <Item :key="environment.id" :environment="environment" @pick="$emit('pick', environment)" v-for="environment in environments"/>
+  </div>
 </template>
 
 <script>
+import Item from './Item.vue'
+
 export default {
-  props: ['variables']
+  components: {Item},
+  props: ['environments', 'environment']
 }
 </script>

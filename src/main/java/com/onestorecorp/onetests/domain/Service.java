@@ -12,11 +12,11 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper=false)
 public class Service extends Domain {
 
-	private String code;
-	private String name;
-	private String description;
-	private List<String> hosts;
-	private Map<String, String> variables;
+	String code;
+	String name;
+	String description;
+	List<String> hosts;
+	Map<String, String> variables;
 
 	public Service() {
 	}
