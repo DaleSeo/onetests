@@ -1,9 +1,8 @@
 <template>
-  <div class="ui message" @click="pick">
+  <div class="ui message" @click="$emit('pick')">
     <div class="header">
-      <div class="ui label">{{environment.service && environment.service.code}}</div>
       <div v-if="environment.code" class="ui label">{{environment.code}}</div>
-      {{environment.title}}
+      {{environment.host}}
     </div>
     <p>
       {{environment.description}}
@@ -19,11 +18,6 @@
 
 <script>
 export default {
-  props: ['environment'],
-  methods: {
-    pick () {
-      this.$emit('pick')
-    }
-  }
+  props: ['environment']
 }
 </script>

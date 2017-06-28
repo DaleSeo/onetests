@@ -11,6 +11,10 @@
       </div>
     </div>
     <div class="field">
+      <label>호스트</label>
+      <input v-model="environment.host"/>
+    </div>
+    <div class="field">
       <label>변수</label>
       <Variables :variables="environment.variables"/>
     </div>
@@ -18,7 +22,6 @@
       <label>설명</label>
       <textarea v-model="environment.description"/>
     </div>
-    <pre>{{environment}}</pre>
   </div>
 </template>
 

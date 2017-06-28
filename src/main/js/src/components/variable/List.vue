@@ -9,6 +9,6 @@ import Item from './Item.vue'
 
 export default {
   components: {Item},
-  props: ['environments', 'environment']
+  props: ['environments']
 }
 </script>

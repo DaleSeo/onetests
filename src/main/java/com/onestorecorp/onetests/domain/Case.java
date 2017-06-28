@@ -8,27 +8,30 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Data
+/**
+ * @author 서대영(DAEYOUNG SEO)/Onestore/SKP
+ */
 @Document
+@Data
 @EqualsAndHashCode(callSuper=false)
 public class Case extends Domain {
 
-	String title, description;
+	private String title, description;
 
-	Request request;
-	Response response;
-
-	@Indexed
-	String serviceId;
-
-	@DBRef(lazy = true)
-	Service service;
+	private Request request;
+	private Response response;
 
 	@Indexed
-	String hostId;
+	private String serviceId;
 
 	@DBRef(lazy = true)
-	Host host;
+	private Service service;
+
+	@Indexed
+	private String hostId;
+
+	@DBRef(lazy = true)
+	private Host host;
 
 	List<String> exclusions;
 

@@ -1,10 +1,17 @@
 <template>
-  <div class="ui container">
-    <CaseSearch :fluid="true" size="massive"/>
+  <div class="ui text container">
+    Host: <input v-model="host"/>
+    <HostInput v-model="host"/>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      host: '',
+      service: null
+    }
+  }
 }
 </script>

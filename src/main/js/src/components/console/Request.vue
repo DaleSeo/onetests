@@ -7,10 +7,8 @@
       </div>
     </h5>
     <form class="ui attached form segment" @submit.prevent @keyup.enter="callApi">
-      <div class="fields">
-        <div class="sixteen wide field">
-          <HostDropdown v-model="request.hostId" :serviceId="serviceId"/>
-        </div>
+      <div class="field">
+        <HostInput v-model="request.host"/>
       </div>
       <div class="fields">
         <div class="five wide field">
