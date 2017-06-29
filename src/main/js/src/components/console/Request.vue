@@ -56,6 +56,7 @@ export default {
   data () {
     return {
       tab: 'body',
+      environment: null
     }
   },
   mounted () {

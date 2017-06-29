@@ -10,6 +10,8 @@
 
     <div class="ui grid">
       <div class="five wide column">
+        <EnvironmentDropdown v-model="environment" :fluid="true"/>
+        <div>&nbsp;</div>
         <CaseList
           @pickApi="pickApi"
         />
@@ -38,6 +40,7 @@ import callApi from '../../services/callApi'
 import serviceSvc from '../../services/serviceSvc'
 import callSvc from '../../services/callSvc'
 
+import EnvironmentDropdown from '../common/EnvironmentDropdown.vue'
 import CaseList from './CaseList.vue'
 import Request from './Request.vue'
 import Buttons from './Buttons.vue'
@@ -46,13 +49,13 @@ import Share from './Share.vue'
 import Curl from './Curl.vue'
 
 export default {
-  components: {CaseList, Request, Buttons, Response, Share, Curl},
+  components: {EnvironmentDropdown, CaseList, Request, Buttons, Response, Share, Curl},
   data () {
     return {
       request: this.initRequest(),
       response: this.initResponse(),
+      environment: null,
       serviceId: '',
-      caseId: '',
       callId: this.$route.query.callId || '',
       inProgress: false,
       loading: false
@@ -93,7 +96,7 @@ export default {
     callApi () {
       this.inProgress = true
       this.response = this.initResponse()
-      callApi(this.request, this.caseId)
+      callApi(this.request, this.environment)
         .then(call => {
           this.callId = call.id
           this.response = call.response
@@ -112,7 +115,6 @@ export default {
     pickApi (cas) {
       console.log('Index.vue#pickApi()', cas)
       this.serviceId = cas.serviceId
-      this.caseId = cas.id
       this.request.hostId = cas.hostId
       this.request.method = cas.request.method
       this.request.host = cas.request.host

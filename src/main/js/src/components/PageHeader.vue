@@ -34,7 +34,7 @@
           <a href="/admin/settings" class="item">
             <i class="settings icon"/>Settings
           </a>
-          <a href="/admin/variables" class="item">
+          <a href="/admin/environments" class="item">
             <i class="options icon"/>Environments
           </a>
         </div>

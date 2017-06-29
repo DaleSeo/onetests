@@ -1,10 +1,8 @@
 package com.onestorecorp.onetests.service;
 
-import com.onestorecorp.onetests.domain.Call;
-import com.onestorecorp.onetests.domain.Request;
-import com.onestorecorp.onetests.domain.Response;
-import com.onestorecorp.onetests.domain.Result;
+import com.onestorecorp.onetests.domain.*;
 import com.onestorecorp.onetests.repository.CallRepository;
+import com.onestorecorp.onetests.repository.EnvironmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +16,14 @@ public class CallApiService {
 	private CallRepository callRepo;
 
 	@Autowired
+	private EnvironmentRepository environmentRepo;
+
+	@Autowired
 	private RestOperations restOperations;
 
 	private EntityConverter converter = new EntityConverter();
+
+	private EnvironmentApplier environmentApplier = new EnvironmentApplier();
 
 	public Response callApiWithSuiteId(Request req, String suiteId) {
 		Response res = invoke(req);
@@ -35,6 +38,14 @@ public class CallApiService {
 	}
 
 	public Call callApi(Request req) {
+		Response res = invoke(req);
+		Call call = addHistory(req, res);
+		return call;
+	}
+
+	public Call callApi(Request req, String environmentId) {
+		Environment environment = environmentRepo.findOne(environmentId);
+		environmentApplier.apply(req, environment);
 		Response res = invoke(req);
 		Call call = addHistory(req, res);
 		return call;

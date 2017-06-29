@@ -4,11 +4,12 @@ import config from '../../config'
 
 const restUrl = config.BACKEND_URL
 
-export default function callApi (request, caseId) {
+export default function callApi (request, environment) {
   let req = Object.assign({}, request)
   console.log(req)
 
-  return superagent.post(restUrl + '/callApi?caseId=' + caseId)
+  let environmentId = environment && environment.id || ''
+  return superagent.post(restUrl + '/callApi?environmentId=' + environmentId)
     .send(req)
     .then(res => res.body)
     .catch(err => {

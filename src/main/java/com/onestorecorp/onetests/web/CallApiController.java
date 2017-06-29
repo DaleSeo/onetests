@@ -19,9 +19,9 @@ public class CallApiController {
 	private CallApiService svc;
 
 	@PostMapping
-	public Call callApi(@RequestBody Request req) {
+	public Call callApi(@RequestBody Request req, @RequestParam String environmentId) {
 		logger.info("##### {}", req);
-		Call call = svc.callApi(req);
+		Call call = svc.callApi(req, environmentId);
 		return call;
 	}
 

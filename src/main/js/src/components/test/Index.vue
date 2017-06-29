@@ -1,16 +1,19 @@
 <template>
   <div class="ui text container">
-    Host: <input v-model="host"/>
-    <HostInput v-model="host"/>
+    <pre>Environment: {{environment && environment.id}}</pre>
+    <div class="ui divider"/>
+    <EnvironmentDropdown v-model="environment"/>
   </div>
 </template>
 
 <script>
+import EnvironmentDropdown from '../common/EnvironmentDropdown.vue'
+
 export default {
+  components: {EnvironmentDropdown},
   data () {
     return {
-      host: '',
-      service: null
+      environment: null
     }
   }
 }

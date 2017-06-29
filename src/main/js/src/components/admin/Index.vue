@@ -8,7 +8,7 @@
 import Services from '../service/Index.vue'
 import Hosts from '../host/Index.vue'
 import Settings from '../settings/Index.vue'
-import Variables from '../variable/Index.vue'
+import Environments from '../environment/Index.vue'
 
 export default {
   props: ['category'],
@@ -18,7 +18,7 @@ export default {
         case 'services': return Services
         case 'hosts': return Hosts
         case 'settings': return Settings
-        case 'variables': return Variables
+        case 'environments': return Environments
       }
     }
   }

@@ -27,15 +27,7 @@ export default {
       this.loading = true
       this.$http.get('/api/environments')
         .then(res => res.body._embedded.environments)
-        .then(environments => {
-          console.log(environments)
-          return environments
-        })
         .then(environments => this.hosts = environments.map(environment => environment.host))
-        .catch(err => {
-          console.error(err)
-          throw err
-        })
         .catch(err => toastr.error('호스트 조회 실패'))
         .then(_ => this.loading = false)
     }
