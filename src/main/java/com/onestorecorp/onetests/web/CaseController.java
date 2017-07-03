@@ -1,6 +1,7 @@
 package com.onestorecorp.onetests.web;
 
 import com.onestorecorp.onetests.domain.Case;
+import com.onestorecorp.onetests.domain.Environment;
 import com.onestorecorp.onetests.domain.Request;
 import com.onestorecorp.onetests.domain.Response;
 import com.onestorecorp.onetests.repository.CaseRepository;
@@ -38,6 +39,10 @@ public class CaseController {
 		Case found = repo.findOne(id);
 		found.setTitle(cas.getTitle());
 		found.setDescription(cas.getDescription());
+		if (cas.getEnvironmentId() != null) {
+			found.setEnvironmentId(cas.getEnvironmentId());
+			found.setEnvironment(new Environment(cas.getEnvironmentId()));
+		}
 		repo.save(found);
 	}
 

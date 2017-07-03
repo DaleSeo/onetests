@@ -36,8 +36,10 @@
           <ServiceDropdown v-model="cas.serviceId" :readonly="true"/>
         </div>
         <div class="ten wide required field">
-          <label>호스트</label>
-          <HostDropdown v-model="cas.hostId" :serviceId="cas.serviceId" :readonly="true"/>
+          <!-- <label>호스트</label>
+          <HostDropdown v-model="cas.hostId" :serviceId="cas.serviceId" :readonly="true"/> -->
+          <label>디폴트 환경</label>
+          <EnvironmentDropdown v-model="cas.environment" :fluid="true" :readonly="readonly" look="selection"/>
         </div>
       </div>
 
@@ -67,9 +69,10 @@
 <script>
 import caseSvc from '../../services/caseSvc'
 import Pairs from '../common/Pairs.vue'
+import EnvironmentDropdown from '../common/EnvironmentDropdown.vue'
 
 export default {
-  components: {Pairs},
+  components: {Pairs, EnvironmentDropdown},
   props: ['cas'],
   data () {
     return {
@@ -90,7 +93,13 @@ export default {
     edit () {
       if (this.readonly) return this.readonly = false
       this.inProgress = true
-      caseSvc.saveBasics(this.cas)
+      let aCase = {}
+      aCase.id = this.cas.id
+      aCase.title = this.cas.title
+      aCase.description = this.cas.description
+      aCase.environmentId = this.cas.environmentId
+      aCase.serviceId = this.cas.serviceId
+      caseSvc.saveBasics(aCase)
         .then(_ => toastr.success('기본 정보가 저장되었습니다.'))
         .catch(err => toastr.error('기본 정보 저장 실패'))
         .then(_ => this.inProgress = false)

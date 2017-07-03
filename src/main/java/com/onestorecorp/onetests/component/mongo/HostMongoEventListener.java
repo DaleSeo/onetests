@@ -8,6 +8,9 @@ import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventLis
 import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author 서대영(DAEYOUNG SEO)/Onestore/SKP
+ */
 @Component
 public class HostMongoEventListener extends AbstractMongoEventListener<Host> {
 

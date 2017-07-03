@@ -7,7 +7,6 @@
     <div class="ui stackable grid">
       <div class="ten wide column">
         <ServiceFilter v-model="service"/>
-        <HostFilter v-model="host" :serviceId="service && service.id"/>
       </div>
       <div class="right aligned six wide column">
         <button class="ui labeled icon button" @click="create">
@@ -23,7 +22,6 @@
           <th>메소드</th>
           <th>패스</th>
           <th>서비스</th>
-          <th>호스트</th>
           <th>제목</th>
           <th>등록일</th>
         </tr>
@@ -33,7 +31,6 @@
           <td><Method :method="cas.request.method" type="ribbon"/></td>
           <td>{{cas.request.path | limitLength}}</td>
           <td>{{cas.service.code}}</td>
-          <td>{{cas.request.host}}</td>
           <td>{{cas.title | limitLength}}</td>
           <td>{{cas.createdDate | date}}</td>
         </tr>
@@ -50,7 +47,6 @@ export default {
   data () {
     return {
       service: null,
-      host: null,
       cases: [],
       dataTable: null,
       loading: false
@@ -63,10 +59,6 @@ export default {
     service (val) {
       let code = val ? val.code : ''
       this.dataTable.column(2).search(code).draw()
-    },
-    host (val) {
-      let baseUrl = val ? val.baseUrl : ''
-      this.dataTable.column(3).search(baseUrl).draw()
     }
   },
   methods: {
@@ -76,10 +68,10 @@ export default {
         .then(cases => this.cases = cases)
         .then(_ =>
           this.dataTable = $('#tableCase').DataTable({
-            order: [[ 5, "desc" ]],
+            order: [[ 4, "desc" ]],
             columnDefs: [
               // { targets: [0], visible: false },
-              { targets: [5], searchable: false }
+              { targets: [4], searchable: false }
             ]
           })
         )

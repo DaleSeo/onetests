@@ -18,8 +18,8 @@
           <ServiceDropdown v-model="cas.serviceId"/>
         </div>
         <div class="ten wide required field">
-          <label>호스트</label>
-          <HostDropdown v-model="cas.hostId" :serviceId="cas.serviceId"/>
+          <label>디폴트 환경</label>
+          <EnvironmentDropdown v-model="environment" :fluid="true" look="selection"/>
         </div>
       </div>
 
@@ -36,17 +36,25 @@ import caseSvc from '../../services/caseSvc'
 import callSvc from '../../services/callSvc'
 
 import Entries from '../common/Entries.vue'
+import EnvironmentDropdown from '../common/EnvironmentDropdown.vue'
 
 export default {
-  components: { Entries },
+  components: {Entries, EnvironmentDropdown},
   props: ['id'],
   data () {
     return {
       cas: this.initCase(),
+      environment: null,
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'],
       callId: this.$route.query.callId || '',
       loading: false,
       inProgress: false
+    }
+  },
+  watch: {
+    environment (val) {
+      console.log('#watch cas.environment:', val)
+      if (val) this.cas.environmentId = val.id
     }
   },
   created () {
@@ -98,9 +106,10 @@ export default {
         hostId: '',
         title: '',
         description: '',
+        environmentId: '',
         request: {
           method: 'GET',
-          host: '',
+          host: '[[HOST]]',
           path: '',
           queries: {},
           headers: {},

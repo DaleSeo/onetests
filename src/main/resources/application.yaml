@@ -1,7 +1,10 @@
 spring:
   output:
-      ansi:
-        enabled: ALWAYS
+    ansi:
+      enabled: ALWAYS
+  devtools:
+    livereload:
+      enabled: true
   data:
     rest:
       base-path: /api
@@ -33,6 +36,9 @@ logging:
 ---
 spring:
   profiles: production
+  devtools:
+    livereload:
+      enabled: false
   data:
     mongodb:
       uri: mongodb://sqe:QASPBIS*36!@172.21.196.30:27017/sqe

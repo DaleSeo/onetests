@@ -6,6 +6,11 @@
       </button>
     </div>
     <div class="ui segment" v-if="cas.request">
+      <div class="required field">
+        <label>호스트</label>
+        <input required v-model="cas.request.host" :disabled="readonly"/>
+      </div>
+
       <div class="fields">
         <div class="four wide required field">
           <label>메소드</label>

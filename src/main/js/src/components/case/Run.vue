@@ -2,6 +2,7 @@
   <div>
     <div class="ui grid">
       <div class="right aligned column">
+        <EnvironmentDropdown v-model="environment" size="tiny"/>
         <button class="ui labeled icon primary tiny button" :class="{loading}" @click="run">
           <i class="rocket icon"/>검증 수행
         </button>
@@ -13,14 +14,16 @@
 
 <script>
 import testRunner from '../../services/testRunner'
+import EnvironmentDropdown from '../common/EnvironmentDropdown.vue'
 import ResultList from './ResultList.vue'
 
 export default {
-  components: {ResultList},
+  components: {EnvironmentDropdown, ResultList},
   props: ['caseId'],
   data () {
     return {
       results: [],
+      environment: null,
       loading: false
     }
   },
@@ -38,7 +41,7 @@ export default {
     },
     run () {
       this.loading = true
-      testRunner.runCase(this.caseId)
+      testRunner.runCase(this.caseId, this.environment)
         .then(this.fetchResults)
         .then(_ => toastr.success('테스트가 완료되었습니다.'))
         .catch(err => toastr.error('테스트 케이스 실행 실패'))

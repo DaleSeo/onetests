@@ -29,12 +29,17 @@ public class RunTestService {
     private SuiteResultRepository suiteResultRepo;
 
 	@Autowired
+	private EnvironmentRepository environmentRepo;
+
+	@Autowired
 	private CallApiService callApiSvc;
 
 	@Autowired
 	private ResponseEqualer responseEqualer;
 
-    public SuiteResult runTestSuite(String id) {
+	private EnvironmentApplier environmentApplier = new EnvironmentApplier();
+
+    public SuiteResult runTestSuite(String id, String environmentId) {
 	    long start = System.currentTimeMillis();
 	    SuiteResult suiteResult = new SuiteResult(id);
 
@@ -42,7 +47,7 @@ public class RunTestService {
 		List<CaseResult> caseResults = suite.getCases()
 				.parallelStream()
 				.map(aCase -> {
-                    CaseResult caseResult = run(aCase, suite);
+                    CaseResult caseResult = run(aCase, suite, environmentId);
 
                     if (caseResult.isPassed()) {
                         suiteResult.incrementSuccess();
@@ -63,14 +68,17 @@ public class RunTestService {
 		return suiteResult;
     }
 
-	public CaseResult runTestCase(String caseId) {
+	public CaseResult runTestCase(String caseId, String environmentId) {
 		Case cas = caseRepo.findOne(caseId);
-		return run(cas, new Suite());
+		return run(cas, new Suite(), environmentId);
 	}
 
-	private CaseResult run(Case cas, Suite suite) {
+	private CaseResult run(Case cas, Suite suite, String environmentId) {
 		long start = System.currentTimeMillis();
 		Request req = cas.getRequest();
+
+		Environment environment = environmentRepo.findOne(environmentId);
+		environmentApplier.apply(req, environment);
 
 		Response expected = cas.getResponse();
 		Response actual;

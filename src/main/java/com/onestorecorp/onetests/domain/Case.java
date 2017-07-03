@@ -33,7 +33,13 @@ public class Case extends Domain {
 	@DBRef(lazy = true)
 	private Host host;
 
-	List<String> exclusions;
+	@Indexed
+	private String environmentId;
+
+	@DBRef(lazy = true)
+	private Environment environment;
+
+	private List<String> exclusions;
 
 	public Case() {
 	}
@@ -49,6 +55,7 @@ public class Case extends Domain {
 		newCase.setRequest(request);
 		newCase.setResponse(response);
 		newCase.setServiceId(serviceId);
+		newCase.setEnvironmentId(environmentId);
 		newCase.setHostId(hostId);
 		newCase.setExclusions(exclusions);
 		return newCase;

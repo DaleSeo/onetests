@@ -1,7 +1,7 @@
 <template>
-  <div id="EnvironmentDropdown" class="ui pointing dropdown icon labeled button" :class="{fluid}">
-    <i class="options icon"/>
-    <span class="text">환경 옵션</span>
+  <div id="EnvironmentDropdown" :class="classArr">
+    <i :class="icon" class="icon"/>
+    <span class="text">{{value ? value.code : '환경 옵션'}}</span>
     <div class="menu" v-show="menuShown">
       <div class="item"
         @click="pick(null)"
@@ -19,25 +19,69 @@
 </template>
 
 <script>
+const DEFAULT_CLASSES = ['ui', 'dropdown']
+
 export default {
-  props: ['value', 'fluid'],
+  props: {
+    value: Object,
+    fluid: Boolean,
+    readonly: Boolean,
+    size: String,
+    look: {
+      type: String,
+      default: 'filter'
+    }
+  },
   data () {
     return {
       environments: [],
-      menuShown: false
+      menuShown: false,
+    }
+  },
+  computed: {
+    classArr () {
+      let classes
+
+      switch (this.look) {
+        case 'selection':
+          classes = DEFAULT_CLASSES.concat(['selection'])
+          break;
+        case 'button':
+          classes = DEFAULT_CLASSES.concat([])
+          break;
+        case 'filter':
+          classes = DEFAULT_CLASSES.concat(['pointing', 'icon', 'labeled', 'button'])
+          break;
+      }
+
+      if (this.size) {
+        classes.push(this.size)
+      }
+
+      if (this.fluid) {
+        classes.push('fluid')
+      }
+
+      if (this.readonly) {
+        classes.push('disabled')
+      }
+
+      return classes
+    },
+    icon () {
+      switch (this.look) {
+        case 'selection': return 'dropdown'
+        case 'button': return ''
+        case 'filter': return 'options'
+      }
     }
   },
   created () {
     this.fetch()
   },
-  watch () {
-  },
   mounted () {
+    console.log('#mounted')
     $('#EnvironmentDropdown.ui.dropdown').dropdown()
-    if (this.value) {
-      let found = this.environments.find(env => env.id = this.value.id)
-      this.pick(found)
-    }
   },
   methods: {
     fetch () {

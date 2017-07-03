@@ -10,7 +10,7 @@
 
     <div class="ui grid">
       <div class="five wide column">
-        <EnvironmentDropdown v-model="environment" :fluid="true"/>
+        <EnvironmentDropdown v-model="environment" :fluid="true" :look="filter"/>
         <div>&nbsp;</div>
         <CaseList
           @pickApi="pickApi"

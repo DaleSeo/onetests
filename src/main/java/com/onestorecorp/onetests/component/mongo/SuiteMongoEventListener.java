@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author 서대영(DAEYOUNG SEO)/Onestore/SKP
+ */
 @Component
 public class SuiteMongoEventListener extends AbstractMongoEventListener<Suite> {
 

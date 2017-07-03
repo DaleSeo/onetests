@@ -16,7 +16,7 @@
           <a class="active item" data-tab="basics">기본 정보</a>
           <a class="item" data-tab="request">요청 상세</a>
           <a class="item" data-tab="response">기대 응답</a>
-          <a class="item" data-tab="history">검증 결과</a>
+          <a class="item" data-tab="run">검증 수행</a>
         </div>
       </div>
       <div class="thirteen wide stretched column">
@@ -29,8 +29,8 @@
         <div class="ui tab" data-tab="response">
           <Response :cas="cas"/>
         </div>
-        <div class="ui tab" data-tab="history">
-          <History :caseId="id"/>
+        <div class="ui tab" data-tab="run">
+          <Run :caseId="id"/>
         </div>
       </div>
     </div>
@@ -44,10 +44,10 @@ import utils from '../../services/utils'
 import Basics from './Basics.vue'
 import Request from './Request.vue'
 import Response from './Response.vue'
-import History from './History.vue'
+import Run from './Run.vue'
 
 export default {
-  components: {Basics, Request, Response, History},
+  components: {Basics, Request, Response, Run},
   props: ['id'],
   data() {
     return {
@@ -56,6 +56,12 @@ export default {
         response: {},
         service: {}
       }
+    }
+  },
+  watch: {
+    'cas.environment': function (val) {
+      console.log('#watch cas.environment:', val)
+      if (val) this.cas.environmentId = val.id
     }
   },
   created () {

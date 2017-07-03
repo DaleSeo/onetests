@@ -4,9 +4,10 @@ import config from '../../config'
 
 const restUrl = config.BACKEND_URL
 
-exports.runCase = function (caseId) {
+exports.runCase = function (caseId, environment) {
   console.log('#runCase:', caseId)
-  return superagent.post(restUrl + `/cases/${caseId}/run`)
+  let environmentId = environment && environment.id || ''
+  return superagent.post(restUrl + `/cases/${caseId}/run?environmentId=${environmentId}`)
     .then(res => res.body)
     .then(result => {
       console.log('#result:', result)
@@ -20,7 +21,8 @@ exports.runCase = function (caseId) {
 
 exports.runSuite = function (suiteId) {
   console.log('#runSuite:', suiteId)
-  return superagent.post(restUrl + `/suites/${suiteId}/run`)
+  let environmentId = environment && environment.id || ''
+  return superagent.post(restUrl + `/suites/${suiteId}/run?environmentId=${environmentId}`)
     .then(res => res.body)
     .then(result => {
       console.log('#result:', result)

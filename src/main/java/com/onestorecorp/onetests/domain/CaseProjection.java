@@ -4,6 +4,9 @@ import org.springframework.data.rest.core.config.Projection;
 
 import java.util.List;
 
+/**
+ * @author 서대영(DAEYOUNG SEO)/Onestore/SKP
+ */
 @Projection(name = "inline", types = Case.class)
 public interface CaseProjection extends DomainProjection {
 
@@ -24,5 +27,9 @@ public interface CaseProjection extends DomainProjection {
 	String getHostId();
 
 	Host getHost();
+
+	String getEnvironmentId();
+
+	Environment getEnvironment();
 
 }
