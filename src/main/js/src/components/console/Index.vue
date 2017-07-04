@@ -10,7 +10,7 @@
 
     <div class="ui grid">
       <div class="five wide column">
-        <EnvironmentDropdown v-model="environment" :fluid="true" :look="filter"/>
+        <EnvironmentDropdown v-model="environment" :fluid="true" look="filter"/>
         <div>&nbsp;</div>
         <CaseList
           @pickApi="pickApi"
@@ -103,7 +103,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
-          this.response.error = err.response.body.message
+          this.response.error = err.response.text
         })
         .then(_ => this.inProgress = false)
     },

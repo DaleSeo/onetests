@@ -5,6 +5,7 @@ import com.onestorecorp.onetests.domain.Environment;
 import com.onestorecorp.onetests.domain.Request;
 import com.onestorecorp.onetests.domain.Service;
 import com.onestorecorp.onetests.repository.EnvironmentRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -19,7 +20,7 @@ public class EnvironmentService {
 	private EnvironmentApplier environmentApplier = new EnvironmentApplier();
 
 	public void applyEnvironmentToRequest(Request req, String environmentId) {
-		if (environmentId == null) {
+		if (StringUtils.isBlank(environmentId)) {
 			return;
 		}
 		Environment environment = environmentRepo.findOne(environmentId);

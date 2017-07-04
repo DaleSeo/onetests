@@ -41,7 +41,6 @@ public class RunTestService {
 	private ResponseEqualer responseEqualer;
 
     public SuiteResult runTestSuite(String id, String environmentId) {
-	    long start = System.currentTimeMillis();
 	    SuiteResult suiteResult = new SuiteResult(id);
 
 	    Suite suite = suiteRepo.findOne(id);
@@ -61,8 +60,11 @@ public class RunTestService {
 		suiteResult.setCaseResults(caseResults);
         suiteResult.setTotal(caseResults.size());
 
-	    long end = System.currentTimeMillis();
-	    suiteResult.setElapsedTime(end - start);
+        long elapsedTime = caseResults.stream()
+		        .map(CaseResult::getElapsedTime)
+		        .collect(Collectors.summingLong(Long::longValue));
+
+	    suiteResult.setElapsedTime(elapsedTime);
 
         suiteResultRepo.save(suiteResult);
 

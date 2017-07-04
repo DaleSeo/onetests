@@ -42,9 +42,6 @@
       </div>
 
       <div style="text-align: right" v-if="callId">
-        <button type="button" class="ui labeled icon small button" @click="detail">
-          <i class="browser icon"/> 상세
-        </button>
         <button type="button" class="ui labeled icon yellow small button" @click="share">
           <i class="share alternate icon"/> 공유
         </button>
@@ -73,9 +70,6 @@ export default {
     }
   },
   methods: {
-    detail () {
-      window.location.href = window.location.origin + '/calls/' + this.callId
-    },
     share () {
       $('#modalShare').modal('show')
     },
