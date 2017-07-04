@@ -17,6 +17,9 @@ public class RunTestService {
 	private static Logger logger = LoggerFactory.getLogger(RunTestService.class);
 
 	@Autowired
+	private EnvironmentService environmentService;
+
+	@Autowired
 	private CaseRepository caseRepo;
 
 	@Autowired
@@ -29,15 +32,13 @@ public class RunTestService {
     private SuiteResultRepository suiteResultRepo;
 
 	@Autowired
-	private EnvironmentRepository environmentRepo;
-
-	@Autowired
 	private CallApiService callApiSvc;
 
 	@Autowired
-	private ResponseEqualer responseEqualer;
+	private EnvironmentRepository environmentRepo;
 
-	private EnvironmentApplier environmentApplier = new EnvironmentApplier();
+	@Autowired
+	private ResponseEqualer responseEqualer;
 
     public SuiteResult runTestSuite(String id, String environmentId) {
 	    long start = System.currentTimeMillis();
@@ -78,7 +79,7 @@ public class RunTestService {
 		Request req = cas.getRequest();
 
 		Environment environment = environmentRepo.findOne(environmentId);
-		environmentApplier.apply(req, environment);
+		environmentService.applyEnvironmentToRequest(req, environment, cas.getService());
 
 		Response expected = cas.getResponse();
 		Response actual;
@@ -90,6 +91,7 @@ public class RunTestService {
 			Call call = callApiSvc.addHistory(req, actual, cas.getId(), suite.getId(), null);
 			caseResult = convert(result);
 			caseResult.setCaseId(cas.getId());
+			caseResult.setEnvironment(environment);
 			caseResult.setCallId(call.getId());
 			caseResult.setRequest(req);
 			caseResult.setExpected(expected);
@@ -97,6 +99,7 @@ public class RunTestService {
 		} catch (Exception e) {
 			caseResult = new CaseResult();
 			caseResult.setCaseId(cas.getId());
+			caseResult.setEnvironment(environment);
 			caseResult.setRequest(req);
 			caseResult.setExpected(expected);
 			caseResult.setError(e.toString());

@@ -1,7 +1,6 @@
 package com.onestorecorp.onetests.component.mongo;
 
 import com.onestorecorp.onetests.domain.Case;
-import com.onestorecorp.onetests.domain.Host;
 import com.onestorecorp.onetests.domain.Service;
 import com.onestorecorp.onetests.domain.Suite;
 import org.slf4j.Logger;
@@ -35,9 +34,9 @@ public class SuiteMongoEventListener extends AbstractMongoEventListener<Suite> {
 			suite.setService(new Service(suite.getServiceId()));
 		}
 
-		if (suite.getHostId() != null) {
-			suite.setHost(new Host(suite.getHostId()));
-		}
+//		if (suite.getHostId() != null) {
+//			suite.setHost(new Host(suite.getHostId()));
+//		}
 		logger.debug("# before convert a suite: {}", suite);
 	}
 

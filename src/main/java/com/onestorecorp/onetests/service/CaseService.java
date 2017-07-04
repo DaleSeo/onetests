@@ -1,7 +1,7 @@
 package com.onestorecorp.onetests.service;
 
+import com.onestorecorp.onetests.domain.Call;
 import com.onestorecorp.onetests.domain.Case;
-import com.onestorecorp.onetests.domain.Request;
 import com.onestorecorp.onetests.domain.Response;
 import com.onestorecorp.onetests.repository.CaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +21,10 @@ public class CaseService {
 
 	public Response recordResponse(String id) {
 		Case aCase = caseRepo.findOne(id);
-		Request req = aCase.getRequest();
-		Response res = callApiSvc.callApiThenAddHistory(req);
-		aCase.setResponse(res); // replace the current response
+		Call call = callApiSvc.callApi(aCase);
+		aCase.setResponse(call.getResponse()); // replace the current response
 		caseRepo.save(aCase);
-		return res;
+		return call.getResponse();
 	}
 
 	public Case clone(String id) {

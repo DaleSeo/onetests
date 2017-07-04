@@ -3,6 +3,7 @@
     <ResultHeader :result="result"/>
     <div class="content">
       <div class="header" v-if="result.request">
+        <div class="ui label">{{result.environment ? result.environment.code : 'NO ENV'}}</div>
         {{result.request.method}} {{result.request.host}}{{result.request.path}}
       </div>
       <p>

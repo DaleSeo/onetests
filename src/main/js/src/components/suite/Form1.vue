@@ -52,9 +52,9 @@ export default {
       console.log('#createSuite')
       suiteSvc.create(this.suite)
         .then(id => {
-          // window.location.href = '/suites/' + id
-          this.suite.id = id
-          this.$emit('changeStep', 2)
+          window.location.href = '/suites/' + id
+          // this.suite.id = id
+          // this.$emit('changeStep', 2)
         })
         .catch(err => toastr.error('테스트 스위트 생성 실패'))
     }

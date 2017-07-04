@@ -4,6 +4,7 @@
     <DetailBasics :suite="suite"/>
     <div class="ui grid">
       <div class="right aligned column">
+        <EnvironmentDropdown v-model="environment" size="tiny"/>
         <button class="ui labeled icon primary tiny button" :class="{loading: inProgress}" @click="run">
           <i class="rocket icon"/>검증 수행
         </button>
@@ -38,15 +39,17 @@ import testRunner from '../../services/testRunner'
 import ResultList from './ResultList.vue'
 import ResultView from './ResultView.vue'
 import DetailBasics from './DetailBasics.vue'
+import EnvironmentDropdown from '../common/EnvironmentDropdown.vue'
 
 export default {
-  components: {ResultList, ResultView, DetailBasics},
+  components: {ResultList, ResultView, DetailBasics, EnvironmentDropdown},
   props: ['id'],
   data () {
     return {
       suite: {},
       results: [],
       resultId: '',
+      environment: null,
       inProgress: false
     }
   },
@@ -70,7 +73,7 @@ export default {
     },
     run () {
       this.inProgress = true
-      testRunner.runSuite(this.suite.id)
+      testRunner.runSuite(this.suite.id, this.environment)
         .then(this.fetchResults)
         .then(_ => toastr.success('테스트가 완료되었습니다'))
         .catch(err => toastr.error('테스트 스위트 실행 실패'))

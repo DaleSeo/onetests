@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     fetchResults () {
-      let url = `/api/caseResults/search/byCase?id=${this.caseId}&sort=id,desc`
+      let url = `/api/caseResults/search/byCase?projection=inline&id=${this.caseId}&sort=id,desc`
       console.log('#url:', url)
       return this.$http.get(url)
         .then(res => res.body._embedded.caseResults)

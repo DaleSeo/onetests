@@ -28,7 +28,6 @@ export default {
         title: '',
         description: '',
         serviceId: '',
-        hostId: '',
         caseIds: []
       }
     }

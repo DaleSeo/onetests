@@ -1,5 +1,6 @@
 package com.onestorecorp.onetests.service;
 
+import com.onestorecorp.onetests.component.http.EntityConverter;
 import com.onestorecorp.onetests.domain.Request;
 import com.onestorecorp.onetests.domain.Response;
 import org.junit.Before;

@@ -10,15 +10,9 @@
       <textarea id="description" rows="3" v-model="suite.description"/>
     </div>
 
-    <div class="fields">
-      <div class="eight wide required field">
-        <label for="serviceDropdown">서비스</label>
-        <ServiceDropdown v-model="suite.serviceId" />
-      </div>
-      <div class="eight wide required field">
-        <label for="hostDropdown">호스트</label>
-        <HostDropdown v-model="suite.hostId" :serviceId="suite.serviceId" />
-      </div>
+    <div class="required field">
+      <label for="serviceDropdown">서비스</label>
+      <ServiceDropdown v-model="suite.serviceId" />
     </div>
 
     <div style="text-align: right">
@@ -30,7 +24,10 @@
 </template>
 
 <script>
+import EnvironmentDropdown from '../common/EnvironmentDropdown.vue'
+
 export default {
+  components: {EnvironmentDropdown},
   props: ['suite'],
   methods: {
     next() {

@@ -1,8 +1,8 @@
 package com.onestorecorp.onetests.service;
 
+import com.onestorecorp.onetests.component.http.EntityConverter;
 import com.onestorecorp.onetests.domain.*;
 import com.onestorecorp.onetests.repository.CallRepository;
-import com.onestorecorp.onetests.repository.EnvironmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +13,15 @@ import org.springframework.web.client.RestOperations;
 public class CallApiService {
 
 	@Autowired
-	private CallRepository callRepo;
+	private EnvironmentService environmentService;
 
 	@Autowired
-	private EnvironmentRepository environmentRepo;
+	private CallRepository callRepo;
 
 	@Autowired
 	private RestOperations restOperations;
 
 	private EntityConverter converter = new EntityConverter();
-
-	private EnvironmentApplier environmentApplier = new EnvironmentApplier();
 
 	public Response callApiWithSuiteId(Request req, String suiteId) {
 		Response res = invoke(req);
@@ -43,9 +41,16 @@ public class CallApiService {
 		return call;
 	}
 
+	public Call callApi(Case cas) {
+		Request req = cas.getRequest();
+		environmentService.applyEnvironmentToRequest(req, cas.getEnvironment(), cas.getService());
+		Response res = invoke(req);
+		Call call = addHistory(req, res);
+		return call;
+	}
+
 	public Call callApi(Request req, String environmentId) {
-		Environment environment = environmentRepo.findOne(environmentId);
-		environmentApplier.apply(req, environment);
+		environmentService.applyEnvironmentToRequest(req, environmentId);
 		Response res = invoke(req);
 		Call call = addHistory(req, res);
 		return call;
@@ -55,19 +60,6 @@ public class CallApiService {
 		RequestEntity<Object> requestEntity = converter.convertRequest(req);
 		ResponseEntity<String> responseEntity = restOperations.exchange(requestEntity, String.class);
 		Response res = converter.convertResponse(responseEntity);
-		return res;
-	}
-
-	public Response callApiThenAddHistory(Request req) {
-		RequestEntity<Object> requestEntity = converter.convertRequest(req);
-		ResponseEntity<String> responseEntity = restOperations.exchange(requestEntity, String.class);
-		Response res = converter.convertResponse(responseEntity);
-
-		Call call = new Call();
-		call.setRequest(req);
-		call.setResponse(res);
-		callRepo.save(call);
-
 		return res;
 	}
 

@@ -2,6 +2,7 @@ package com.onestorecorp.onetests.domain;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -18,6 +19,9 @@ public class CaseResult extends Domain {
     String caseId;
 
     String callId;
+
+    @DBRef(lazy = true)
+	Environment environment;
 
     String error;
 

@@ -8,16 +8,12 @@
             <td>{{suite.title}}</td>
           </tr>
           <tr>
-            <td>설명</td>
-            <td>{{suite.description}}</td>
-          </tr>
-          <tr>
             <td>서비스</td>
             <td>{{suite.service ? suite.service.code : ''}}</td>
           </tr>
           <tr>
-            <td>호스트</td>
-            <td>{{suite.host ? suite.host.baseUrl : ''}}</td>
+            <td rowspan="2">설명</td>
+            <td rowspan="2">{{suite.description}}</td>
           </tr>
         </tbody>
       </table>

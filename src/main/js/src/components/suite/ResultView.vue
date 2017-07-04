@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     fetchCaseResults () {
-      this.$http.get(`/api/suiteResults/${this.resultId}/caseResults`)
+      this.$http.get(`/api/suiteResults/${this.resultId}/caseResults?projection=inline`)
         .then(res => res.body._embedded.caseResults)
         .then(caseResults => this.results = caseResults)
     }

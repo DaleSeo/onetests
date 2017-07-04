@@ -19,7 +19,7 @@ exports.runCase = function (caseId, environment) {
     })
 }
 
-exports.runSuite = function (suiteId) {
+exports.runSuite = function (suiteId, environment) {
   console.log('#runSuite:', suiteId)
   let environmentId = environment && environment.id || ''
   return superagent.post(restUrl + `/suites/${suiteId}/run?environmentId=${environmentId}`)

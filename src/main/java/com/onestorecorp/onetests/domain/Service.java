@@ -2,10 +2,10 @@ package com.onestorecorp.onetests.domain;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Document
@@ -16,7 +16,9 @@ public class Service extends Domain {
 	String name;
 	String description;
 	List<String> hosts;
-	Map<String, String> variables;
+
+	@DBRef(lazy = true)
+	Environment environment;
 
 	public Service() {
 	}

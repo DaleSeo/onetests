@@ -3,7 +3,7 @@
     <td>{{suite.title}}</td>
     <td>{{numCases}}</td>
     <td>{{suite.service.code}}</td>
-    <td>{{suite.host.baseUrl}}</td>
+    <!-- <td>{{suite.host.baseUrl}}</td> -->
     <td>{{suite.createdBy | userName}}</td>
     <td>{{suite.createdDate | formatDate}}</td>
   </tr>
