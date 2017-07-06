@@ -1,20 +1,30 @@
 <template>
   <div class="ui container">
-    <Title icon="options" title="Environments" subTitle="환경 변수"/>
-    <ServiceFilter v-model="service"/>
-    <div class="ui right floated teal icon labeled button" @click="add" v-if="service">
-      <i class="plus icon"/>등록
+    <Title icon="options" title="Environments" subTitle="환경 관리"/>
+    <div class="ui grid">
+      <div class="eight wide column">
+        <ServiceFilter v-model="service"/>
+        <div class="ui icon message" v-if="!service">
+          <i class="warning circle icon"/>
+          <div class="content">
+            <div class="header">서비스를 선택해주세요.</div>
+          </div>
+        </div>
+        <div class="ui icon message" v-if="service && environments.length === 0">
+          <i class="info circle icon"/>
+          <div class="content">
+            <div class="header">등록된 환경이 없습니다.</div>
+          </div>
+        </div>
+        <List :environments="environments" @pick="pick" v-if="environments" style="padding-top: 15px"/>
+      </div>
+      <div class="eight wide column">
+        <div class="ui right floated teal icon labeled button" @click="add" v-show="!environment && service">
+          <i class="plus icon"/>등록
+        </div>
+        <Edit :environment="environment" @save="save" v-if="environment"/>
+      </div>
     </div>
-    <div>&nbsp;</div>
-    <div class="ui message" v-if="!service">
-      <p>서비스를 선택해주세요</p>
-    </div>
-    <div class="ui message" v-if="service && environments.length === 0">
-      <p>등록된 환경 변수가 없습니다.</p>
-    </div>
-    <List :environments="environments" @pick="pick" v-if="environments"/>
-    <Edit :environment="environment" v-if="environment"/>
-    <button class="ui button" @click="save" v-if="environment">Save</button>
   </div>
 </template>
 
@@ -61,6 +71,10 @@ export default {
           this.fetch()
           this.environment = null
         })
+    },
+    cancel () {
+      this.environment = null
+      this.fetch()
     },
     add () {
       this.environment = {

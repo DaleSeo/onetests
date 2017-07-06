@@ -1,5 +1,5 @@
 <template>
-  <div id="pageHeader" class="ui stackable inverted menu">
+  <div id="pageHeader" class="ui small stackable inverted menu">
     <div class="ui container">
       <a href="/" class="header item">
         <h1 class="ui teal inverted header">ONE tests</h1>
@@ -39,10 +39,8 @@
           </a>
         </div>
       </div>
-      <!-- <div class="item">
-        <CaseSearch :fluid="true"/>
-      </div> -->
       <div class="right menu">
+        <CaseSearch size="small"/>
         <div class="ui dropdown item" v-if="authenticated">
           <i class="user icon"/>Profile<i class="dropdown icon"/>
           <div class="menu">

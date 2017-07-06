@@ -1,8 +1,8 @@
 <template>
-  <div id="caseSearch" class="ui category search" :class="{fluid}">
+  <div id="caseSearch" class="ui category search item" :class="{fluid}">
     <div class="ui icon input" :class="size">
       <input class="prompt" type="text" placeholder="Search...">
-      <i class="search icon"></i>
+      <i class="search link icon"></i>
     </div>
     <div class="results"></div>
   </div>
