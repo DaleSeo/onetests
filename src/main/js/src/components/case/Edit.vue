@@ -25,8 +25,6 @@
 
       <button type="submit" class="ui primary button" :class="{loading: inProgress}" tabindex="0">저장</button>
       <button type="reset" class="ui secondary button" tabindex="0">취소</button>
-
-      <pre>{{cas}}</pre>
     </form>
   </div>
 </template>

@@ -3,6 +3,7 @@ package com.onestorecorp.onetests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onestorecorp.onetests.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
+@EnableCaching
 public class AppConfig {
 
 	@Bean

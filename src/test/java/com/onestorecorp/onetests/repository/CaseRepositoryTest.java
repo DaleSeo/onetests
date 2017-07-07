@@ -3,20 +3,23 @@ package com.onestorecorp.onetests.repository;
 import com.onestorecorp.onetests.domain.Case;
 import com.onestorecorp.onetests.domain.Request;
 import com.onestorecorp.onetests.domain.Service;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
-import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
-//@Ignore
 @RunWith(SpringRunner.class)
 @DataMongoTest
 @ActiveProfiles("production")
@@ -25,6 +28,7 @@ public class CaseRepositoryTest {
     @Autowired
     private CaseRepository repository;
 
+	@Ignore
     @Test
     public void test() {
         Request request = new Request();
@@ -73,8 +77,9 @@ public class CaseRepositoryTest {
 
     @Test
 	public void testFindByServiceId() {
-	    List<Case> cases = repository.findByServiceId("5912a299ec46ff6c417a9482");
-	    System.out.println("# cases: " + cases);
+	    Page<Case> cases = repository.findByServiceId("5912a299ec46ff6c417a9482", new PageRequest(0, 10));
+	    System.out.println("# cases: " + cases.getContent());
+	    assertThat(cases.getSize()).isEqualTo(10);
     }
 
 	@Configuration

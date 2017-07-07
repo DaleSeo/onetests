@@ -24,8 +24,12 @@ public class Case extends Domain {
 	@Indexed
 	private String serviceId;
 
-	@DBRef(lazy = true)
+//	@DBRef(lazy = true)
 	private Service service;
+
+	public Service getService() {
+		return service;
+	}
 
 	@Indexed
 	private String hostId;

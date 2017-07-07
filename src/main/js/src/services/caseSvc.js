@@ -17,7 +17,7 @@ exports.list = function (serviceId) {
 
   console.log(url)
   return superagent.get(url)
-    .then(res => res.body._embedded.cases)
+    .then(res => res.body.content)
 }
 
 exports.save = function (_cas) {

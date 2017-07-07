@@ -30,7 +30,7 @@
         <tr v-for="cas in cases" @click="detail(cas.id)">
           <td><Method :method="cas.request.method" type="ribbon"/></td>
           <td>{{cas.request.path | limitLength}}</td>
-          <td>{{cas.service.code}}</td>
+          <td>{{cas.service && cas.service.code}}</td>
           <td>{{cas.title | limitLength}}</td>
           <td>{{cas.createdDate | date}}</td>
         </tr>

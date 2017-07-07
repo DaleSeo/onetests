@@ -1,14 +1,11 @@
 package com.onestorecorp.onetests.web;
 
-import com.onestorecorp.onetests.domain.Case;
-import com.onestorecorp.onetests.domain.Environment;
-import com.onestorecorp.onetests.domain.Request;
-import com.onestorecorp.onetests.domain.Response;
+import com.onestorecorp.onetests.domain.*;
 import com.onestorecorp.onetests.repository.CaseRepository;
 import com.onestorecorp.onetests.service.CaseService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +13,8 @@ import org.springframework.web.bind.annotation.*;
  * @author 서대영(DAEYOUNG SEO)/Onestore/SKP
  */
 @RestController
+@Slf4j
 public class CaseController {
-
-	private static final Logger logger = LoggerFactory.getLogger(CaseController.class);
 
 	@Autowired
 	private CaseService svc;
@@ -26,10 +22,24 @@ public class CaseController {
 	@Autowired
 	private CaseRepository repo;
 
+	@GetMapping("/api/cases")
+	public Page<Case> getCases(
+			@RequestParam(required = false) String serviceId,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "100") int size) {
+		return svc.find(serviceId, page, size);
+	}
+
+	@PostMapping("/api/cases")
+	@ResponseStatus(HttpStatus.CREATED)
+	public void create(@RequestBody Case aCase) {
+		svc.save(aCase);
+	}
+
 	@PatchMapping("/api/cases/{id}/recordResponse")
 	public Response recordResponse(@PathVariable String id) {
 		Response response = svc.recordResponse(id);
-		logger.debug("response: {}", response);
+		log.debug("response: {}", response);
 		return response;
 	}
 
@@ -43,7 +53,7 @@ public class CaseController {
 			found.setEnvironmentId(cas.getEnvironmentId());
 			found.setEnvironment(new Environment(cas.getEnvironmentId()));
 		}
-		repo.save(found);
+		svc.save(found);
 	}
 
 
@@ -52,7 +62,7 @@ public class CaseController {
 	public void replaceRequest(@PathVariable String id, @RequestBody Request request) {
 		Case found = repo.findOne(id);
 		found.setRequest(request);
-		repo.save(found);
+		svc.save(found);
 	}
 
 	@PutMapping("/api/cases/{id}/response")
@@ -60,7 +70,7 @@ public class CaseController {
 	public void replaceResponse(@PathVariable String id, @RequestBody Response response) {
 		Case found = repo.findOne(id);
 		found.setResponse(response);
-		repo.save(found);
+		svc.save(found);
 	}
 
 	@PostMapping("/api/cases/{id}/clone")

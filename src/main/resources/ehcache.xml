@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false">
+
+  <defaultCache
+      eternal="false"
+      timeToIdleSeconds="3600"
+      timeToLiveSeconds="3600"
+      maxEntriesLocalHeap="10000"
+      maxEntriesLocalDisk="10000"
+      diskExpiryThreadIntervalSeconds="120"
+      memoryStoreEvictionPolicy="LRU">
+    <persistence strategy="localTempSwap"/>
+  </defaultCache>
+
+  <cache name="service"
+         eternal="false"
+         timeToIdleSeconds="3600"
+         timeToLiveSeconds="3600"
+         maxEntriesLocalHeap="10000"
+         maxEntriesLocalDisk="10000"
+         diskExpiryThreadIntervalSeconds="120"
+         memoryStoreEvictionPolicy="LRU">
+    <persistence strategy="localTempSwap"/>
+  </cache>
+
+  <cache name="cases"
+         eternal="false"
+         timeToIdleSeconds="3600"
+         timeToLiveSeconds="3600"
+         maxEntriesLocalHeap="10000"
+         maxEntriesLocalDisk="10000"
+         diskExpiryThreadIntervalSeconds="120"
+         memoryStoreEvictionPolicy="LRU">
+    <persistence strategy="localTempSwap"/>
+  </cache>
+
+</ehcache>

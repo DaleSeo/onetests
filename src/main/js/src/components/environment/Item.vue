@@ -5,13 +5,10 @@
       {{environment.host}}
     </div>
     <p>
-      {{environment.description}}
+      <span>{{environment.description}}&nbsp;</span>
       <span style="float: right">
         <i class="calendar icon"/>{{environment.createdDate | formatDate}}
       </span>
-    </p>
-    <p>
-      {{environment.variables}}
     </p>
   </div>
 </template>
