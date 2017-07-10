@@ -2,7 +2,7 @@
   <div class="ui equal width stackable internally celled grid">
     <div class="column">
       <h3 class="ui center aligned icon header">
-        <i class="toggle right icon"/>
+        <i class="rocket icon"/>
         테스트 실행 횟수
       </h3>
       <div class="ui statistic">

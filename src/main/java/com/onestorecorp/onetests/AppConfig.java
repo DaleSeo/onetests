@@ -44,6 +44,7 @@ public class AppConfig {
                                 "/about",
                                 "/signup",
                                 "/api/search",
+                                "/api/stats",
                                 "/api/auth/**"
                         ).permitAll()
                         .anyRequest().authenticated()
