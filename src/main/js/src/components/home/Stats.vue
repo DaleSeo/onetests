@@ -7,7 +7,7 @@
       </h3>
       <div class="ui statistic">
         <div class="value">
-          254
+          {{stats.numCalls}}
         </div>
         <div class="label">
           Tests
@@ -21,7 +21,7 @@
       </h3>
       <div class="ui statistic">
         <div class="value">
-          51
+          {{stats.numCases}}
         </div>
         <div class="label">
           Cases
@@ -35,7 +35,7 @@
       </h3>
       <div class="ui statistic">
         <div class="value">
-          3
+          {{stats.numSuites}}
         </div>
         <div class="label">
           Suites
@@ -44,6 +44,34 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    data () {
+      return {
+        stats: {
+          numCalls: 0,
+          numCases: 0,
+          numSuites: 0,
+        },
+        loading: false
+      }
+    },
+    created () {
+      this.fetch()
+    },
+    methods: {
+      fetch () {
+        this.loading = true
+        this.$http.get('/api/stats')
+          .then(res => res.body)
+          .then(stats => this.stats = stats)
+          .catch(err => toastr.error('통계 정보 조회 실패'))
+          .then(_ => this.loading = false)
+      }
+    }
+  }
+</script>
 
 <style scoped>
 h3.ui.header {

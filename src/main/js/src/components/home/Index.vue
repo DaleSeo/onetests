@@ -8,11 +8,11 @@
         <Notice/>
       </div>
       <div class="ui vertical center aligned segment">
-        <Statistics/>
+        <Stats/>
       </div>
-      <div class="ui vertical center aligned segment">
-        <Ranking/>
-      </div>
+      <!--<div class="ui vertical center aligned segment">-->
+        <!--<Ranking/>-->
+      <!--</div>-->
       <div class="ui vertical center aligned segment">
         <Quotes/>
       </div>
@@ -22,20 +22,17 @@
 
 <script>
 import Jumbotron from './Jumbotron.vue'
-import Ranking from './Ranking.vue'
-import Statistics from './Statistics.vue'
+//import Ranking from './Ranking.vue'
+import Stats from './Stats.vue'
 import Notice from './Notice.vue'
 import Quotes from './Quotes.vue'
 
 export default {
-  components: {Jumbotron, Ranking, Statistics, Notice, Quotes}
+  components: {Jumbotron, Stats, Notice, Quotes}
 }
 </script>
 
 <style scoped>
-.tight {
-  padding: 0em;
-}
 .jumbotron.segment {
   min-height: 350px;
 }
