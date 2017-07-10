@@ -18,7 +18,7 @@ public class HomeController {
 			"/suites/**",
 			"/cases/**",
 			"/calls/**",
-			"/dashboard/**",
+			"/stats/**",
 			"/profile/**",
 			"/settings/**",
 			"/admin/**"

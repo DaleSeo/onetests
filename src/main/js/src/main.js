@@ -60,7 +60,7 @@ import SuiteDetail from './components/suite/Detail.vue'
 import Call from './components/call/Index.vue'
 import CallDetail from './components/call/Detail.vue'
 
-import Dashboard from './components/dashboard/Index.vue'
+import Stats from './components/stats/Index.vue'
 import Login from './components/user/Login.vue'
 import Signup from './components/user/Signup.vue'
 import Profile from './components/user/Profile.vue'
@@ -85,7 +85,7 @@ const router = new VueRouter({
     {path: '/suites/:id', component: SuiteDetail, props: true},
     {path: '/calls', component: Call},
     {path: '/calls/:id', component: CallDetail, props: true},
-    {path: '/dashboard', component: Dashboard},
+    {path: '/stats', component: Stats},
     {path: '/login', component: Login},
     {path: '/signup', component: Signup},
     {path: '/profile', component: Profile},

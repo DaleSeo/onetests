@@ -19,8 +19,8 @@
       <a href="/calls" class="item">
         <i class="history icon"/>History
       </a>
-      <a href="/dashboard" class="item">
-        <i class="dashboard icon"/>Dashboard
+      <a href="/stats" class="item">
+        <i class="line chart icon"/>Stats
       </a>
       <div class="ui dropdown item">
         <i class="power icon"/>Admin<i class="dropdown icon"/>
