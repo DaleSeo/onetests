@@ -5,17 +5,7 @@ import config from '../../config'
 const restUrl = config.BACKEND_URL + '/cases'
 
 exports.list = function (serviceId) {
-  let url = restUrl
-
-  if (serviceId) {
-    url += `/search/findByServiceId?serviceId=${serviceId}`
-  } else {
-    url += '?size=1000'
-  }
-
-  url += '&projection=inline'
-
-  console.log(url)
+  let url = `${restUrl}?size=1000&serviceId=${serviceId}`
   return superagent.get(url)
     .then(res => res.body.content)
 }

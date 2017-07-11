@@ -17,6 +17,7 @@
           <a class="item" data-tab="request">요청 상세</a>
           <a class="item" data-tab="response">기대 응답</a>
           <a class="item" data-tab="run">검증 수행</a>
+          <a class="item" data-tab="social">의견 교환</a>
         </div>
       </div>
       <div class="thirteen wide stretched column">
@@ -32,6 +33,9 @@
         <div class="ui tab" data-tab="run">
           <Run :caseId="id"/>
         </div>
+        <div class="ui tab" data-tab="social">
+          <Social :cas="cas"/>
+        </div>
       </div>
     </div>
   </div>
@@ -45,9 +49,10 @@ import Basics from './Basics.vue'
 import Request from './Request.vue'
 import Response from './Response.vue'
 import Run from './Run.vue'
+import Social from './Social.vue'
 
 export default {
-  components: {Basics, Request, Response, Run},
+  components: {Basics, Request, Response, Run, Social},
   props: ['id'],
   data() {
     return {
