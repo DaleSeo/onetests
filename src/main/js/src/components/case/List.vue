@@ -24,6 +24,7 @@
           <th>서비스</th>
           <th>제목</th>
           <th>등록일</th>
+          <th>좋아요</th>
         </tr>
       </thead>
       <tbody>
@@ -33,6 +34,7 @@
           <td>{{cas.service && cas.service.code}}</td>
           <td>{{cas.title | limitLength}}</td>
           <td>{{cas.createdDate | date}}</td>
+          <td>{{cas.numLikes}}</td>
         </tr>
       </tbody>
     </table>
@@ -68,7 +70,8 @@ export default {
         .then(cases => this.cases = cases)
         .then(_ =>
           this.dataTable = $('#tableCase').DataTable({
-            order: [[ 4, "desc" ]],
+            pageLength: 20,
+            order: [[ 5, "desc" ], [ 4, "desc" ]],
             columnDefs: [
               // { targets: [0], visible: false },
               { targets: [4], searchable: false }
