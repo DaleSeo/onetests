@@ -32,4 +32,6 @@ public interface CaseProjection extends DomainProjection {
 
 	Environment getEnvironment();
 
+	long getNumLikes();
+
 }

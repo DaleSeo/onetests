@@ -45,6 +45,8 @@ public class Case extends Domain {
 
 	private List<String> exclusions;
 
+	private long numLikes;
+
 	public Case() {
 	}
 

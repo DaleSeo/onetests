@@ -78,4 +78,12 @@ public class CaseController {
 		return svc.clone(id);
 	}
 
+	@PutMapping("/api/cases/{id}/like")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void like(@PathVariable String id) {
+		Case found = repo.findOne(id);
+		found.setNumLikes(found.getNumLikes() + 1); // TODO: use MongoDB inc operator to be thread safe
+		svc.save(found);
+	}
+
 }

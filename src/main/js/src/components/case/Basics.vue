@@ -10,15 +10,23 @@
       <button class="ui icon labeled tiny yellow button" @click="clone">
         <i class="clone icon"/>복제
       </button>
+      <div class="ui tiny labeled button">
+        <div class="ui tiny red button" @click="like">
+          <i class="heart icon"></i> 좋아요
+        </div>
+        <a class="ui tiny basic red left pointing label">
+          {{cas.numLikes}}
+        </a>
+      </div>
       <!-- <button class="ui icon labeled tiny red button" @click="del">
         <i class="trash icon"/>삭제
       </button> -->
     </div>
     <div class="ui segment" v-if="cas.request">
-      <div class="field">
-        <label>ID</label>
-        <input type="text" readonly :value="cas.id">
-      </div>
+      <!--<div class="field">-->
+        <!--<label>ID</label>-->
+        <!--<input type="text" readonly :value="cas.id">-->
+      <!--</div>-->
 
       <div class="field required">
         <label>제목</label>
@@ -118,6 +126,12 @@ export default {
       caseSvc.remove(this.cas.id)
         .then(toastr.success('테스트 케이스가 삭제되었습니다.'))
         .then(this.list)
+    },
+    like () {
+      caseSvc.like(this.cas.id)
+        .then(_ => toastr.success('좋아요 처리가 되었습니다.'))
+        .then(_ => this.$set(this.cas, 'numLikes', this.cas.numLikes + 1))
+        .catch(err => toastr.error('좋아요 처리 실패'))
     }
   }
 }

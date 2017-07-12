@@ -105,3 +105,8 @@ exports.clone = function (id) {
   return superagent.post(`${restUrl}/${id}/clone`)
     .then(res => res.body)
 }
+
+exports.like = function (id) {
+  return superagent.put(`${restUrl}/${id}/like`)
+    .then(res => res.body)
+}
