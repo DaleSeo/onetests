@@ -69,28 +69,6 @@ public class AppConfig {
     }
 
 	@Bean
-	public RepositoryRestConfigurer repositoryRestConfigurer() {
-		return new RepositoryRestConfigurerAdapter() {
-
-			@Override
-			public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-				config.exposeIdsFor(User.class);
-				config.exposeIdsFor(Service.class);
-				config.exposeIdsFor(Host.class);
-				config.exposeIdsFor(Api.class);
-				config.exposeIdsFor(Call.class);
-				config.exposeIdsFor(Case.class);
-				config.exposeIdsFor(CaseResult.class);
-				config.exposeIdsFor(Suite.class);
-				config.exposeIdsFor(SuiteResult.class);
-				config.exposeIdsFor(Setting.class);
-				config.exposeIdsFor(Environment.class);
-			}
-
-		};
-	}
-
-	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurerAdapter() {
 			@Override

@@ -1,38 +1,38 @@
 <template>
   <div>
     <div class="ui comments">
-      <div class="comment" v-for="comment in comments">
-        <a class="avatar">
-          <i class="big user icon"/>
-        </a>
-        <div class="content">
-          <span class="author">{{comment.author}}</span>
-          <div class="metadata">
-            <span class="date">{{comment.date}}</span>
-          </div>
-          <div class="text">
-            {{comment.text}}
-          </div>
-        </div>
-      </div>
+      <Comment :comment="defaultComment" :isAdmin="true"/>
+      <Comment :key="comment.id" :comment="comment" @del="del(comment.id)" v-for="comment in comments"/>
     </div>
-    <form class="ui reply form">
+    <form class="ui reply form" @submit.prevent="add">
       <div class="field">
-        <textarea></textarea>
+        <textarea v-model="comment.text"/>
       </div>
-      <div class="ui primary submit labeled icon button">
-        <i class="icon edit"></i> Add Comment
-        </div>
+      <button type="submit" class="ui right floated teal small labeled icon button">
+        <i class="icon edit"/> 의견 추가
+      </button>
     </form>
   </div>
 </template>
 
 <script>
+import Comment from './Comment.vue'
+
 export default {
   props: ['cas'],
+  components: {Comment},
   data () {
     return {
-      comments: []
+      comments: [],
+      comment: {
+        caseId: this.cas.id,
+        text: ''
+      },
+      defaultComment: {
+        author: '관리자',
+        created: this.cas.created,
+        text: '테스트 케이스에 관련된 의견을 공유하는 공간입니다.'
+      }
     }
   },
   created () {
@@ -40,18 +40,22 @@ export default {
   },
   methods: {
     fetch () {
-      this.comments = [
-        {
-          author: '서대영',
-          date: '2017/07/02 21:00:43',
-          text: '임의로 작성한 테스트입니다. 1'
-        },
-        {
-          author: '최은봉',
-          date: '2017/07/01 12:00:05',
-          text: '임의로 작성한 테스트입니다. 2'
-        }
-      ]
+      this.$http.get(`/api/comments?caseId=${this.cas.id}`)
+        .then(res => res.body)
+        .then(comments => this.comments = comments)
+    },
+    add () {
+      this.$http.post('/api/comments', this.comment)
+        .then(_ => toastr.success('의견이 추가되었습니다.'))
+        .catch(err => toastr.error('의견 추가 실패'))
+        .then(this.fetch)
+        .then(_ => this.comment.text = '')
+    },
+    del (id) {
+      this.$http.delete(`/api/comments/${id}`)
+        .then(_ => toastr.success('의견이 삭제되었습니다.'))
+        .catch(err => toastr.error('의견 삭제 실패'))
+        .then(this.fetch)
     }
   }
 }

@@ -1,6 +1,7 @@
 package com.onestorecorp.onetests.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Document
 @Data
+@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id

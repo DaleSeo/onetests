@@ -34,7 +34,7 @@
           <Run :caseId="id"/>
         </div>
         <div class="ui tab" data-tab="social">
-          <Social :cas="cas"/>
+          <Social :cas="cas" v-if="cas.id"/>
         </div>
       </div>
     </div>
